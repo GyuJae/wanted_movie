@@ -11,7 +11,7 @@ interface IProps {
 
 const Layout = ({ children, title }: IProps) => {
   return (
-    <div className='flex min-h-screen text-white bg-black'>
+    <div className='flex overflow-x-hidden min-h-screen text-white bg-black'>
       <Head>
         <title>{title ? `${title} | Wanted Movie App` : 'Wanted Movie App'}</title>
       </Head>
@@ -20,7 +20,7 @@ const Layout = ({ children, title }: IProps) => {
       </div>
       <div className='flex flex-col flex-1 min-h-screen'>
         <Header />
-        <main className='flex-1 p-4'>{children}</main>
+        <main className='flex-1 p-4 w-full'>{children}</main>
       </div>
     </div>
   )

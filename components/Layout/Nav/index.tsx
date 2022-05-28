@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { navItems } from 'dictionary/navitemDict'
 
-const NavItem = dynamic(() => import('./NavItem'))
+const NavItem = dynamic(() => import('./NavItem'), { ssr: false })
 
 const styles = {
   wrapper: 'py-14 pl-4 w-16 min-h-screen text-zinc-500 bg-zinc-900 transition-all lg:w-48',

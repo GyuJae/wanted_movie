@@ -1,7 +1,10 @@
 import type { AppProps } from 'next/app'
+import Error from '@components/Error'
+import { ErrorBoundary } from 'react-error-boundary'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
 
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from 'react-query'
 
 import '../styles/globals.css'
 
@@ -9,19 +12,31 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // retry: false,
+        retry: false,
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: false,
         suspense: true,
+        useErrorBoundary: true,
       },
     },
   })
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <Component {...pageProps} />
-      </RecoilRoot>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              onReset={reset}
+              // eslint-disable-next-line react/no-unstable-nested-components
+              fallbackRender={({ resetErrorBoundary }) => <Error resetErrorBoundary={resetErrorBoundary} />}
+            >
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
+      </QueryClientProvider>
+    </RecoilRoot>
   )
 }
 
