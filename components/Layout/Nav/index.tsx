@@ -4,7 +4,7 @@ import { navItems } from 'dictionary/navitemDict'
 const NavItem = dynamic(() => import('./NavItem'), { ssr: false })
 
 const styles = {
-  wrapper: 'py-14 pl-4 w-16 min-h-screen text-zinc-500 bg-zinc-900 transition-all lg:w-48',
+  wrapper: 'fixed z-20 py-14 pl-4 w-16 min-h-screen text-zinc-500 bg-zinc-900 transition-all lg:w-48',
   categoryTitle: 'text-xs text-zinc-400',
   categoryContainer: 'mt-5 space-y-4',
 }

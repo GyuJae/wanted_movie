@@ -6,21 +6,21 @@ const Header = dynamic(() => import('./Header'))
 
 interface IProps {
   title?: string
+  showHeader?: boolean
+  showNav?: boolean
   children: React.ReactNode
 }
 
-const Layout = ({ children, title }: IProps) => {
+const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) => {
   return (
-    <div className='flex overflow-x-hidden min-h-screen text-white bg-black'>
+    <div className='flex overflow-x-hidden min-h-screen text-white bg-black transition-all'>
       <Head>
         <title>{title ? `${title} | Wanted Movie App` : 'Wanted Movie App'}</title>
       </Head>
-      <div>
-        <Nav />
-      </div>
+      <div>{showNav && <Nav />}</div>
       <div className='flex flex-col flex-1 min-h-screen'>
-        <Header />
-        <main className='flex-1 p-4 w-full'>{children}</main>
+        {showHeader && <Header />}
+        <main className='flex-1 p-4 pl-20 w-full lg:pl-52'>{children}</main>
       </div>
     </div>
   )

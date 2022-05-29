@@ -1,34 +1,28 @@
-import Image from 'next/image'
+import { IMovie } from 'types/movie'
+import { ITV } from 'types/tv'
 import dynamic from 'next/dynamic'
-import { getImage } from '@utils/getImage'
 import { mediaTypeState } from 'atoms/mediaTypeState'
-import { motion } from 'framer-motion'
+import { timeTrendingState } from 'atoms/timeTrendingState'
 import { useRecoilValue } from 'recoil'
 import { useTrendings } from '@hooks/trending'
 
-const Carousel = dynamic(() => import('@components/Carousel'))
+const Movies = dynamic(() => import('./Movies'))
+const TVShows = dynamic(() => import('./TVShows'))
+const TimeToggle = dynamic(() => import('./TimeToggle'))
 
 const Trendings = () => {
   const mediaType = useRecoilValue(mediaTypeState)
-  const { data } = useTrendings(mediaType, 'day')
+  const timeTrending = useRecoilValue(timeTrendingState)
+  const { data } = useTrendings(mediaType, timeTrending)
 
   return (
-    <div className='space-y-4 min-w-[1200px]'>
-      <h3 className='text-lg font-semibold'>Trending movies</h3>
-      <Carousel>
-        {data?.results &&
-          data.results.map((trending) => (
-            <motion.div key={trending.id} className='relative min-w-[22rem] h-64 pointer-events-none '>
-              <Image
-                alt={trending.title}
-                layout='fill'
-                src={getImage({ path: trending.backdrop_path, format: 'w500' })}
-                className='rounded-xl'
-                priority
-              />
-            </motion.div>
-          ))}
-      </Carousel>
+    <div className='space-y-4 '>
+      <div className='flex items-center space-x-4'>
+        <h3 className='text-xl font-semibold'>Trending</h3>
+        <TimeToggle />
+      </div>
+      <Movies inView={Boolean(mediaType === 'movie' && data && data.results)} movies={data?.results as IMovie[]} />
+      <TVShows inView={Boolean(mediaType === 'tv' && data && data.results)} tvs={data?.results as ITV[]} />
     </div>
   )
 }

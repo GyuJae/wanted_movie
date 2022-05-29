@@ -22,7 +22,7 @@ class TrendingsService {
   public getTrendings = async (mediaType: TMediaType, time: 'day' | 'week'): Promise<ITrendingResponse> => {
     const response = await this.makeApiCall<ITrendingResponse>(`${mediaType}/${time}?api_key=${this.API_KEY}`)
     if (!response.results) {
-      throw new Error('Trendins not found')
+      throw new Error('Trending not found')
     }
     return response
   }
