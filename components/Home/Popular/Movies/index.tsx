@@ -12,30 +12,32 @@ interface IProps {
 }
 
 const Movies = ({ inView }: IProps) => {
-  const { data } = useMovies('upcoming')
+  const { data } = useMovies('popular')
 
   if (!inView || !data) return null
 
   return (
-    <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 257}>
+    <Carousel totalWidth={data.results.filter((movie) => !!movie.poster_path).length * 162}>
       {data.results.map((movie, index) => {
         const key = `${movie.id}-${index}`
-        if (!movie.backdrop_path) return null
+        if (!movie.poster_path) return null
         return (
-          <motion.div key={key} className='relative w-[19rem] h-48'>
+          <motion.div key={key} className='relative w-52 h-52'>
             <Image
               alt={movie.title}
               layout='fill'
-              src={getImage({ path: movie.backdrop_path, format: 'w780' })}
+              src={getImage({ path: movie.poster_path, format: 'w500' })}
               className='object-cover rounded-xl pointer-events-none'
               priority
             />
             <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-              <motion.div className='flex flex-col'>
+              <motion.div className='flex flex-col mb-2'>
                 <motion.span className='text-base font-semibold'>{movie.title}</motion.span>
                 <motion.span className='text-xs'>{movie.release_date.split('-')[0]}</motion.span>
+                <motion.div className='absolute right-2 bottom-2'>
+                  <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
+                </motion.div>
               </motion.div>
-              <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
             </motion.div>
           </motion.div>
         )

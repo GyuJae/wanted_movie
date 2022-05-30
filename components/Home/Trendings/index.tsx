@@ -21,7 +21,9 @@ const Trendings = () => {
     <div className='space-y-4 '>
       <div className='flex items-center space-x-4'>
         <h3 className='text-xl font-semibold'>Trending</h3>
-        <TimeToggle />
+        <div className='pt-1'>
+          <TimeToggle />
+        </div>
       </div>
       <Suspense fallback={<Skeleton />}>
         <Movies inView={Boolean(mediaType === 'movie' && data && data.results)} movies={data?.results as IMovie[]} />

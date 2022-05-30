@@ -1,11 +1,12 @@
 import Image from 'next/image'
-import StarIcon from '@components/Icons/StarIcon'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
 import { useMovies } from '@hooks/movie'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
   inView: boolean
@@ -35,9 +36,12 @@ const Movies = ({ inView }: IProps) => {
               <span className='text-xs font-semibold'>{movie.vote_average}</span>
             </motion.div>
             <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-              <motion.div className='flex flex-col'>
+              <motion.div className='flex flex-col mb-2'>
                 <motion.span className='text-base font-semibold'>{movie.title}</motion.span>
                 <motion.span className='text-xs'>{movie.release_date.split('-')[0]}</motion.span>
+                <motion.div className='absolute right-2 bottom-2'>
+                  <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>

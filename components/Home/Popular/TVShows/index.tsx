@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { useTvs } from '@hooks/tv'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
 const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
@@ -13,7 +12,7 @@ interface IProps {
 }
 
 const TVShows = ({ inView }: IProps) => {
-  const { data } = useTvs('top_rated')
+  const { data } = useTvs('popular')
 
   if (!inView || !data) return null
 
@@ -31,10 +30,6 @@ const TVShows = ({ inView }: IProps) => {
               className='object-cover rounded-xl pointer-events-none'
               priority
             />
-            <motion.div className='flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl'>
-              <StarIcon styleClassName='w-3 h-3 fill-yellow-500 mt-[1px]  ' />
-              <span className='text-xs font-semibold'>{tv.vote_average}</span>
-            </motion.div>
             <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
               <motion.div className='flex flex-col mb-2'>
                 <motion.span className='text-base font-semibold'>{tv.name}</motion.span>

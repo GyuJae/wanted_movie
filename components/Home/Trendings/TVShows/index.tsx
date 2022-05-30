@@ -5,6 +5,7 @@ import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
   inView: boolean
@@ -23,7 +24,7 @@ const TVShows = ({ inView, tvs }: IProps) => {
             <Image
               alt={tv.name}
               layout='fill'
-              src={getImage({ path: tv.backdrop_path, format: 'w500' })}
+              src={getImage({ path: tv.backdrop_path, format: 'w780' })}
               className='object-cover rounded-xl pointer-events-none'
               priority
             />
@@ -32,6 +33,9 @@ const TVShows = ({ inView, tvs }: IProps) => {
                 <motion.span className='text-lg font-semibold'>{tv.name}</motion.span>
                 <motion.span className='text-sm'>{tv.first_air_date.split('-')[0]}</motion.span>
                 <motion.span className='text-xs font-semibold'>{tv.vote_average} rating</motion.span>
+              </motion.div>
+              <motion.div>
+                <ReadMoreBtn mediaType='tv' mediaId={tv.id} />
               </motion.div>
             </motion.div>
           </motion.div>

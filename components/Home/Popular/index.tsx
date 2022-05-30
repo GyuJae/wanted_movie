@@ -1,19 +1,22 @@
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { useRecoilValue } from 'recoil'
 
+import React, { Suspense } from 'react'
+
+const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
-const Skeleton = dynamic(() => import('@components/Skeleton'))
 
-const Current = () => {
+const Popular = () => {
   const mediaType = useRecoilValue(mediaTypeState)
 
   return (
     <div className='space-y-4'>
       <div className='flex items-center'>
-        <h3 className='text-xl font-semibold'>{mediaType === 'movie' ? 'Upcoming' : 'Airing Today'}</h3>
+        <div className='flex items-center space-x-2'>
+          <h3 className='text-xl font-semibold'>Popular</h3>
+        </div>
       </div>
       <Suspense fallback={<Skeleton />}>
         <Movies inView={mediaType === 'movie'} />
@@ -23,4 +26,4 @@ const Current = () => {
   )
 }
 
-export default Current
+export default Popular
