@@ -12,11 +12,11 @@ interface IProps {
 
 const styles = {
   category: (pathname: string, categoryPathname: string) =>
-    classNames('relative flex justify-center items-center lg:justify-start', {
+    classNames('relative flex pl-4 py-3 justify-center items-center lg:justify-start hover:bg-zinc-800', {
       'text-white font-semibold fill-red-600': pathname === categoryPathname,
       'fill-zinc-600': pathname !== categoryPathname,
     }),
-  categoryName: 'hidden lg:block',
+  categoryName: 'hidden pr-5 lg:block',
   categoryIcon: 'mr-4 w-5',
 }
 
@@ -35,7 +35,9 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
           <li className={styles.category(pathname, categoryPathname)}>
             {symbolIcon}
             <span className={styles.categoryName}>{categoryName}</span>
-            {pathname === categoryPathname && <div className='absolute right-0 w-1 h-5 bg-red-600 rounded-l-md' />}
+            {pathname === categoryPathname && (
+              <div className='hidden absolute right-0 w-1 h-5 bg-red-600 rounded-l-md lg:block' />
+            )}
           </li>
         </a>
       </Link>

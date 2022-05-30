@@ -7,7 +7,7 @@ const HeaderItem = dynamic(() => import('./HeaderItem'), { ssr: false })
 const headerItems: TMediaTypeState[] = ['movie', 'tv']
 
 const styles = {
-  wrapper: 'flex p-4 pl-20 w-full border-b-[1px] border-zinc-800 lg:pl-52',
+  wrapper: 'flex p-4 pl-20 w-full border-b-[1px] border-zinc-800 lg:pl-48',
   container: 'flex space-x-9 text-sm text-zinc-400',
 }
 

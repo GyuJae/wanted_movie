@@ -16,12 +16,12 @@ const Movies = ({ inView }: IProps) => {
   if (!inView || !data) return null
 
   return (
-    <Carousel totalWidth={data.results.length * 258}>
+    <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 257}>
       {data.results.map((movie, index) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[19rem] h-48'>
+          <motion.div key={key} className='relative w-[19rem] h-48'>
             <Image
               alt={movie.title}
               layout='fill'

@@ -1,8 +1,10 @@
-import React from 'react'
 import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { useRecoilValue } from 'recoil'
 
+import React, { Suspense } from 'react'
+
+const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
 const TVShows = dynamic(() => import('./TVShows'))
@@ -18,8 +20,10 @@ const TopRated = () => {
           <StarIcon styleClassName='fill-yellow-500 w-4 h-4 mt-[2px]' />
         </div>
       </div>
-      <Movies inView={mediaType === 'movie'} />
-      <TVShows inView={mediaType === 'tv'} />
+      <Suspense fallback={<Skeleton />}>
+        <Movies inView={mediaType === 'movie'} />
+        <TVShows inView={mediaType === 'tv'} />
+      </Suspense>
     </div>
   )
 }

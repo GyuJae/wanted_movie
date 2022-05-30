@@ -4,9 +4,9 @@ import { navItems } from 'dictionary/navitemDict'
 const NavItem = dynamic(() => import('./NavItem'), { ssr: false })
 
 const styles = {
-  wrapper: 'fixed z-20 py-14 pl-4 w-16 min-h-screen text-zinc-500 bg-zinc-900 transition-all lg:w-48',
-  categoryTitle: 'text-xs text-zinc-400',
-  categoryContainer: 'mt-5 space-y-4',
+  wrapper: 'fixed z-20 py-14 pl-2 min-h-screen text-zinc-500 bg-zinc-900',
+  categoryTitle: 'text-xs ml-2 text-zinc-400',
+  categoryContainer: 'mt-5',
 }
 
 const Nav = () => {
@@ -20,7 +20,7 @@ const Nav = () => {
             return <NavItem key={key} {...item} />
           })}
         </ul>
-        <div className='mt-7 w-11/12 h-[1px] bg-zinc-700' />
+        <div className='mx-auto mt-7 w-11/12 h-[1px] bg-zinc-700' />
       </div>
     </nav>
   )

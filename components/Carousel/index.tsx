@@ -1,5 +1,4 @@
 import { AnimatePresence, Variants, motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
 
 interface ICarousel {
   children: React.ReactNode
@@ -32,7 +31,12 @@ const Carousel = ({ children, totalWidth }: ICarousel) => {
         }}
         whileTap={{ cursor: 'grabbing' }}
       >
-        <motion.div drag='x' dragConstraints={{ right: 0, left: -totalWidth }} className='flex space-x-4'>
+        <motion.div
+          drag='x'
+          dragElastic={0.01}
+          dragConstraints={{ right: 0, left: -totalWidth }}
+          className='flex space-x-4'
+        >
           {children}
         </motion.div>
       </motion.div>

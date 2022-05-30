@@ -20,7 +20,7 @@ const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) 
       <div>{showNav && <Nav />}</div>
       <div className='flex flex-col flex-1 min-h-screen'>
         {showHeader && <Header />}
-        <main className='flex-1 p-4 pl-20 w-full lg:pl-52'>{children}</main>
+        <main className='flex-1 p-4 pl-20 w-full lg:pl-48'>{children}</main>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@ const TVShows = ({ inView }: IProps) => {
   if (!inView || !data) return null
 
   return (
-    <Carousel totalWidth={data.results.length * 162}>
+    <Carousel totalWidth={data.results.filter((tv) => !!tv.poster_path).length * 162}>
       {data.results.map((tv, index) => {
         const key = `${tv.id}-${index}`
         if (!tv.poster_path) return null

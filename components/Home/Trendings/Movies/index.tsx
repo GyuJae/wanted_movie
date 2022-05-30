@@ -14,12 +14,12 @@ interface IProps {
 const Movies = ({ inView, movies }: IProps) => {
   if (!inView) return null
   return (
-    <Carousel totalWidth={movies.length * 305}>
+    <Carousel totalWidth={movies.filter((movie) => !!movie.backdrop_path).length * 305}>
       {movies.map((movie, index) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[22rem] h-60'>
+          <motion.div key={key} className='relative w-[22rem] h-60'>
             <Image
               alt={movie.title}
               layout='fill'

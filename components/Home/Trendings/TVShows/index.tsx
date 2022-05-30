@@ -14,7 +14,7 @@ const TVShows = ({ inView, tvs }: IProps) => {
   if (!inView) return null
 
   return (
-    <Carousel totalWidth={tvs.length * 305}>
+    <Carousel totalWidth={tvs.filter((tv) => !!tv.backdrop_path).length * 305}>
       {tvs.map((tv, index) => {
         const key = `${tv.id}-${index}`
         if (!tv.backdrop_path) return null

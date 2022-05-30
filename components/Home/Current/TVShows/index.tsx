@@ -16,12 +16,12 @@ const TVShows = ({ inView }: IProps) => {
   if (!inView || !data) return null
 
   return (
-    <Carousel totalWidth={data.results.length * 258}>
+    <Carousel totalWidth={data.results.filter((tv) => !!tv.backdrop_path).length * 255}>
       {data.results.map((tv, index) => {
         const key = `${tv.id}-${index}`
         if (!tv.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[19rem] h-48'>
+          <motion.div key={key} className='relative w-[19rem] h-48'>
             <Image
               alt={tv.name}
               layout='fill'

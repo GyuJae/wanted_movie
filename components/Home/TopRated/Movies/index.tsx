@@ -17,7 +17,7 @@ const Movies = ({ inView }: IProps) => {
   if (!inView || !data) return null
 
   return (
-    <Carousel totalWidth={data.results.length * 162}>
+    <Carousel totalWidth={data.results.filter((movie) => !!movie.poster_path).length * 162}>
       {data.results.map((movie, index) => {
         const key = `${movie.id}-${index}`
         if (!movie.poster_path) return null
