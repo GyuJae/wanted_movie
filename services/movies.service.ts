@@ -1,4 +1,4 @@
-import { IMovieDetail, IMovieResult, MovieCategory } from 'types/movie'
+import { IMovieCredits, IMovieDetail, IMovieResult, MovieCategory } from 'types/movie'
 
 class MoviesService {
   private apiURL: string
@@ -31,6 +31,30 @@ class MoviesService {
     const response = await this.makeApiCall<IMovieDetail>(`${id}?api_key=${this.API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
+    }
+    return response
+  }
+
+  public getRecommendations = async (id: string) => {
+    const response = await this.makeApiCall<IMovieResult>(`${id}/recommendations?api_key=${this.API_KEY}`)
+    if (!response.results) {
+      throw new Error('Movies not found')
+    }
+    return response
+  }
+
+  public getCredits = async (id: string) => {
+    const response = await this.makeApiCall<IMovieCredits>(`${id}/credits?api_key=${this.API_KEY}`)
+    if (!response.id) {
+      throw new Error('Movie not found')
+    }
+    return response
+  }
+
+  public getSimilar = async (id: string) => {
+    const response = await this.makeApiCall<IMovieResult>(`${id}/similar?api_key=${this.API_KEY}`)
+    if (!response.results) {
+      throw new Error('Movies not found')
     }
     return response
   }

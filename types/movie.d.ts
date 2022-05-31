@@ -1,4 +1,4 @@
-export type MovieCategory = 'top_rated' | 'popular' | 'upcoming'
+export type MovieCategory = 'top_rated' | 'popular' | 'upcoming' | 'now_playing'
 
 export interface IMovie {
   adult: boolean
@@ -65,4 +65,39 @@ export interface IMovieDetail {
   video: boolean
   vote_average: number
   vote_count: number
+}
+
+export interface ICast {
+  adult: boolean
+  gender: number | null
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string | null
+  cast_id: number
+  character: string
+  credit_id: string
+  order: number
+}
+
+interface ICrew {
+  adult: boolean
+  gender: number | null
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: any | null
+  credit_id: string
+  department: string
+  job: string
+}
+
+export interface IMovieCredits {
+  id: number
+  cast: ICast[]
+  crew: ICrew[]
 }

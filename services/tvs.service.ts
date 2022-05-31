@@ -1,4 +1,4 @@
-import { ITVDetail, ITVResult, TvCategory } from 'types/tv.d'
+import { ITVCredits, ITVDetail, ITVResult, TvCategory } from 'types/tv.d'
 
 class TvsService {
   private apiURL: string
@@ -31,6 +31,30 @@ class TvsService {
     const response = await this.makeApiCall<ITVDetail>(`${id}?api_key=${this.API_KEY}`)
     if (!response.id) {
       throw new Error('TV not found')
+    }
+    return response
+  }
+
+  public getRecommendations = async (id: string) => {
+    const response = await this.makeApiCall<ITVResult>(`${id}/recommendations?api_key=${this.API_KEY}`)
+    if (!response.results) {
+      throw new Error('Movies not found')
+    }
+    return response
+  }
+
+  public getCredits = async (id: string) => {
+    const response = await this.makeApiCall<ITVCredits>(`${id}/credits?api_key=${this.API_KEY}`)
+    if (!response.id) {
+      throw new Error('Movie not found')
+    }
+    return response
+  }
+
+  public getSimilar = async (id: string) => {
+    const response = await this.makeApiCall<ITVResult>(`${id}/similar?api_key=${this.API_KEY}`)
+    if (!response.results) {
+      throw new Error('Movies not found')
     }
     return response
   }

@@ -15,7 +15,7 @@ const ReadMoreBtn = ({ mediaType, mediaId }: IProps) => {
     <button
       type='button'
       onClick={handleClick}
-      className='flex z-10 justify-center py-2 px-1 w-20 text-[10px] font-medium bg-red-600/60 hover:bg-red-600/70 rounded-full'
+      className='flex z-10 justify-center py-2 px-1 min-w-[4.8rem] text-[10px] font-medium bg-red-600/60 hover:bg-red-600/70 rounded-full'
     >
       Read more
     </button>

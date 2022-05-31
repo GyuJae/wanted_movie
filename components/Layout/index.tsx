@@ -77,11 +77,13 @@ const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) 
           />
         )}
       </AnimatePresence>
-      <motion.button
+      {/* <button
         type='button'
         onClick={handleClickSide}
         className='fixed top-1/2 right-1/2 w-20 h-20 bg-rose-700 rounded-full '
-      />
+      >
+        helo
+      </button> */}
     </div>
   )
 }

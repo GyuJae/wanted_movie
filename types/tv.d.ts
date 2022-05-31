@@ -1,4 +1,4 @@
-export type TvCategory = 'top_rated' | 'popular' | 'airing_today'
+export type TvCategory = 'top_rated' | 'popular' | 'airing_today' | 'on_the_air'
 
 export interface ITV {
   backdrop_path?: string
@@ -100,4 +100,39 @@ export interface ITVResult {
   results: ITV[]
   total_pages: number
   total_results: number
+}
+
+export interface ICast {
+  adult: boolean
+  gender: number | null
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string | null
+  cast_id: number
+  character: string
+  credit_id: string
+  order: number
+}
+
+interface ICrew {
+  adult: boolean
+  gender: number | null
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: any | null
+  credit_id: string
+  department: string
+  job: string
+}
+
+export interface ITVCredits {
+  id: number
+  cast: ICast[]
+  crew: ICrew[]
 }
