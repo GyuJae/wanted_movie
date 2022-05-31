@@ -7,6 +7,7 @@ import React, { Suspense } from 'react'
 const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
 
 const Popular = () => {
   const mediaType = useRecoilValue(mediaTypeState)
@@ -22,6 +23,7 @@ const Popular = () => {
         <Movies inView={mediaType === 'movie'} />
         <TVShows inView={mediaType === 'tv'} />
       </Suspense>
+      <SeeMoreBtn category='popular' mediaType='movie' />
     </div>
   )
 }

@@ -8,6 +8,7 @@ const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
 const TVShows = dynamic(() => import('./TVShows'))
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
 
 const TopRated = () => {
   const mediaType = useRecoilValue(mediaTypeState)
@@ -24,6 +25,7 @@ const TopRated = () => {
         <Movies inView={mediaType === 'movie'} />
         <TVShows inView={mediaType === 'tv'} />
       </Suspense>
+      <SeeMoreBtn category='top_rated' mediaType='movie' />
     </div>
   )
 }

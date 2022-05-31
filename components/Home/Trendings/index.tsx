@@ -18,7 +18,7 @@ const Trendings = () => {
   const { data } = useTrendings(mediaType, timeTrending)
 
   return (
-    <div className='space-y-4 '>
+    <div className='space-y-4'>
       <div className='flex items-center space-x-4'>
         <h3 className='text-xl font-semibold'>Trending</h3>
         <div className='pt-1'>

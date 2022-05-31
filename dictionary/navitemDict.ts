@@ -7,6 +7,10 @@ export const navItems: {
     categoryPathname: '/',
   },
   {
+    categoryName: 'Discovery',
+    categoryPathname: '/discovery',
+  },
+  {
     categoryName: 'Community',
     categoryPathname: '/community',
   },

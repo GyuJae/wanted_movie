@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil'
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
 const Skeleton = dynamic(() => import('@components/Skeleton'))
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
 
 const Current = () => {
   const mediaType = useRecoilValue(mediaTypeState)
@@ -19,6 +20,7 @@ const Current = () => {
         <Movies inView={mediaType === 'movie'} />
         <TVShows inView={mediaType === 'tv'} />
       </Suspense>
+      <SeeMoreBtn category='upcoming' mediaType='movie' />
     </div>
   )
 }

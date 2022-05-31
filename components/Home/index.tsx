@@ -11,7 +11,7 @@ const Popular = dynamic(() => import('@components/Home/Popular'), { ssr: false }
 const HomePage = () => {
   return (
     <Layout title='Home'>
-      <div className='px-4 pb-10 space-y-14'>
+      <div className='px-4 pb-10 space-y-12'>
         <Trendings />
         <Current />
         <TopRated />

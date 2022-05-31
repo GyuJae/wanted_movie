@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import CompassIcon from '@components/Icons/CompassIcon'
 import HouseIcon from '@components/Icons/HouseIcon'
 import Link from 'next/link'
 import UsersIcon from '@components/Icons/UsersIcon'
@@ -13,16 +14,6 @@ interface IProps {
   categoryPathname: string
   categoryName: string
 }
-
-// const styles = {
-//   category: (pathname: string, categoryPathname: string) =>
-//     classNames('relative flex pl-4 py-3 justify-center items-center lg:justify-start hover:bg-zinc-800', {
-//       'text-white font-semibold fill-red-600': pathname === categoryPathname,
-//       'fill-zinc-600': pathname !== categoryPathname,
-//     }),
-//   categoryName: 'hidden pr-5 lg:block',
-//   categoryIcon: 'mr-4 w-5',
-// }
 
 const variants: Variants = {
   initial: {
@@ -40,6 +31,7 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
   const symbolIcon = {
     Home: <HouseIcon styleClassName='w-6' />,
     Community: <UsersIcon styleClassName='w-6' />,
+    Discovery: <CompassIcon styleClassName='w-6' />,
   }[categoryName]
 
   const { pathname } = useRouter()
