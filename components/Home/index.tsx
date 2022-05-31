@@ -13,10 +13,10 @@ const HomePage = () => {
     <Layout title='Home'>
       <div className='px-4 pb-10 space-y-12'>
         <Trendings />
-        <Current />
+        <Now />
         <TopRated />
         <Popular />
-        <Now />
+        <Current />
       </div>
     </Layout>
   )

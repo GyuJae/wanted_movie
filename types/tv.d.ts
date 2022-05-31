@@ -136,3 +136,12 @@ export interface ITVCredits {
   cast: ICast[]
   crew: ICrew[]
 }
+
+export interface IGenre {
+  id: number
+  name: string
+}
+
+export interface ITVGenres {
+  genres: IGenre[]
+}

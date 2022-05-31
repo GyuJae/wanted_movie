@@ -101,3 +101,12 @@ export interface IMovieCredits {
   cast: ICast[]
   crew: ICrew[]
 }
+
+export interface IGenre {
+  id: number
+  name: string
+}
+
+export interface IMovieGenres {
+  genres: IGenre[]
+}

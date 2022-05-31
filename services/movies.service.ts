@@ -1,10 +1,10 @@
-import { IMovieCredits, IMovieDetail, IMovieResult, MovieCategory } from 'types/movie'
+import { IMovieCredits, IMovieDetail, IMovieGenres, IMovieResult, MovieCategory } from 'types/movie'
 
 class MoviesService {
   private apiURL: string
   private API_KEY: string
   constructor() {
-    this.apiURL = 'https://api.themoviedb.org/3/movie/'
+    this.apiURL = 'https://api.themoviedb.org/3/'
     this.API_KEY = process.env.API_KEY as string
   }
   private makeApiCall = async <T>(apiPath: string): Promise<T> => {
@@ -20,7 +20,7 @@ class MoviesService {
   }
 
   public getMovies = async (category: MovieCategory): Promise<IMovieResult> => {
-    const response = await this.makeApiCall<IMovieResult>(`${category}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(`movie/${category}?api_key=${this.API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -28,7 +28,7 @@ class MoviesService {
   }
 
   public getMovie = async (id: string) => {
-    const response = await this.makeApiCall<IMovieDetail>(`${id}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieDetail>(`movie/${id}?api_key=${this.API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
     }
@@ -36,7 +36,7 @@ class MoviesService {
   }
 
   public getRecommendations = async (id: string) => {
-    const response = await this.makeApiCall<IMovieResult>(`${id}/recommendations?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(`movie/${id}/recommendations?api_key=${this.API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -44,7 +44,7 @@ class MoviesService {
   }
 
   public getCredits = async (id: string) => {
-    const response = await this.makeApiCall<IMovieCredits>(`${id}/credits?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieCredits>(`movie/${id}/credits?api_key=${this.API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
     }
@@ -52,9 +52,17 @@ class MoviesService {
   }
 
   public getSimilar = async (id: string) => {
-    const response = await this.makeApiCall<IMovieResult>(`${id}/similar?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(`movie/${id}/similar?api_key=${this.API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
+    }
+    return response
+  }
+
+  public getGenres = async () => {
+    const response = await this.makeApiCall<IMovieGenres>(`genre/movie/list?api_key=${this.API_KEY}`)
+    if (!response.genres) {
+      throw new Error('Genres not found')
     }
     return response
   }

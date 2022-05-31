@@ -1,7 +1,7 @@
 import TvsService from '@services/tvs.service'
 import { useQuery } from 'react-query'
 
-import { ITVCredits, ITVDetail, ITVResult, TvCategory } from 'types/tv.d'
+import { ITVCredits, ITVDetail, ITVGenres, ITVResult, TvCategory } from 'types/tv.d'
 
 const services = new TvsService()
 
@@ -23,4 +23,8 @@ export const useTVCredits = (id: string) => {
 
 export const useTVSimilar = (id: string) => {
   return useQuery<ITVResult, Error>(['tv', id, 'similar'], () => services.getSimilar(id))
+}
+
+export const useTVGenres = () => {
+  return useQuery<ITVGenres, Error>(['tv', 'genres'], () => services.getGenres())
 }
