@@ -1,26 +1,37 @@
+import CategoryTitle from '@components/CategoryTitle'
 import dynamic from 'next/dynamic'
+import { motion } from 'framer-motion'
+import { movieCategoryDict } from 'dictionary/discoveryCategory'
 import { movieDiscoveryState } from 'atoms/discoveryState'
-import { useMovies } from '@hooks/movie'
+import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
 
 const MovieGenres = dynamic(() => import('../MovieGenres'))
+const MovieList = dynamic(() => import('./MovieList'))
 
 interface IProps {
   inView: boolean
 }
 
 const Movies = ({ inView }: IProps) => {
-  const cateogry = useRecoilValue(movieDiscoveryState)
-
-  const { data } = useMovies(cateogry)
-
-  if (!inView || !data) return null
+  const movieCategoryName = useRecoilValue(movieDiscoveryState)
+  const showNavValue = useRecoilValue(showNavState)
+  if (!inView) return null
   return (
     <div className='px-4 pb-10'>
-      <MovieGenres />
-      {data.results.map((item) => (
-        <div key={item.id}>{item.title}</div>
-      ))}
+      <CategoryTitle cateogoryName={movieCategoryDict[movieCategoryName]} />
+      <motion.div
+        animate={{
+          right: showNavValue ? 60 : 90,
+        }}
+        transition={{
+          duration: 0.3,
+        }}
+        className='absolute -top-1 right-14 z-20'
+      >
+        <MovieGenres />
+      </motion.div>
+      <MovieList />
     </div>
   )
 }

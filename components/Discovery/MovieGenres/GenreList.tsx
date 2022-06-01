@@ -1,48 +1,39 @@
 import { IGenre } from 'types/movie'
 import { MouseEvent } from 'react'
 import { movieSelectedGenres } from 'atoms/selectedGenres'
-import { useRecoilState } from 'recoil'
-
-import { AnimatePresence, motion } from 'framer-motion'
+import { useSetRecoilState } from 'recoil'
 
 interface IProps {
   inView: boolean
   genres: IGenre[]
+  handleClickClose: () => void
 }
 
-const GenreList = ({ inView, genres }: IProps) => {
-  const [selected, setSelected] = useRecoilState(movieSelectedGenres)
+const GenreList = ({ inView, genres, handleClickClose }: IProps) => {
+  const setSelected = useSetRecoilState(movieSelectedGenres)
+  const handleClickAll = () => setSelected(null)
   const handleClickSelect = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     const {
       currentTarget: { value, id },
     } = e
-    setSelected((prev) => [...prev, { id: +id, name: value }])
+    setSelected({ id: +id, name: value })
+    handleClickClose()
   }
   if (!inView) return null
   return (
-    <AnimatePresence initial={false}>
-      <motion.ul layout className='flex flex-col w-32 text-sm bg-zinc-800 rounded-sm'>
-        {genres
-          .filter((genre) => !selected.map((s) => s.id).includes(genre.id))
-          .map((genre, index) => {
-            const key = `movie-genre-${genre.id}-${index}`
-            return (
-              <motion.button
-                key={key}
-                layout
-                id={`${genre.id}`}
-                value={genre.name}
-                type='button'
-                onClick={handleClickSelect}
-              >
-                <motion.li layout className='py-1 px-3 text-left hover:bg-zinc-900'>
-                  {genre.name}
-                </motion.li>
-              </motion.button>
-            )
-          })}
-      </motion.ul>
-    </AnimatePresence>
+    <ul className='flex overflow-y-scroll flex-col w-40 h-48 text-sm bg-zinc-800 rounded-sm shadow-md scrollBar'>
+      <button type='button' onClick={handleClickAll}>
+        <li className='py-1 px-3 text-left hover:bg-zinc-900'>All</li>
+      </button>
+      {genres.map((genre, index) => {
+        const key = `movie-genre-${genre.id}-${index}`
+        return (
+          <button key={key} id={`${genre.id}`} value={genre.name} type='button' onClick={handleClickSelect}>
+            <li className='py-1 px-3 text-left hover:bg-zinc-900'>{genre.name}</li>
+          </button>
+        )
+      })}
+    </ul>
   )
 }
 

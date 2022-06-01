@@ -1,12 +1,12 @@
 import { IGenre } from 'types/movie'
 import { atom } from 'recoil'
 
-export const movieSelectedGenres = atom<IGenre[]>({
+export const movieSelectedGenres = atom<IGenre | null>({
   key: '#movieSelectedGenres',
-  default: [],
+  default: null,
 })
 
-export const tvSelectedGenres = atom<IGenre[]>({
+export const tvSelectedGenres = atom<IGenre | null>({
   key: '#tvSelectedGenres',
-  default: [],
+  default: null,
 })

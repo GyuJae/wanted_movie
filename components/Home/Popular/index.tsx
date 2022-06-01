@@ -8,17 +8,14 @@ const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
 const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 const Popular = () => {
   const mediaType = useRecoilValue(mediaTypeState)
 
   return (
     <div className='space-y-4'>
-      <div className='flex items-center'>
-        <div className='flex items-center space-x-2'>
-          <h3 className='text-xl font-semibold'>Popular</h3>
-        </div>
-      </div>
+      <CategoryTitle cateogoryName='Popular' />
       <Suspense fallback={<Skeleton />}>
         <Movies inView={mediaType === 'movie'} />
         <TVShows inView={mediaType === 'tv'} />

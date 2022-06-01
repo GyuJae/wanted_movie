@@ -11,6 +11,7 @@ const Skeleton = dynamic(() => import('@components/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
 const TimeToggle = dynamic(() => import('./TimeToggle'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 const Trendings = () => {
   const mediaType = useRecoilValue(mediaTypeState)
@@ -20,7 +21,7 @@ const Trendings = () => {
   return (
     <div className='space-y-4'>
       <div className='flex items-center space-x-4'>
-        <h3 className='text-xl font-semibold'>Trending</h3>
+        <CategoryTitle cateogoryName='Trending' />
         <div className='pt-1'>
           <TimeToggle />
         </div>

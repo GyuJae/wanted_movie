@@ -1,12 +1,12 @@
 import MoviesService from '@services/movies.service'
-import { useQuery } from 'react-query'
 
 import { IMovieCredits, IMovieDetail, IMovieGenres, IMovieResult, MovieCategory } from '../types/movie.d'
+import { useInfiniteQuery, useQuery } from 'react-query'
 
 const services = new MoviesService()
 
 export const useMovies = (category: MovieCategory) => {
-  return useQuery<IMovieResult, Error>(['movies', category], () => services.getMovies(category))
+  return useQuery<IMovieResult, Error>(['movies', category, 1], () => services.getMovies(category))
 }
 
 export const useMovie = (id: string) => {
@@ -27,4 +27,21 @@ export const useMovieSimilar = (id: string) => {
 
 export const useMovieGenres = () => {
   return useQuery<IMovieGenres, Error>(['movie', 'genres'], () => services.getGenres())
+}
+
+export const useInfiniteMovies = (category: MovieCategory) => {
+  return useInfiniteQuery<IMovieResult, Error>(
+    ['movies', category],
+    ({ pageParam = 1 }) => services.getPageMovies({ category, pageParam }),
+    {
+      getNextPageParam: (lastPage: IMovieResult) => {
+        if (lastPage.page < lastPage.total_pages) return lastPage.page + 1
+        return undefined
+      },
+      refetchOnWindowFocus: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      retry: 1,
+    }
+  )
 }

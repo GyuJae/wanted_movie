@@ -7,20 +7,19 @@ const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
 const Skeleton = dynamic(() => import('@components/Skeleton'))
 const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 const Current = () => {
   const mediaType = useRecoilValue(mediaTypeState)
 
   return (
     <div className='space-y-4'>
-      <div className='flex items-center'>
-        <h3 className='text-xl font-semibold'>{mediaType === 'movie' ? 'Now Playing' : 'On The Air'}</h3>
-      </div>
+      <CategoryTitle cateogoryName={mediaType === 'movie' ? 'Now Playing' : 'On The Air'} />
       <Suspense fallback={<Skeleton />}>
         <Movies inView={mediaType === 'movie'} />
         <TVShows inView={mediaType === 'tv'} />
       </Suspense>
-      <SeeMoreBtn category='now_playing' mediaType='movie' />
+      <SeeMoreBtn category={mediaType === 'movie' ? 'now_playing' : 'on_the_air'} mediaType={mediaType} />
     </div>
   )
 }

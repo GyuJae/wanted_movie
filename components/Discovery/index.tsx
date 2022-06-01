@@ -9,7 +9,7 @@ const TVShows = dynamic(() => import('./TVShows'))
 const Discovery = () => {
   const mediaTypeValue = useRecoilValue(mediaTypeState)
   return (
-    <Layout>
+    <Layout showHeader={false}>
       <Movies inView={mediaTypeValue === 'movie'} />
       <TVShows inView={mediaTypeValue === 'tv'} />
     </Layout>

@@ -8,6 +8,7 @@ interface IProps {
 
 const TVShows = ({ inView }: IProps) => {
   const cateogry = useRecoilValue(tvDiscoveryState)
+
   const { data } = useTvs(cateogry)
 
   if (!inView || !data) return null

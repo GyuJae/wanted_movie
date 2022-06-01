@@ -27,6 +27,20 @@ class MoviesService {
     return response
   }
 
+  public getPageMovies = async ({
+    category,
+    pageParam = 1,
+  }: {
+    category: MovieCategory
+    pageParam?: number
+  }): Promise<IMovieResult> => {
+    const response = await this.makeApiCall<IMovieResult>(`movie/${category}?api_key=${this.API_KEY}&page=${pageParam}`)
+    if (!response.results) {
+      throw new Error('Movies not found')
+    }
+    return response
+  }
+
   public getMovie = async (id: string) => {
     const response = await this.makeApiCall<IMovieDetail>(`movie/${id}?api_key=${this.API_KEY}`)
     if (!response.id) {
