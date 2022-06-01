@@ -1,18 +1,18 @@
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import { movieDiscoveryState } from 'atoms/discoveryState'
-import { useInfiniteMovies } from '@hooks/movie'
+import { tvDiscoveryState } from 'atoms/discoveryState'
+import { useInfiniteTVs } from '@hooks/tv'
 import { useRecoilValue } from 'recoil'
 
-const MoviePage = dynamic(() => import('./MoviePage'))
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
+const TVPage = dynamic(() => import('./TVPage'))
+const NextPageBtn = dynamic(() => import('@components/Discovery//NextPageBtn'))
 const Loading = dynamic(() => import('@components/Discovery/Skeleton'))
 
-const MovieList = () => {
-  const cateogry = useRecoilValue(movieDiscoveryState)
+const TVList = () => {
+  const cateogry = useRecoilValue(tvDiscoveryState)
 
-  const { data, fetchNextPage, isFetching, hasNextPage } = useInfiniteMovies(cateogry)
+  const { data, fetchNextPage, isFetching, hasNextPage } = useInfiniteTVs(cateogry)
   const handleFetch = () => {
     if (isFetching) return
     fetchNextPage()
@@ -28,7 +28,7 @@ const MovieList = () => {
         <Suspense fallback={<Loading />}>
           {data.pages.map((page, index) => {
             const key = `movie-${cateogry}-${page.page}-${index}`
-            return <MoviePage key={key} moviePage={page} />
+            return <TVPage key={key} tvPage={page} />
           })}
         </Suspense>
       </motion.div>
@@ -37,4 +37,4 @@ const MovieList = () => {
   )
 }
 
-export default MovieList
+export default TVList

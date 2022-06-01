@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 const Movies = dynamic(() => import('./Movies'))
 const TVShows = dynamic(() => import('./TVShows'))
-const Skeleton = dynamic(() => import('@components/Skeleton'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
 const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 

@@ -27,6 +27,20 @@ class TvsService {
     return response
   }
 
+  public getPageTVs = async ({
+    category,
+    pageParam = 1,
+  }: {
+    category: TvCategory
+    pageParam?: number
+  }): Promise<ITVResult> => {
+    const response = await this.makeApiCall<ITVResult>(`tv/${category}?api_key=${this.API_KEY}&page=${pageParam}`)
+    if (!response.results) {
+      throw new Error('TV Shows not found')
+    }
+    return response
+  }
+
   public getTV = async (id: string) => {
     const response = await this.makeApiCall<ITVDetail>(`tv/${id}?api_key=${this.API_KEY}`)
     if (!response.id) {

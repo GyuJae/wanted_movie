@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useTVSimilar } from '@hooks/tv'
 
 const SimilarItem = dynamic(() => import('./SimilarItem'))
-const Skeleton = dynamic(() => import('@components/Skeleton'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
 
 interface IProps {
   id: string

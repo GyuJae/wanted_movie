@@ -1,7 +1,7 @@
 import TvsService from '@services/tvs.service'
-import { useQuery } from 'react-query'
 
 import { ITVCredits, ITVDetail, ITVGenres, ITVResult, TvCategory } from 'types/tv.d'
+import { useInfiniteQuery, useQuery } from 'react-query'
 
 const services = new TvsService()
 
@@ -27,4 +27,21 @@ export const useTVSimilar = (id: string) => {
 
 export const useTVGenres = () => {
   return useQuery<ITVGenres, Error>(['tv', 'genres'], () => services.getGenres())
+}
+
+export const useInfiniteTVs = (category: TvCategory) => {
+  return useInfiniteQuery<ITVResult, Error>(
+    ['tv', category],
+    ({ pageParam = 1 }) => services.getPageTVs({ category, pageParam }),
+    {
+      getNextPageParam: (lastPage: ITVResult) => {
+        if (lastPage.page < lastPage.total_pages) return lastPage.page + 1
+        return undefined
+      },
+      refetchOnWindowFocus: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      retry: 1,
+    }
+  )
 }

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useTVRecommendations } from '@hooks/tv'
 
 const RecommendationsItem = dynamic(() => import('./RecommendationsItem'))
-const Skeleton = dynamic(() => import('@components/Skeleton'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
 
 interface IProps {
   id: string

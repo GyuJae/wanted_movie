@@ -6,7 +6,7 @@ import { useInfiniteQuery, useQuery } from 'react-query'
 const services = new MoviesService()
 
 export const useMovies = (category: MovieCategory) => {
-  return useQuery<IMovieResult, Error>(['movies', category, 1], () => services.getMovies(category))
+  return useQuery<IMovieResult, Error>(['movies', category], () => services.getMovies(category))
 }
 
 export const useMovie = (id: string) => {

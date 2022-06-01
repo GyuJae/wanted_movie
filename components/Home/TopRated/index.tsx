@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import React, { Suspense } from 'react'
 
-const Skeleton = dynamic(() => import('@components/Skeleton'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
 const Movies = dynamic(() => import('./Movies'))
 const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
 const TVShows = dynamic(() => import('./TVShows'))
