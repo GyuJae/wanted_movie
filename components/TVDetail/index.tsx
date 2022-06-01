@@ -9,11 +9,16 @@ interface IProps {
   id: string
 }
 
+const styles = {
+  wrapper: 'w-screen h-full text-white bg-black',
+  container: 'py-12 px-10 space-y-12',
+}
+
 const TVDetail = ({ id }: IProps) => {
   return (
-    <div className=' w-screen h-full text-white bg-black'>
+    <div className={styles.wrapper}>
       <Main id={id} />
-      <div className='py-12 px-10 space-y-12'>
+      <div className={styles.container}>
         <Cast id={id} />
         <Recommendations id={id} />
         <Similar id={id} />

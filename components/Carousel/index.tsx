@@ -1,41 +1,33 @@
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { opacityVariants } from '@animations/variants'
+
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface ICarousel {
   children: React.ReactNode
   totalWidth: number
 }
 
-const variants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
+const styles = {
+  wrapper: 'overflow-hidden w-full cursor-grab',
+  container: 'flex space-x-4',
 }
 
 const Carousel = ({ children, totalWidth }: ICarousel) => {
   return (
     <AnimatePresence exitBeforeEnter>
       <motion.div
-        variants={variants}
+        variants={opacityVariants}
         initial='initial'
         animate='animate'
         exit='exit'
-        className='overflow-hidden w-full cursor-grab'
-        transition={{
-          duration: 0.7,
-        }}
+        className={styles.wrapper}
         whileTap={{ cursor: 'grabbing' }}
       >
         <motion.div
           drag='x'
           dragElastic={0.01}
           dragConstraints={{ right: 0, left: -totalWidth }}
-          className='flex space-x-4'
+          className={styles.container}
         >
           {children}
         </motion.div>

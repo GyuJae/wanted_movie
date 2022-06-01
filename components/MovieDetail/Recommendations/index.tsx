@@ -5,6 +5,7 @@ import { useMovieRecommendations } from '@hooks/movie'
 
 const RecommendationsItem = dynamic(() => import('./RecommendationsItem'))
 const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 interface IProps {
   id: string
@@ -15,11 +16,7 @@ const Recommendations = ({ id }: IProps) => {
   if (!data || data.results.length === 0) return null
   return (
     <div className='space-y-4'>
-      <div className='flex items-center'>
-        <div className='flex items-center space-x-2'>
-          <h3 className='text-xl font-semibold'>Recommendations</h3>
-        </div>
-      </div>
+      <CategoryTitle cateogoryName='Recommendations' />
       <Suspense fallback={<Skeleton />}>
         <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 255}>
           {data?.results.map((movie, index) => {

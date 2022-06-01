@@ -13,13 +13,18 @@ interface IProps {
   inView: boolean
 }
 
+const styles = {
+  wrapper: 'px-4 pb-10',
+  container: 'flex justify-between',
+}
+
 const Movies = ({ inView }: IProps) => {
   const movieCategoryName = useRecoilValue(movieDiscoveryState)
   const showNavValue = useRecoilValue(showNavState)
   if (!inView) return null
   return (
-    <div className='px-4 pb-10'>
-      <div className='flex justify-between'>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
         <CategoryTitle cateogoryName={movieCategoryDict[movieCategoryName]} />
         <motion.div
           animate={{

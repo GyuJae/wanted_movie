@@ -2,6 +2,10 @@ import { motion } from 'framer-motion'
 import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
 
+const styles = {
+  container: 'w-[19rem] h-48 bg-zinc-800 rounded-xl',
+}
+
 const Loading = () => {
   const showNavValue = useRecoilValue(showNavState)
   return (
@@ -22,7 +26,7 @@ const Loading = () => {
                 duration: 1.6,
                 repeat: Infinity,
               }}
-              className='w-[19rem] h-48 bg-zinc-800 rounded-xl'
+              className={styles.container}
             />
           )
         })}

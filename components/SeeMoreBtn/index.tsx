@@ -14,6 +14,11 @@ interface IProps {
   category: MovieCategory | TvCategory
 }
 
+const styles = {
+  container: 'flex items-center space-x-1 text-xs text-zinc-500',
+  icon: 'w-3 h-3 fill-zinc-500 mt-1',
+}
+
 const SeeMoreBtn = ({ mediaType, category }: IProps) => {
   const router = useRouter()
   const setMovieDiscovery = useSetRecoilState(movieDiscoveryState)
@@ -24,9 +29,9 @@ const SeeMoreBtn = ({ mediaType, category }: IProps) => {
     router.push('/discovery')
   }
   return (
-    <button type='button' onClick={handleClick} className='flex items-center space-x-1 text-xs text-zinc-500'>
+    <button type='button' onClick={handleClick} className={styles.container}>
       <span>See More</span>
-      <RightArrowIcon styleClassname='w-3 h-3 fill-zinc-500 mt-1' />
+      <RightArrowIcon styleClassname={styles.icon} />
     </button>
   )
 }

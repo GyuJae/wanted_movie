@@ -12,6 +12,20 @@ const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 interface IProps {
   movie: IMovie
 }
+
+const styles = {
+  wrapper: 'relative',
+  image: 'object-cover rounded-md',
+  voteContainer: 'flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl',
+  starIcon: 'w-3 h-3 fill-yellow-500 mt-[1px]',
+  vote: 'text-xs font-semibold',
+  subWrapper: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col mb-2',
+  title: 'text-base font-semibold',
+  date: 'text-xs',
+  readMoreContainer: 'absolute right-2 bottom-2',
+}
+
 const MovieItem = ({ movie }: IProps) => {
   const showNavValue = useRecoilValue(showNavState)
   if (!movie.poster_path) return null
@@ -26,24 +40,24 @@ const MovieItem = ({ movie }: IProps) => {
         height: showNavValue ? '16rem' : '18rem',
       }}
       exit={{ opacity: 0 }}
-      className='relative'
+      className={styles.wrapper}
     >
       <Image
         alt={movie.title}
         layout='fill'
         src={getImage({ path: movie.poster_path, format: 'w500' })}
-        className='object-cover rounded-md'
+        className={styles.image}
         priority
       />
-      <div className='flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl'>
-        <StarIcon styleClassName='w-3 h-3 fill-yellow-500 mt-[1px]' />
-        <span className='text-xs font-semibold'>{movie.vote_average}</span>
+      <div className={styles.voteContainer}>
+        <StarIcon styleClassName={styles.starIcon} />
+        <span className={styles.vote}>{movie.vote_average}</span>
       </div>
-      <div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-        <div className='flex flex-col mb-2'>
-          <span className='text-base font-semibold'>{movie.title}</span>
-          <span className='text-xs'>{movie.release_date.split('-')[0]}</span>
-          <div className='absolute right-2 bottom-2'>
+      <div className={styles.subWrapper}>
+        <div className={styles.subContainer}>
+          <span className={styles.title}>{movie.title}</span>
+          <span className={styles.date}>{movie.release_date.split('-')[0]}</span>
+          <div className={styles.readMoreContainer}>
             <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
           </div>
         </div>

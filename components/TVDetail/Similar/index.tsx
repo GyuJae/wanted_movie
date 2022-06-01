@@ -5,21 +5,22 @@ import { useTVSimilar } from '@hooks/tv'
 
 const SimilarItem = dynamic(() => import('./SimilarItem'))
 const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 interface IProps {
   id: string
+}
+
+const styles = {
+  wrapper: 'space-y-4',
 }
 
 const Similar = ({ id }: IProps) => {
   const { data } = useTVSimilar(id)
   if (!data || data.results.length === 0) return null
   return (
-    <div className='space-y-4'>
-      <div className='flex items-center'>
-        <div className='flex items-center space-x-2'>
-          <h3 className='text-xl font-semibold'>Similar</h3>
-        </div>
-      </div>
+    <div className={styles.wrapper}>
+      <CategoryTitle cateogoryName='Similar' />
       <Suspense fallback={<Skeleton />}>
         <Carousel totalWidth={data.results.filter((tv) => !!tv.backdrop_path).length * 257}>
           {data?.results.map((tv, index) => {

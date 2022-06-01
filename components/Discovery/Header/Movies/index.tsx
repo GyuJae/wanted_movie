@@ -1,14 +1,14 @@
 import { MovieCategory } from 'types/movie'
 import classNames from 'classnames'
+import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
-import { movieCategoryDict } from 'dictionary/discoveryCategory'
 import { movieDiscoveryState } from 'atoms/discoveryState'
 import { useClickAway } from 'react-use'
 
 import { MouseEvent, useRef, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-const items: MovieCategory[] = ['top_rated', 'popular', 'upcoming', 'now_playing']
+const MovieItems = dynamic(() => import('./MovieItems'))
 
 const Movie = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -38,24 +38,7 @@ const Movie = () => {
       >
         <span>Movies</span>
       </button>
-      {open && (
-        <div className='absolute top-8 z-10 py-2 w-24 text-sm bg-zinc-800 rounded-md'>
-          {items.map((item, index) => {
-            const key = `movie-${item}-${index}`
-            return (
-              <button
-                key={key}
-                value={item}
-                onClick={handleSelectCategory}
-                type='button'
-                className='py-1 px-2 w-full text-left hover:bg-zinc-900'
-              >
-                {movieCategoryDict[item]}
-              </button>
-            )
-          })}
-        </div>
-      )}
+      <MovieItems inView={open} handleSelectCategory={handleSelectCategory} />
     </div>
   )
 }

@@ -2,10 +2,15 @@ interface IProps {
   cateogoryName: string
 }
 
+const styles = {
+  wrapper: 'flex items-center',
+  container: 'text-xl font-semibold',
+}
+
 const CategoryTitle = ({ cateogoryName }: IProps) => {
   return (
-    <div className='flex items-center'>
-      <h3 className='text-xl font-semibold'>{cateogoryName}</h3>
+    <div className={styles.wrapper}>
+      <h3 className={styles.container}>{cateogoryName}</h3>
     </div>
   )
 }

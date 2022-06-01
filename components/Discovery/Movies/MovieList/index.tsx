@@ -9,6 +9,12 @@ const MoviePage = dynamic(() => import('./MoviePage'))
 const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
 const Loading = dynamic(() => import('@components/Discovery/Skeleton'))
 
+const styles = {
+  wrapper: 'flex flex-col',
+  container:
+    'grid grid-cols-2 gap-4 justify-center py-4 pb-10 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6',
+}
+
 const MovieList = () => {
   const cateogry = useRecoilValue(movieDiscoveryState)
 
@@ -20,11 +26,8 @@ const MovieList = () => {
 
   if (!data) return null
   return (
-    <div className='flex flex-col'>
-      <motion.div
-        layout
-        className='grid grid-cols-2 gap-4 justify-center py-4 pb-10 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
-      >
+    <div className={styles.wrapper}>
+      <motion.div layout className={styles.container}>
         <Suspense fallback={<Loading />}>
           {data.pages.map((page, index) => {
             const key = `movie-${cateogry}-${page.page}-${index}`

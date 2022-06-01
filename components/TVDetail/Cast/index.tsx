@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useTVCredits } from '@hooks/tv'
 
 const CastItem = dynamic(() => import('./CastItem'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 interface IProps {
   id: string
@@ -15,13 +16,9 @@ const Cast = ({ id }: IProps) => {
 
   return (
     <div className='space-y-4'>
-      <div className='flex items-center'>
-        <div className='flex items-center space-x-2'>
-          <h3 className='text-xl font-semibold'>Cast</h3>
-        </div>
-      </div>
+      <CategoryTitle cateogoryName='Cast' />
       <Suspense fallback={<div>loading..</div>}>
-        <Carousel totalWidth={data.cast.length * 149}>
+        <Carousel totalWidth={data.cast.length * 158}>
           {data?.cast.map((item, index) => {
             const key = `cast-${item.id}-${index}`
             return <CastItem key={key} cast={item} />
