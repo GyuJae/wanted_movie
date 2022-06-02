@@ -15,7 +15,7 @@ const Cast = ({ id }: IProps) => {
   if (!data) return null
 
   return (
-    <div className='space-y-4'>
+    <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Cast' />
       <Suspense fallback={<div>loading..</div>}>
         <Carousel totalWidth={data.cast.length * 158}>

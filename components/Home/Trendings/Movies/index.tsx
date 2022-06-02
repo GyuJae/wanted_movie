@@ -28,7 +28,7 @@ const Movies = ({ inView, movies }: IProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key={key}
-              className='relative w-[22rem] h-60'
+              className='relative min-w-[22rem] h-60'
             >
               <Image
                 alt={movie.title}

@@ -22,7 +22,7 @@ const Movies = ({ inView }: IProps) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative w-[19rem] h-48'>
+          <motion.div key={key} className='relative min-w-[19rem] h-48'>
             <Image
               alt={movie.title}
               layout='fill'

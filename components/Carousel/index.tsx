@@ -8,7 +8,7 @@ interface ICarousel {
 }
 
 const styles = {
-  wrapper: 'overflow-hidden w-full cursor-grab',
+  wrapper: 'overflow-hidden w-screen cursor-grab',
   container: 'flex space-x-4',
 }
 

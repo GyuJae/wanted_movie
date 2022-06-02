@@ -22,7 +22,7 @@ const TVShows = ({ inView }: IProps) => {
         const key = `${tv.id}-${index}`
         if (!tv.poster_path) return null
         return (
-          <motion.div key={key} className='relative w-52 h-52'>
+          <motion.div key={key} className='relative min-w-[13rem] min-h-[13rem]'>
             <Image
               alt={tv.name}
               layout='fill'

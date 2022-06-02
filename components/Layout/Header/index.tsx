@@ -2,7 +2,8 @@ import React from 'react'
 import { TMediaTypeState } from 'atoms/mediaTypeState'
 import dynamic from 'next/dynamic'
 
-const HeaderItem = dynamic(() => import('./HeaderItem'), { ssr: false })
+const HeaderItem = dynamic(() => import('./HeaderItem'))
+const AccountItem = dynamic(() => import('./AccountItem'))
 
 const headerItems: TMediaTypeState[] = ['movie', 'tv']
 
@@ -15,6 +16,8 @@ const Header = () => {
           return <HeaderItem key={key} itemName={headerItem} />
         })}
       </ul>
+
+      <AccountItem />
     </header>
   )
 }

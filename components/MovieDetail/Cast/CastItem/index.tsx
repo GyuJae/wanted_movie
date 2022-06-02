@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const styles = {
-  imageContainer: 'relative w-44 h-48 bg-zinc-700 rounded-t-md pointer-events-none',
+  imageContainer: 'relative min-w-[11rem] h-48 bg-zinc-700 rounded-t-md pointer-events-none',
   image: 'rounded-t-md',
   container: 'flex flex-col',
   name: 'font-semibold',

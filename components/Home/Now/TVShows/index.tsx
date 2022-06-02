@@ -22,7 +22,7 @@ const TVShows = ({ inView }: IProps) => {
         const key = `${tv.id}-${index}`
         if (!tv.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative w-[19rem] h-48'>
+          <motion.div key={key} className='relative min-w-[19rem] h-48'>
             <Image
               alt={tv.name}
               layout='fill'

@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'absolute top-8 z-10 py-2 w-24 text-sm bg-zinc-800 rounded-md',
+  wrapper: 'absolute top-8 z-10 py-2 w-32 text-sm bg-zinc-800 rounded-md',
   button: 'py-1 px-2 w-full text-left hover:bg-zinc-900',
 }
 

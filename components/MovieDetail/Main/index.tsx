@@ -1,6 +1,9 @@
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { useMovie } from '@hooks/movie'
+
+const FuncItems = dynamic(() => import('./FuncItems'))
 
 interface IProps {
   id: string
@@ -11,8 +14,8 @@ const Main = ({ id }: IProps) => {
   if (!data) return null
 
   return (
-    <div className='w-screen h-full '>
-      <div className='flex relative justify-center w-screen h-screen'>
+    <div className='w-full h-full bg-black'>
+      <div className='flex relative justify-center w-full h-screen'>
         <Image
           alt={`backdrop-${data.title}`}
           className='object-fill opacity-30'
@@ -48,6 +51,7 @@ const Main = ({ id }: IProps) => {
             <div className='w-[800px]'>
               <span>{data.overview}</span>
             </div>
+            <FuncItems movie={data} />
           </div>
         </div>
       </div>

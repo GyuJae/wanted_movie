@@ -17,7 +17,7 @@ const Loading = () => {
                 duration: 1.6,
                 repeat: Infinity,
               }}
-              className='w-[19rem] h-48 bg-zinc-800 rounded-xl'
+              className='min-w-[19rem] h-48 bg-zinc-800 rounded-xl'
             />
           )
         })}

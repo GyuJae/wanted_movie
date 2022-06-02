@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'space-y-4',
+  wrapper: 'overflow-hidden space-y-4',
 }
 
 const Similar = ({ id }: IProps) => {

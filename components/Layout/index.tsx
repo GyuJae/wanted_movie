@@ -2,30 +2,19 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
-import { useState } from 'react'
 
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { Variants, motion } from 'framer-motion'
 
 const Nav = dynamic(() => import('./Nav'))
 const Header = dynamic(() => import('./Header'))
+const SideMe = dynamic(() => import('./SideMe'))
+const AccountForm = dynamic(() => import('@components/AccountForm'))
 
 interface IProps {
   title?: string
   showHeader?: boolean
   showNav?: boolean
   children: React.ReactNode
-}
-
-const sideVariants: Variants = {
-  initial: {
-    x: 400,
-  },
-  animate: {
-    x: 0,
-  },
-  exit: {
-    x: 400,
-  },
 }
 
 const paddingVariants: Variants = {
@@ -38,10 +27,7 @@ const paddingVariants: Variants = {
 }
 
 const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) => {
-  const [showSide, setShowSide] = useState<boolean>(false)
   const showAllNav = useRecoilValue(showNavState)
-
-  const handleClickSide = () => setShowSide((prev) => !prev)
 
   return (
     <div className='flex overflow-x-hidden min-h-screen text-white bg-black transition-all'>
@@ -63,27 +49,8 @@ const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) 
           {children}
         </motion.main>
       </div>
-      <AnimatePresence initial={false}>
-        {showSide && (
-          <motion.div
-            className='fixed right-0 z-20 w-72 h-screen bg-zinc-900'
-            variants={sideVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            transition={{
-              type: 'tween',
-            }}
-          />
-        )}
-      </AnimatePresence>
-      {/* <button
-        type='button'
-        onClick={handleClickSide}
-        className='fixed top-1/2 right-1/2 w-20 h-20 bg-rose-700 rounded-full '
-      >
-        helo
-      </button> */}
+      <SideMe />
+      <AccountForm />
     </div>
   )
 }

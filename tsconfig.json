@@ -22,7 +22,8 @@
       "@services/*": ["services/*"],
       "@assets/*": ["assets/*"],
       "@atoms/*": ["atoms/*"],
-      "@animations/*": ["animations/*"]
+      "@animations/*": ["animations/*"],
+      "@libs/*": ["libs/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Layout/Nav/NavItem"],

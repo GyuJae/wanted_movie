@@ -15,7 +15,7 @@ const Recommendations = ({ id }: IProps) => {
   const { data } = useMovieRecommendations(id)
   if (!data || data.results.length === 0) return null
   return (
-    <div className='space-y-4'>
+    <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Recommendations' />
       <Suspense fallback={<Skeleton />}>
         <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 255}>

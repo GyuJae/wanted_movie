@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import { ITVCredits, ITVDetail, ITVGenres, ITVResult, TvCategory } from 'types/tv.d'
 
 class TvsService {
@@ -8,15 +10,15 @@ class TvsService {
     this.API_KEY = process.env.API_KEY as string
   }
   private makeApiCall = async <T>(apiPath: string): Promise<T> => {
-    const response = await fetch(`${this.apiURL}${apiPath}`, {
+    const response = await axios.get(`${this.apiURL}${apiPath}`, {
       headers: {
         Accept: 'application/json',
       },
     })
-    if (!response.ok) {
-      throw new Error(`Error from api call ${apiPath}: status=${response.status} ${await response.text()}`)
+    if (!response.data) {
+      throw new Error(`Error from api call ${apiPath}: status=${response.status} ${response.statusText}`)
     }
-    return response.json()
+    return response.data
   }
 
   public getTvs = async (category: TvCategory): Promise<ITVResult> => {

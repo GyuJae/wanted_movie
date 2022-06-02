@@ -15,7 +15,7 @@ const Similar = ({ id }: IProps) => {
   const { data } = useMovieSimilar(id)
   if (!data || data.results.length === 0) return null
   return (
-    <div className='space-y-4'>
+    <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Similar' />
       <Suspense fallback={<Skeleton />}>
         <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 257}>

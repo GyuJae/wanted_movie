@@ -22,7 +22,7 @@ const Movies = ({ inView }: IProps) => {
         const key = `${movie.id}-${index}`
         if (!movie.poster_path) return null
         return (
-          <motion.div key={key} className='relative w-52 h-52'>
+          <motion.div key={key} className='relative min-w-[13rem] min-h-[13rem]'>
             <Image
               alt={movie.title}
               layout='fill'

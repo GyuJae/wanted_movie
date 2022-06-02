@@ -10,8 +10,8 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'w-screen h-full text-white bg-black',
-  container: 'py-12 px-10 space-y-12',
+  wrapper: 'w-screen min-h-screen text-white bg-black',
+  container: 'w-full py-12 px-10 space-y-10',
 }
 
 const MovieDetail = ({ id }: IProps) => {
