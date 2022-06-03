@@ -1,4 +1,3 @@
-import CategoryTitle from '@components/CategoryTitle'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { movieCategoryDict } from 'dictionary/discoveryCategory'
@@ -8,6 +7,7 @@ import { useRecoilValue } from 'recoil'
 
 const MovieGenres = dynamic(() => import('./MovieGenres'))
 const MovieList = dynamic(() => import('./MovieList'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 interface IProps {
   inView: boolean

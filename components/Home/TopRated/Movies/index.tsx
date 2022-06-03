@@ -28,7 +28,7 @@ const Movies = ({ inView }: IProps) => {
               alt={movie.title}
               layout='fill'
               src={getImage({ path: movie.poster_path, format: 'w500' })}
-              className='object-cover rounded-xl pointer-events-none'
+              className='object-cover object-top rounded-xl pointer-events-none'
               priority
             />
             <motion.div className='flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl'>
@@ -40,7 +40,7 @@ const Movies = ({ inView }: IProps) => {
                 <motion.span className='text-base font-semibold'>{movie.title}</motion.span>
                 <motion.span className='text-xs'>{movie.release_date.split('-')[0]}</motion.span>
                 <motion.div className='absolute right-2 bottom-2'>
-                  <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
+                  <ReadMoreBtn mediaId={movie.id} mediaType='movie' media={movie} />
                 </motion.div>
               </motion.div>
             </motion.div>

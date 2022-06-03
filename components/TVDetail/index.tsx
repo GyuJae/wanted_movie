@@ -11,7 +11,7 @@ interface IProps {
 
 const styles = {
   wrapper: 'w-screen h-full text-white bg-black',
-  container: 'py-12 px-10 space-y-12',
+  container: 'py-12 px-4 space-y-12',
 }
 
 const TVDetail = ({ id }: IProps) => {

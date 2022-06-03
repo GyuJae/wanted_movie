@@ -1,25 +1,25 @@
+import { IMovie } from 'types/movie'
+import { ITV } from 'types/tv'
 import { TMediaType } from 'types/trending'
-import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
+
+import { Bookmark, RecentView } from '@prisma/client'
+
+const TVShow = dynamic(() => import('./TVShow'))
+const Movie = dynamic(() => import('./Movie'))
 
 interface IProps {
   mediaType: TMediaType
   mediaId: number
+  media: IMovie | ITV | Bookmark | RecentView
 }
 
-const styles = {
-  button:
-    'flex z-10 justify-center py-2 px-1 min-w-[4.8rem] text-[10px] font-medium bg-red-600/60 hover:bg-red-600/70 rounded-full',
-}
-
-const ReadMoreBtn = ({ mediaType, mediaId }: IProps) => {
-  const router = useRouter()
-
-  const handleClick = () => router.push(`/${mediaType}/${mediaId}`)
-
+const ReadMoreBtn = ({ mediaType, mediaId, media }: IProps) => {
   return (
-    <button type='button' onClick={handleClick} className={styles.button}>
-      Read more
-    </button>
+    <div>
+      <TVShow mediaType={mediaType} mediaId={mediaId} media={media as ITV} inView={mediaType === 'tv'} />
+      <Movie mediaType={mediaType} mediaId={mediaId} media={media as IMovie} inView={mediaType === 'movie'} />
+    </div>
   )
 }
 

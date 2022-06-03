@@ -1,10 +1,14 @@
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { useTv } from '@hooks/tv'
+
+const FuncItems = dynamic(() => import('./FuncItems'))
 
 interface IProps {
   id: string
 }
+
 
 const Main = ({ id }: IProps) => {
   const { data } = useTv(id)
@@ -48,6 +52,7 @@ const Main = ({ id }: IProps) => {
             <div className='w-[800px]'>
               <span>{data.overview}</span>
             </div>
+            <FuncItems tv={data} />
           </div>
         </div>
       </div>

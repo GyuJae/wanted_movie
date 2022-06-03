@@ -14,6 +14,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
       where: {
         id: user?.id,
       },
+      select: {
+        id: true,
+      },
     })
     if (!currentUser) {
       return res.json({
@@ -32,6 +35,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
       const {
         body: { mediaType, mediaId, posterPath, title, releaseDate, vote },
       } = req
+      const existBookmark = await prisma.bookmark.findUnique({
+        where: {
+          userId_mediaId: {
+            userId: currentUser.id,
+            mediaId,
+          },
+        },
+        select: {
+          id: true,
+        },
+      })
+      if (existBookmark) {
+        return res.json({
+          ok: false,
+          error: 'already bookmark',
+        })
+      }
       await prisma.bookmark.create({
         data: {
           mediaType,
@@ -49,11 +69,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
     }
     if (req.method === 'DELETE') {
       const {
-        body: { bookmarkId },
+        body: { mediaId },
       } = req
       const bookmark = await prisma.bookmark.findUnique({
         where: {
-          id: +bookmarkId,
+          userId_mediaId: {
+            userId: currentUser.id,
+            mediaId: +mediaId
+          }
         },
         select: {
           id: true,

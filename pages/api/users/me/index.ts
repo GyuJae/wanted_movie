@@ -18,6 +18,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IMeResponse>) {
     }
     const currentUser = await prisma.user.findUnique({
       where: { id: user.id },
+      include: {
+        Bookmark: {
+          select: {
+            mediaId: true
+          }
+        }
+      }
     })
     if (!currentUser) {
       return res.json({

@@ -5,6 +5,10 @@ export interface IBookmarkResponse extends IResponse {
   bookmarks?: Bookmark[]
 }
 
+export interface ILastBookmarkResponse extends IResponse {
+  bookmark?: Bookmark | null
+}
+
 export interface ICreateBookmarkInput {
   mediaType: Media
   mediaId: number
@@ -15,5 +19,5 @@ export interface ICreateBookmarkInput {
 }
 
 export interface IDeleteBookmarkInput {
-  bookmarkId: number
+  mediaId: number
 }

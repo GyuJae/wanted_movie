@@ -44,7 +44,7 @@ const Movies = ({ inView, movies }: IProps) => {
                   <motion.span className='text-xs font-semibold'>{movie.vote_average} rating</motion.span>
                 </motion.div>
                 <motion.div>
-                  <ReadMoreBtn mediaType='movie' mediaId={movie.id} />
+                  <ReadMoreBtn mediaType='movie' mediaId={movie.id} media={movie} />
                 </motion.div>
               </motion.div>
             </motion.div>

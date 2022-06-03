@@ -27,7 +27,7 @@ const TVShows = ({ inView }: IProps) => {
               alt={tv.name}
               layout='fill'
               src={getImage({ path: tv.poster_path, format: 'w500' })}
-              className='object-cover rounded-xl pointer-events-none'
+              className='object-cover object-top rounded-xl pointer-events-none'
               priority
             />
             <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
@@ -35,7 +35,7 @@ const TVShows = ({ inView }: IProps) => {
                 <motion.span className='text-base font-semibold'>{tv.name}</motion.span>
                 <motion.span className='text-xs'>{tv.first_air_date.split('-')[0]}</motion.span>
                 <motion.div className='absolute right-2 bottom-2'>
-                  <ReadMoreBtn mediaId={tv.id} mediaType='tv' />
+                  <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
                 </motion.div>
               </motion.div>
             </motion.div>

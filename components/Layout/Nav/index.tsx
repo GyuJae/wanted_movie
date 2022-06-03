@@ -2,11 +2,12 @@ import BarsIcon from '@components/Icons/BarsIcon'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
-import { navItems } from 'dictionary/navitemDict'
 import { showNavState } from 'atoms/showNavState'
 import { useRecoilState } from 'recoil'
 
-const NavItem = dynamic(() => import('./NavItem'), { ssr: false })
+import { navLibraryItems, navMenuItems } from 'dictionary/navitemDict'
+
+const NavItem = dynamic(() => import('./NavItem'))
 
 const Nav = () => {
   const [show, setShow] = useRecoilState(showNavState)
@@ -16,7 +17,7 @@ const Nav = () => {
   return (
     <motion.nav
       animate={{
-        width: show ? '200px' : '57px',
+        width: show ? '200px' : '62px',
       }}
       transition={{
         type: 'tween',
@@ -31,15 +32,27 @@ const Nav = () => {
       >
         <BarsIcon styleClassName='w-5' />
       </button>
-      <div>
-        <h3 className='ml-3 text-xs text-zinc-400'>Menu</h3>
-        <ul className='mt-5'>
-          {navItems.map((item, index) => {
-            const key = `${item.categoryName}-${index}`
-            return <NavItem key={key} {...item} />
-          })}
-        </ul>
-        <div className='mx-auto mt-7 w-11/12 h-[1px] bg-zinc-700' />
+      <div className='space-y-2'>
+        <div>
+          <h3 className='pl-3 text-xs text-zinc-400'>MENU</h3>
+          <ul className='mt-2'>
+            {navMenuItems.map((item, index) => {
+              const key = `${item.categoryName}-${index}`
+              return <NavItem key={key} {...item} />
+            })}
+          </ul>
+          <div className='mx-auto mt-7 w-10/12 h-[1px] bg-zinc-700' />
+        </div>
+        <div className='py-2'>
+          <h3 className='pl-2 text-xs text-zinc-400'>LIBRARY</h3>
+          <ul className='mt-2'>
+            {navLibraryItems.map((item, index) => {
+              const key = `${item.categoryName}-${index}`
+              return <NavItem key={key} {...item} />
+            })}
+          </ul>
+          <div className='mx-auto mt-7 w-10/12 h-[1px] bg-zinc-700' />
+        </div>
       </div>
     </motion.nav>
   )

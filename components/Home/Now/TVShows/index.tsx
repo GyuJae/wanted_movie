@@ -35,7 +35,7 @@ const TVShows = ({ inView }: IProps) => {
                 <motion.span className='text-base font-semibold'>{tv.name}</motion.span>
                 <motion.span className='text-xs'>{tv.first_air_date.split('-')[0]}</motion.span>
               </motion.div>
-              <ReadMoreBtn mediaId={tv.id} mediaType='tv' />
+              <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
             </motion.div>
           </motion.div>
         )

@@ -34,7 +34,7 @@ const SimilarItem = ({ movie }: IProps) => {
           <span className={styles.title}>{movie.title}</span>
           <span className={styles.date}>{movie.release_date.split('-')[0]}</span>
         </div>
-        <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
+        <ReadMoreBtn mediaId={movie.id} mediaType='movie' media={movie} />
       </div>
     </div>
   )

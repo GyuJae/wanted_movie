@@ -76,6 +76,8 @@ model Bookmark {
   title       String
   releaseDate String
   vote        Float
+
+  @@unique([userId, mediaId])
 }
 
 model RecentView {
@@ -90,6 +92,8 @@ model RecentView {
   title       String
   releaseDate String
   vote        Float
+
+  @@unique([userId, mediaId])
 }
 
 enum Media {

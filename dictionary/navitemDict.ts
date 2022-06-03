@@ -1,7 +1,9 @@
-export const navItems: {
+interface IProps {
   categoryPathname: string
   categoryName: string
-}[] = [
+}
+
+export const navMenuItems: IProps[] = [
   {
     categoryName: 'Home',
     categoryPathname: '/',
@@ -13,5 +15,16 @@ export const navItems: {
   {
     categoryName: 'Community',
     categoryPathname: '/community',
+  },
+]
+
+export const navLibraryItems: IProps[] = [
+  {
+    categoryName: 'Recent',
+    categoryPathname: '/me/recent',
+  },
+  {
+    categoryName: 'Bookmarked',
+    categoryPathname: '/me/bookmarked',
   },
 ]

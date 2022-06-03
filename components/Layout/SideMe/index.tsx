@@ -7,6 +7,8 @@ import { useRef } from 'react'
 import { AnimatePresence, Variants, motion } from 'framer-motion'
 
 const UserInfo = dynamic(() => import('./UserInfo'))
+const Bookmark = dynamic(() => import('./Bookmark'))
+const RecentView = dynamic(() => import('./RecentView'))
 
 const sideVariants: Variants = {
   initial: {
@@ -31,7 +33,7 @@ const SideMe = () => {
     <AnimatePresence initial={false}>
       <motion.div
         ref={ref}
-        className='fixed right-0 z-20 py-2 px-4 w-72 h-screen bg-zinc-900'
+        className='fixed right-0 z-20 py-2 px-4 space-y-4 w-80 h-screen bg-zinc-900'
         variants={sideVariants}
         initial='initial'
         animate='animate'
@@ -41,6 +43,8 @@ const SideMe = () => {
         }}
       >
         <UserInfo />
+        <RecentView />
+        <Bookmark />
       </motion.div>
     </AnimatePresence>
   )

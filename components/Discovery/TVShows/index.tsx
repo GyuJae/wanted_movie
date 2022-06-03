@@ -1,4 +1,3 @@
-import CategoryTitle from '@components/CategoryTitle'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { showNavState } from 'atoms/showNavState'
@@ -8,6 +7,7 @@ import { useRecoilValue } from 'recoil'
 
 const TVShowGenres = dynamic(() => import('./TVShowGenres'))
 const TVList = dynamic(() => import('./TVList'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
 interface IProps {
   inView: boolean

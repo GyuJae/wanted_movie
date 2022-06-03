@@ -11,7 +11,7 @@ interface IProps {
 
 const styles = {
   wrapper: 'w-screen min-h-screen text-white bg-black',
-  container: 'w-full py-12 px-10 space-y-10',
+  container: 'w-full py-12 px-4 space-y-10',
 }
 
 const MovieDetail = ({ id }: IProps) => {

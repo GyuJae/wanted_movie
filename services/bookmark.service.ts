@@ -13,3 +13,7 @@ export const readBookmarks = () => {
 export const deleteBookmark = (deleteBookmarkInput: IDeleteBookmarkInput) => {
   return axios.delete('/api/bookmarks', { data: deleteBookmarkInput }).then((res) => res.data)
 }
+
+export const lastBookmark = () => {
+  return axios.get('/api/bookmarks/last').then((res) => res.data)
+}

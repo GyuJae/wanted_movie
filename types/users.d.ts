@@ -12,6 +12,10 @@ export interface ILoginInput {
   password: string
 }
 
+export interface IUserExtendBookmark extends User {
+  Bookmark: {mediaId: number}[]
+}
+
 export interface IMeResponse extends IResponse {
-  user?: User
+  user?: IUserExtendBookmark
 }

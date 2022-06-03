@@ -34,7 +34,7 @@ const RecommendationsItem = ({ tv }: IProps) => {
           <span className={styles.name}>{tv.name}</span>
           <span className={styles.date}>{tv.first_air_date.split('-')[0]}</span>
         </div>
-        <ReadMoreBtn mediaId={tv.id} mediaType='tv' />
+        <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
       </div>
     </div>
   )

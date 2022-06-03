@@ -35,7 +35,7 @@ const Movies = ({ inView }: IProps) => {
                 <motion.span className='text-base font-semibold'>{movie.title}</motion.span>
                 <motion.span className='text-xs'>{movie.release_date.split('-')[0]}</motion.span>
               </motion.div>
-              <ReadMoreBtn mediaId={movie.id} mediaType='movie' />
+              <ReadMoreBtn mediaId={movie.id} mediaType='movie' media={movie} />
             </motion.div>
           </motion.div>
         )
