@@ -8,8 +8,8 @@ import { useRef } from 'react'
 import { AnimatePresence, Variants, motion } from 'framer-motion'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-const ExclamationIcon = dynamic(() => import('@components/Icons/ExclamationIcon'))
-const XIcon = dynamic(() => import('@components/Icons/XIcon'))
+const ExclamationIcon = dynamic(() => import('@components/Icons/ExclamationIcon'), { ssr: false })
+const XIcon = dynamic(() => import('@components/Icons/XIcon'), { ssr: false })
 
 const variants: Variants = {
   initial: {

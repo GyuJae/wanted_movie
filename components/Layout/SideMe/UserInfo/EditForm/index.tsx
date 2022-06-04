@@ -10,8 +10,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
-const XIcon = dynamic(() => import('@components/Icons/XIcon'))
-const CameraIcon = dynamic(() => import('@components/Icons/CameraIcon'))
+const XIcon = dynamic(() => import('@components/Icons/XIcon'), { ssr: false })
+const CameraIcon = dynamic(() => import('@components/Icons/CameraIcon'), { ssr: false })
 
 interface IProps {
   inView: boolean

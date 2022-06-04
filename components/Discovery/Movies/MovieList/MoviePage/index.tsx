@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { movieSelectedGenres } from 'atoms/selectedGenres'
 import { useRecoilValue } from 'recoil'
 
-const MovieItem = dynamic(() => import('./MovieItem'))
+const MovieItem = dynamic(() => import('./MovieItem'), { ssr: false })
 
 interface IProps {
   moviePage: IMovieResult

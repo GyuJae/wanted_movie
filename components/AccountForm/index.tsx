@@ -5,10 +5,10 @@ import { useRecoilState } from 'recoil'
 
 import { useRef, useState } from 'react'
 
-const CreateAccount = dynamic(() => import('./CreateAccount'))
-const Login = dynamic(() => import('./Login'))
-const Status = dynamic(() => import('./Status'))
-const TagName = dynamic(() => import('./TagName'))
+const CreateAccount = dynamic(() => import('./CreateAccount'), { ssr: false })
+const Login = dynamic(() => import('./Login'), { ssr: false })
+const Status = dynamic(() => import('./Status'), { ssr: false })
+const TagName = dynamic(() => import('./TagName'), { ssr: false })
 
 const styles = {
   wrapper: 'flex fixed top-0 left-0 z-20 justify-center items-center w-screen h-screen bg-zinc-900/90',

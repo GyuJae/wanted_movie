@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
 
-const Carousel = dynamic(() => import('@components/Carousel'))
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
-const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
+const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
 
 interface IProps {
   inView: boolean

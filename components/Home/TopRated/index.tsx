@@ -6,12 +6,12 @@ import { useTvs } from '@hooks/tv'
 
 import React, { Suspense } from 'react'
 
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const Movies = dynamic(() => import('./Movies'))
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
-const TVShows = dynamic(() => import('./TVShows'))
-const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const Movies = dynamic(() => import('./Movies'), { ssr: false })
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
+const TVShows = dynamic(() => import('./TVShows'), { ssr: false })
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 const styles = {
   wrapper: 'space-y-4',

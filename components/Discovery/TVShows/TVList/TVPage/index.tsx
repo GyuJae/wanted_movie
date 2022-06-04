@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { tvSelectedGenres } from 'atoms/selectedGenres'
 import { useRecoilValue } from 'recoil'
 
-const TVItem = dynamic(() => import('./TVItem'))
+const TVItem = dynamic(() => import('./TVItem'), { ssr: false })
 
 interface IProps {
   tvPage: ITVResult

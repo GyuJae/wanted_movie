@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'))
+const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 
 interface IProps {
   handleFetch: () => void

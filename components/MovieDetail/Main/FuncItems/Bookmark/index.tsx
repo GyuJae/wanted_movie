@@ -9,7 +9,7 @@ import { useSetRecoilState } from 'recoil'
 import { createBookmark, deleteBookmark } from '@services/bookmark.service'
 import { useMutation, useQueryClient } from 'react-query'
 
-const BookMarkIcon = dynamic(() => import('@components/Icons/BookMarkIcon'))
+const BookMarkIcon = dynamic(() => import('@components/Icons/BookMarkIcon'), { ssr: false })
 
 interface IProps {
   movie: IMovieDetail

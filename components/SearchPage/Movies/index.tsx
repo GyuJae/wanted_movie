@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 import { useInfiniteSearchMovies } from '@hooks/movie'
 import { useRouter } from 'next/router'
 
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
-const MoviePage = dynamic(() => import('@components/Discovery/Movies/MovieList/MoviePage'))
-const Loading = dynamic(() => import('@components/Discovery/Skeleton'))
+const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const MoviePage = dynamic(() => import('@components/Discovery/Movies/MovieList/MoviePage'), { ssr: false })
+const Loading = dynamic(() => import('@components/Discovery/Skeleton'), { ssr: false })
 
 interface IProps {
   inView: boolean

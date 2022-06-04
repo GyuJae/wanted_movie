@@ -3,8 +3,8 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useMovieCredits } from '@hooks/movie'
 
-const CastItem = dynamic(() => import('./CastItem'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const CastItem = dynamic(() => import('./CastItem'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
   id: string

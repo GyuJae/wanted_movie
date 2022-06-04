@@ -5,9 +5,9 @@ import { movieDiscoveryState } from 'atoms/discoveryState'
 import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
 
-const MovieGenres = dynamic(() => import('./MovieGenres'))
-const MovieList = dynamic(() => import('./MovieList'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const MovieGenres = dynamic(() => import('./MovieGenres'), { ssr: false })
+const MovieList = dynamic(() => import('./MovieList'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
   inView: boolean

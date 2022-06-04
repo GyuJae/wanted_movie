@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { showSideMeState } from '@atoms/showSideMe'
 import { useSetRecoilState } from 'recoil'
 
-const Avatar = dynamic(() => import('@components/Avatar'))
+const Avatar = dynamic(() => import('@components/Avatar'), { ssr: false })
 
 interface IProps {
   inView: boolean

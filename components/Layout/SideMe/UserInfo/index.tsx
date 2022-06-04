@@ -2,9 +2,9 @@ import dynamic from 'next/dynamic'
 import { useMe } from '@hooks/user'
 import { useState } from 'react'
 
-const Avatar = dynamic(() => import('@components/Avatar'))
-const EditForm = dynamic(() => import('./EditForm'))
-const PencliIcon = dynamic(() => import('@components/Icons/PencliIcon'))
+const Avatar = dynamic(() => import('@components/Avatar'), { ssr: false })
+const EditForm = dynamic(() => import('./EditForm'), { ssr: false })
+const PencliIcon = dynamic(() => import('@components/Icons/PencliIcon'), { ssr: false })
 
 const styles = {
   wrapper: 'flex justify-between px-1',

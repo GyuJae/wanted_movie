@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 
 import { Bookmark, RecentView } from '@prisma/client'
 
-const TVShow = dynamic(() => import('./TVShow'))
-const Movie = dynamic(() => import('./Movie'))
+const TVShow = dynamic(() => import('./TVShow'), { ssr: false })
+const Movie = dynamic(() => import('./Movie'), { ssr: false })
 
 interface IProps {
   mediaType: TMediaType

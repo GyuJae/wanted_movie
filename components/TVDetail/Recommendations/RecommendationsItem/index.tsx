@@ -3,7 +3,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 
-const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
 
 interface IProps {
   tv: ITV

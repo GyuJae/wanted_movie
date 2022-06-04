@@ -4,8 +4,8 @@ import { showNavState } from '@atoms/showNavState'
 import { useMe } from '@hooks/user'
 import { useRecoilValue } from 'recoil'
 
-const Login = dynamic(() => import('./Login'))
-const Me = dynamic(() => import('./Me'))
+const Login = dynamic(() => import('./Login'), { ssr: false })
+const Me = dynamic(() => import('./Me'), { ssr: false })
 
 const AccountItem = () => {
   const showNavValue = useRecoilValue(showNavState)

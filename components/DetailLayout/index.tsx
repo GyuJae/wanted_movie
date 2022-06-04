@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
-const AccountForm = dynamic(() => import('@components/AccountForm'))
-const LoginToastMessage = dynamic(() => import('@components/Layout/LoginToastMessage'))
+const AccountForm = dynamic(() => import('@components/AccountForm'), { ssr: false })
+const LoginToastMessage = dynamic(() => import('@components/Layout/LoginToastMessage'), { ssr: false })
 
 interface IProps {
   children: React.ReactNode

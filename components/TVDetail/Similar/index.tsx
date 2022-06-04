@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useTVSimilar } from '@hooks/tv'
 
-const SimilarItem = dynamic(() => import('./SimilarItem'))
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const SimilarItem = dynamic(() => import('./SimilarItem'), { ssr: false })
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
   id: string

@@ -10,8 +10,8 @@ import { useMutation } from 'react-query'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-const Avatar = dynamic(() => import('@components/Avatar'))
-const Vote = dynamic(() => import('@components/MovieDetail/Main/FuncItems/Post/PostForm/Vote'))
+const Avatar = dynamic(() => import('@components/Avatar'), { ssr: false })
+const Vote = dynamic(() => import('@components/MovieDetail/Main/FuncItems/Post/PostForm/Vote'), { ssr: false })
 
 interface IProps {
   inView: boolean

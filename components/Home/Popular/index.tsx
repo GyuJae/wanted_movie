@@ -6,11 +6,11 @@ import { useTvs } from '@hooks/tv'
 
 import React, { Suspense } from 'react'
 
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const Movies = dynamic(() => import('@components/Home/TopRated/Movies'))
-const TVShows = dynamic(() => import('@components/Home/TopRated/TVShows'))
-const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const Movies = dynamic(() => import('@components/Home/TopRated/Movies'), { ssr: false })
+const TVShows = dynamic(() => import('@components/Home/TopRated/TVShows'), { ssr: false })
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 const Popular = () => {
   const mediaType = useRecoilValue(mediaTypeState)

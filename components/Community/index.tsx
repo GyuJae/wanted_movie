@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 
-const Layout = dynamic(() => import('@components/Layout'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
-const CommunityList = dynamic(() => import('./CommunityList'))
+const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
+const CommunityList = dynamic(() => import('./CommunityList'), { ssr: false })
 
 const styles = {
   wrapper: 'px-4 space-y-4',

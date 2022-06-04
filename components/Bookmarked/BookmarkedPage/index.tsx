@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useInfiniteBookmarked } from '@hooks/bookmark'
 
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
-const BookmarkedList = dynamic(() => import('./BookmarkedList'))
+const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const BookmarkedList = dynamic(() => import('./BookmarkedList'), { ssr: false })
 
 const styles = {
   container: 'grid grid-cols-2 gap-4 justify-center py-4 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6',

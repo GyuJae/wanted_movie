@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
-const LeftArrow = dynamic(() => import('@components/Icons/LeftArrow'))
+const LeftArrow = dynamic(() => import('@components/Icons/LeftArrow'), { ssr: false })
 
 const Back = () => {
   const router = useRouter()

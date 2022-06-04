@@ -3,9 +3,9 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useTVRecommendations } from '@hooks/tv'
 
-const RecommendationsItem = dynamic(() => import('./RecommendationsItem'))
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const RecommendationsItem = dynamic(() => import('./RecommendationsItem'), { ssr: false })
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
   id: string

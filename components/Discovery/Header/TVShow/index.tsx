@@ -8,7 +8,7 @@ import { useClickAway } from 'react-use'
 import { MouseEvent, useRef, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-const TVShowItem = dynamic(() => import('./TVShowItem'))
+const TVShowItem = dynamic(() => import('./TVShowItem'), { ssr: false })
 
 const TVShow = () => {
   const containerRef = useRef<HTMLDivElement>(null)

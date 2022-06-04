@@ -7,8 +7,8 @@ import { useMutation } from 'react-query'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Suspense, useState } from 'react'
 
-const Input = dynamic(() => import('../Input'))
-const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'))
+const Input = dynamic(() => import('../Input'), { ssr: false })
+const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 
 interface IProps {
   inView: boolean
@@ -37,6 +37,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   const { mutate } = useMutation(['createAccount'], createAccount, {
     onSuccess: ({ ok, error }: IResponse) => {
+      console.log(ok, error)
       if (error) setFormError(error)
       if (ok) handleSetLogin()
     },
@@ -79,7 +80,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
       <button type='submit' className={styles.button}>
         <Suspense fallback={<SpinLoading />}>Sign Up</Suspense>
       </button>
-      <FormError inView={Boolean(formError)} message={formError} />
+      <FormError inView={!!formError} message={formError} />
     </form>
   )
 }

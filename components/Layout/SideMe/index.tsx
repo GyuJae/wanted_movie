@@ -6,10 +6,10 @@ import { useRef } from 'react'
 
 import { AnimatePresence, Variants, motion } from 'framer-motion'
 
-const UserInfo = dynamic(() => import('./UserInfo'))
-const Bookmark = dynamic(() => import('./Bookmark'))
-const RecentView = dynamic(() => import('./RecentView'))
-const SearchForm = dynamic(() => import('@components/SearchPage/SearchForm'))
+const UserInfo = dynamic(() => import('./UserInfo'), { ssr: false })
+const Bookmark = dynamic(() => import('./Bookmark'), { ssr: false })
+const RecentView = dynamic(() => import('./RecentView'), { ssr: false })
+const SearchForm = dynamic(() => import('@components/SearchPage/SearchForm'), { ssr: false })
 
 interface IProps {
   inView: boolean

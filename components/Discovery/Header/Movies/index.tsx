@@ -8,7 +8,7 @@ import { useClickAway } from 'react-use'
 import { MouseEvent, useRef, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-const MovieItems = dynamic(() => import('./MovieItems'))
+const MovieItems = dynamic(() => import('./MovieItems'), { ssr: false })
 
 const Movie = () => {
   const containerRef = useRef<HTMLDivElement>(null)

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
-const StarHalfIcon = dynamic(() => import('@components/Icons/StarHalfIcon'))
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
+const StarHalfIcon = dynamic(() => import('@components/Icons/StarHalfIcon'), { ssr: false })
 
 interface IProps {
   vote: number

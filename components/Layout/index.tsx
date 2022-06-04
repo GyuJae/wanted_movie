@@ -6,11 +6,11 @@ import { useRecoilValue } from 'recoil'
 
 import { Variants, motion } from 'framer-motion'
 
-const Nav = dynamic(() => import('./Nav'))
-const Header = dynamic(() => import('./Header'))
-const SideMe = dynamic(() => import('./SideMe'))
-const LoginToastMessage = dynamic(() => import('./LoginToastMessage'))
-const AccountForm = dynamic(() => import('@components/AccountForm'))
+const Nav = dynamic(() => import('./Nav'), { ssr: false })
+const Header = dynamic(() => import('./Header'), { ssr: false })
+const SideMe = dynamic(() => import('./SideMe'), { ssr: false })
+const LoginToastMessage = dynamic(() => import('./LoginToastMessage'), { ssr: false })
+const AccountForm = dynamic(() => import('@components/AccountForm'), { ssr: false })
 
 interface IProps {
   title?: string

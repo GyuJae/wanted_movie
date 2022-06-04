@@ -6,9 +6,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Suspense, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
-const Input = dynamic(() => import('../Input'))
-const FormError = dynamic(() => import('../FormError'))
-const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'))
+const Input = dynamic(() => import('../Input'), { ssr: false })
+const FormError = dynamic(() => import('../FormError'), { ssr: false })
+const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 
 interface IProps {
   inView: boolean

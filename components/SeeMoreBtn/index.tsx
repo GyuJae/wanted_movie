@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { movieDiscoveryState, tvDiscoveryState } from 'atoms/discoveryState'
 
-const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'))
+const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'), { ssr: false })
 
 interface IProps {
   mediaType: TMediaType

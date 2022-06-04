@@ -2,7 +2,7 @@ import Bookmark from './Bookmark'
 import { ITVDetail } from 'types/tv'
 import dynamic from 'next/dynamic'
 
-const Post = dynamic(() => import('./Post'))
+const Post = dynamic(() => import('./Post'), { ssr: false })
 
 interface IProps {
   tv: ITVDetail

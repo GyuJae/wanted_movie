@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-const SearchIcon = dynamic(() => import('@components/Icons/SearchIcon'))
+const SearchIcon = dynamic(() => import('@components/Icons/SearchIcon'), { ssr: false })
 
 interface IForm {
   query: string

@@ -5,8 +5,8 @@ import { getImage } from '@utils/getImage'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
-const Carousel = dynamic(() => import('@components/Carousel'))
-const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
+const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
 
 interface IProps {
   inView: boolean

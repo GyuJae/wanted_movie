@@ -5,9 +5,9 @@ import { tvDiscoveryState } from 'atoms/discoveryState'
 import { useInfiniteTVs } from '@hooks/tv'
 import { useRecoilValue } from 'recoil'
 
-const TVPage = dynamic(() => import('./TVPage'))
-const NextPageBtn = dynamic(() => import('@components/Discovery//NextPageBtn'))
-const Loading = dynamic(() => import('@components/Discovery/Skeleton'))
+const TVPage = dynamic(() => import('./TVPage'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/Discovery//NextPageBtn'), { ssr: false })
+const Loading = dynamic(() => import('@components/Discovery/Skeleton'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col',

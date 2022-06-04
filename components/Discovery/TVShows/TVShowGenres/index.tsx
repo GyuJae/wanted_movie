@@ -6,8 +6,8 @@ import { useTVGenres } from '@hooks/tv'
 
 import { useRef, useState } from 'react'
 
-const GenreList = dynamic(() => import('./GenreList'))
-const DownArrow = dynamic(() => import('@components/Icons/DownArrow'))
+const GenreList = dynamic(() => import('./GenreList'), { ssr: false })
+const DownArrow = dynamic(() => import('@components/Icons/DownArrow'), { ssr: false })
 
 const styles = {
   wrapper: 'flex relative items-center space-y-4',

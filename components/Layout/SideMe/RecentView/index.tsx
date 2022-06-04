@@ -4,9 +4,9 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useLastRecentView } from '@hooks/recentView'
 
-const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'))
-const RecentViewItem = dynamic(() => import('./RecentViewItem'))
-const Skeleton = dynamic(() => import('../Skeleton'))
+const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'), { ssr: false })
+const RecentViewItem = dynamic(() => import('./RecentViewItem'), { ssr: false })
+const Skeleton = dynamic(() => import('../Skeleton'), { ssr: false })
 
 const styles = {
   wrapper: 'space-y-2',

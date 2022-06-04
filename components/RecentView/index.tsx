@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
-const Layout = dynamic(() => import('@components/Layout'))
-const RecentViewPage = dynamic(() => import('./RecentViewPage'))
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
+const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
+const RecentViewPage = dynamic(() => import('./RecentViewPage'), { ssr: false })
 
 const RecentView = () => {
   return (

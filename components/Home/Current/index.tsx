@@ -5,11 +5,11 @@ import { useMovies } from '@hooks/movie'
 import { useRecoilValue } from 'recoil'
 import { useTvs } from '@hooks/tv'
 
-const Movies = dynamic(() => import('./Movies'))
-const TVShows = dynamic(() => import('./TVShows'))
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const Movies = dynamic(() => import('./Movies'), { ssr: false })
+const TVShows = dynamic(() => import('./TVShows'), { ssr: false })
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 const Current = () => {
   const mediaType = useRecoilValue(mediaTypeState)

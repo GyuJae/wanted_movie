@@ -5,9 +5,9 @@ import { tvCategoryDict } from 'dictionary/discoveryCategory'
 import { tvDiscoveryState } from 'atoms/discoveryState'
 import { useRecoilValue } from 'recoil'
 
-const TVShowGenres = dynamic(() => import('./TVShowGenres'))
-const TVList = dynamic(() => import('./TVList'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const TVShowGenres = dynamic(() => import('./TVShowGenres'), { ssr: false })
+const TVList = dynamic(() => import('./TVList'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
   inView: boolean

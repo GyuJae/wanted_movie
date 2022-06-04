@@ -2,10 +2,10 @@ import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { useRecoilValue } from 'recoil'
 
-const Layout = dynamic(() => import('@components/Layout'))
-const Movies = dynamic(() => import('./Movies'))
-const TVShows = dynamic(() => import('./TVShows'))
-const Header = dynamic(() => import('./Header'))
+const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
+const Movies = dynamic(() => import('./Movies'), { ssr: false })
+const TVShows = dynamic(() => import('./TVShows'), { ssr: false })
+const Header = dynamic(() => import('./Header'), { ssr: false })
 
 const Discovery = () => {
   const mediaTypeValue = useRecoilValue(mediaTypeState)

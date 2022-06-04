@@ -8,8 +8,8 @@ interface IProps {
   post: PostWithUser
 }
 
-const Avatar = dynamic(() => import('@components/Avatar'))
-const Vote = dynamic(() => import('./Vote'))
+const Avatar = dynamic(() => import('@components/Avatar'), { ssr: false })
+const Vote = dynamic(() => import('./Vote'), { ssr: false })
 
 const styles = {
   wrapper: 'flex justify-between py-2 px-4 space-x-2',

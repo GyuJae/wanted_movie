@@ -1,10 +1,12 @@
-import ExclamationIcon from '@components/Icons/ExclamationIcon'
-import Layout from '@components/Layout'
-import RotateIcon from '@components/Icons/RotateIcon'
+import dynamic from 'next/dynamic'
 
 interface IProps {
   resetErrorBoundary: (...args: unknown[]) => void
 }
+
+const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
+const RotateIcon = dynamic(() => import('@components/Icons/RotateIcon'), { ssr: false })
+const ExclamationIcon = dynamic(() => import('@components/Icons/ExclamationIcon'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col items-center py-20 px-4 m-auto space-y-2 w-2/3 h-1/2 bg-zinc-900 rounded-xl',

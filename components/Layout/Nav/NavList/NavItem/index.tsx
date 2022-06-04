@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import Link from 'next/link'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { opacityVariants } from '@animations/variants'
@@ -9,12 +7,12 @@ import { useRouter } from 'next/router'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
-const CompassIcon = dynamic(() => import('@components/Icons/CompassIcon'))
-const HouseIcon = dynamic(() => import('@components/Icons/HouseIcon'))
-const UsersIcon = dynamic(() => import('@components/Icons/UsersIcon'))
-const ClockIcon = dynamic(() => import('@components/Icons/ClockIcon'))
-const BookMarkIcon = dynamic(() => import('@components/Icons/BookMarkIcon'))
-const SearchIcon = dynamic(() => import('@components/Icons/SearchIcon'))
+const CompassIcon = dynamic(() => import('@components/Icons/CompassIcon'), { ssr: false })
+const HouseIcon = dynamic(() => import('@components/Icons/HouseIcon'), { ssr: false })
+const UsersIcon = dynamic(() => import('@components/Icons/UsersIcon'), { ssr: false })
+const ClockIcon = dynamic(() => import('@components/Icons/ClockIcon'), { ssr: false })
+const BookMarkIcon = dynamic(() => import('@components/Icons/BookMarkIcon'), { ssr: false })
+const SearchIcon = dynamic(() => import('@components/Icons/SearchIcon'), { ssr: false })
 
 interface IProps {
   categoryPathname: string
@@ -23,7 +21,7 @@ interface IProps {
 
 const styles = {
   item: (current: boolean) =>
-    classNames('relative flex pl-5 mt-1  space-x-3 h-12 justify-start items-center text-sm hover:bg-zinc-800', {
+    classNames('relative flex w-full pl-5 mt-1  space-x-3 h-12 justify-start items-center text-sm hover:bg-zinc-800', {
       'text-white font-semibold fill-red-600': current,
       'fill-zinc-600': !current,
     }),
@@ -41,32 +39,30 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
     Search: <SearchIcon styleClassname='w-5' />,
   }[categoryName]
 
-  const { pathname } = useRouter()
-
+  const router = useRouter()
+  const { pathname } = router
   const showItem = useRecoilValue(showNavState)
 
+  const handleClickPathname = () => router.replace(categoryPathname)
+
   return (
-    <Link href={categoryPathname}>
-      <a>
-        <li className={styles.item(pathname === categoryPathname)}>
-          <div>{symbolIcon}</div>
-          <AnimatePresence>
-            {showItem && (
-              <motion.span
-                variants={opacityVariants}
-                initial='initial'
-                animate='animate'
-                exit='exit'
-                className={styles.categoryName}
-              >
-                {categoryName}
-              </motion.span>
-            )}
-          </AnimatePresence>
-          {pathname === categoryPathname && showItem && <div className={styles.redBar} />}
-        </li>
-      </a>
-    </Link>
+    <button type='button' onClick={handleClickPathname} className={styles.item(pathname === categoryPathname)}>
+      <div>{symbolIcon}</div>
+      <AnimatePresence>
+        {showItem && (
+          <motion.span
+            variants={opacityVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            className={styles.categoryName}
+          >
+            {categoryName}
+          </motion.span>
+        )}
+      </AnimatePresence>
+      {pathname === categoryPathname && showItem && <div className={styles.redBar} />}
+    </button>
   )
 }
 

@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { IRecentViewResponse } from 'types/recent'
 import dynamic from 'next/dynamic'
 
-const RecentItem = dynamic(() => import('./RecentItem'))
+const RecentItem = dynamic(() => import('./RecentItem'), { ssr: false })
 
 interface IProps {
   data?: IRecentViewResponse

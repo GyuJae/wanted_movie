@@ -7,11 +7,11 @@ import { timeTrendingState } from 'atoms/timeTrendingState'
 import { useRecoilValue } from 'recoil'
 import { useTrendings } from '@hooks/trending'
 
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'))
-const Movies = dynamic(() => import('./Movies'))
-const TVShows = dynamic(() => import('./TVShows'))
-const TimeToggle = dynamic(() => import('./TimeToggle'))
-const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
+const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+const Movies = dynamic(() => import('./Movies'), { ssr: false })
+const TVShows = dynamic(() => import('./TVShows'), { ssr: false })
+const TimeToggle = dynamic(() => import('./TimeToggle'), { ssr: false })
+const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 const styles = {
   wrapper: 'space-y-4',

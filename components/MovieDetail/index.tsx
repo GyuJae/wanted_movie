@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic'
 
-const Back = dynamic(() => import('./Back'))
-const Cast = dynamic(() => import('./Cast'))
-const Main = dynamic(() => import('./Main'))
-const Recommendations = dynamic(() => import('./Recommendations'))
-const Similar = dynamic(() => import('./Similar'))
-const DetailLayout = dynamic(() => import('@components/DetailLayout'))
+const Back = dynamic(() => import('./Back'), { ssr: false })
+const Cast = dynamic(() => import('./Cast'), { ssr: false })
+const Main = dynamic(() => import('./Main'), { ssr: false })
+const Recommendations = dynamic(() => import('./Recommendations'), { ssr: false })
+const Similar = dynamic(() => import('./Similar'), { ssr: false })
+const DetailLayout = dynamic(() => import('@components/DetailLayout'), { ssr: false })
 
 interface IProps {
   id: string

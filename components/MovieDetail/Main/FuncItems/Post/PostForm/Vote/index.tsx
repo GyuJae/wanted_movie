@@ -3,7 +3,7 @@ import { useClickAway } from 'react-use'
 
 import { MouseEvent, useRef, useState } from 'react'
 
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
 
 interface IProps {
   handleVoteValue: (voteValue: number) => void

@@ -6,7 +6,7 @@ import { useMe } from '@hooks/user'
 import { useSetRecoilState } from 'recoil'
 import { useState } from 'react'
 
-const PencliIcon = dynamic(() => import('@components/Icons/PencliIcon'))
+const PencliIcon = dynamic(() => import('@components/Icons/PencliIcon'), { ssr: false })
 
 interface IProps {
   tv: ITVDetail

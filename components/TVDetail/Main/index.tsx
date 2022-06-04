@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { useTv } from '@hooks/tv'
 
-const FuncItems = dynamic(() => import('./FuncItems'))
+const FuncItems = dynamic(() => import('./FuncItems'), { ssr: false })
 
 interface IProps {
   id: string

@@ -3,8 +3,8 @@ import { RecentView } from '@prisma/client'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 
-const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
-const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
+const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
+const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
 
 interface IProps {
   inView: boolean

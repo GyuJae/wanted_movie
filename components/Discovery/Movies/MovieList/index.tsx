@@ -5,9 +5,9 @@ import { movieDiscoveryState } from 'atoms/discoveryState'
 import { useInfiniteMovies } from '@hooks/movie'
 import { useRecoilValue } from 'recoil'
 
-const MoviePage = dynamic(() => import('./MoviePage'))
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
-const Loading = dynamic(() => import('@components/Discovery/Skeleton'))
+const MoviePage = dynamic(() => import('./MoviePage'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const Loading = dynamic(() => import('@components/Discovery/Skeleton'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col',

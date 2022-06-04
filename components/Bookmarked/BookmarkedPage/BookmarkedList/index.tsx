@@ -2,7 +2,7 @@ import { AnimatePresence } from 'framer-motion'
 import { IBookmarkResponse } from 'types/bookmark'
 import dynamic from 'next/dynamic'
 
-const BookmarkedItem = dynamic(() => import('./BookmarkedItem'))
+const BookmarkedItem = dynamic(() => import('./BookmarkedItem'), { ssr: false })
 
 interface IProps {
   data?: IBookmarkResponse
