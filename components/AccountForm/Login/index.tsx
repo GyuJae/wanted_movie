@@ -1,9 +1,9 @@
 import { IResponse } from '@libs/withHandler'
 import dynamic from 'next/dynamic'
 import { login } from '@services/users.service'
+import { useState } from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Suspense, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
 const Input = dynamic(() => import('../Input'), { ssr: false })
@@ -22,7 +22,7 @@ interface IForm {
 
 const styles = {
   container: 'space-y-3',
-  button: 'py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+  button: 'py-2 w-full flex justify-center items-center text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
 }
 
 const Login = ({ inView, handleClose }: IProps) => {
@@ -33,7 +33,7 @@ const Login = ({ inView, handleClose }: IProps) => {
     formState: { errors },
   } = useForm<IForm>({ mode: 'onChange' })
   const [formError, setFormError] = useState<string | undefined>(undefined)
-  const { mutate } = useMutation('login', login, {
+  const { mutate, isLoading } = useMutation('login', login, {
     onSuccess: ({ ok, error }: IResponse) => {
       if (error) setFormError(error)
       if (ok) {
@@ -71,7 +71,7 @@ const Login = ({ inView, handleClose }: IProps) => {
       />
       <FormError inView={errors.password?.type === 'required'} message='Password Required' />
       <button type='submit' className={styles.button}>
-        <Suspense fallback={<SpinLoading />}>Login</Suspense>
+        {isLoading ? <SpinLoading size='s' darkmode /> : 'Login'}
       </button>
       <FormError inView={Boolean(formError)} message={formError} />
     </form>

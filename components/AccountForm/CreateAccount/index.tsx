@@ -3,9 +3,9 @@ import { IResponse } from '@libs/withHandler'
 import { createAccount } from '@services/users.service'
 import dynamic from 'next/dynamic'
 import { useMutation } from 'react-query'
+import { useState } from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Suspense, useState } from 'react'
 
 const Input = dynamic(() => import('../Input'), { ssr: false })
 const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
@@ -23,7 +23,7 @@ interface IForm {
 
 const styles = {
   container: 'space-y-3',
-  button: 'py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+  button: 'py-2 w-full flex justify-center items-center text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
 }
 
 const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
@@ -35,7 +35,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   const [formError, setFormError] = useState<string | undefined>(undefined)
 
-  const { mutate } = useMutation(['createAccount'], createAccount, {
+  const { mutate, isLoading } = useMutation(['createAccount'], createAccount, {
     onSuccess: ({ ok, error }: IResponse) => {
       if (error) setFormError(error)
       if (ok) handleSetLogin()
@@ -77,7 +77,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
       <FormError inView={errors.password?.type === 'required'} message='Pssword Required' />
       <FormError inView={errors.password?.type === 'maxLength'} message='Pssword Max Length 16' />
       <button type='submit' className={styles.button}>
-        <Suspense fallback={<SpinLoading />}>Sign Up</Suspense>
+        {isLoading ? <SpinLoading size='s' darkmode /> : 'Sign Up'}
       </button>
       <FormError inView={!!formError} message={formError} />
     </form>

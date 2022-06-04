@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from 'react-query'
 
 const XIcon = dynamic(() => import('@components/Icons/XIcon'), { ssr: false })
 const CameraIcon = dynamic(() => import('@components/Icons/CameraIcon'), { ssr: false })
+const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 
 interface IProps {
   inView: boolean
@@ -36,7 +37,7 @@ const styles = {
   cameraIcon: 'w-4 fill-zinc-700 z-40',
   usernameLabel: 'text-sm font-semibold',
   usernameInput: 'py-2 px-3 w-full bg-transparent border-b-2 border-zinc-600 outline-none',
-  saveButton: 'py-2 mt-2 w-full font-semibold bg-red-800 rounded-full',
+  saveButton: 'py-2 mt-2 w-full flex justify-center items-center font-semibold bg-red-800 rounded-full',
   formErrorContainer: 'px-4',
   formError: 'font-semibold text-red-600',
 }
@@ -47,7 +48,7 @@ const EditForm = ({ inView, handleCloseEditForm }: IProps) => {
   const [formError, setFormError] = useState<string | null>(null)
   const { data } = useMe()
   const { register, handleSubmit, setValue, watch } = useForm<IForm>()
-  const { mutate } = useMutation(['user', 'me', 'edit'], edit, {
+  const { mutate, isLoading } = useMutation(['user', 'me', 'edit'], edit, {
     onSuccess: ({ ok, error }: IResponse) => {
       if (ok) {
         queryClient.refetchQueries(['user', 'me'])
@@ -130,7 +131,7 @@ const EditForm = ({ inView, handleCloseEditForm }: IProps) => {
             />
           </fieldset>
           <button type='submit' className={styles.saveButton}>
-            Save
+            {isLoading ? <SpinLoading size='s' /> : 'Save'}
           </button>
         </form>
 

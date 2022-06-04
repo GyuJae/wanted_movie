@@ -32,7 +32,7 @@ const TVShows = ({ mediaType, mediaId, media, inView }: IProps) => {
         vote: media.vote_average,
       })
     }
-    router.push(`/${mediaType}/${mediaId}`)
+    router.push(`/${mediaType}/${mediaId}`).then(() => router.reload())
   }
 
   if (!inView) return null

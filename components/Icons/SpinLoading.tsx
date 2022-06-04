@@ -1,10 +1,19 @@
 import React from 'react'
+import classNames from 'classnames'
 
-const SpinLoading = () => {
+interface IProps {
+  size?: 's' | 'm'
+  darkmode?: boolean
+}
+
+const SpinLoading = ({ size = 'm', darkmode = false }: IProps) => {
   return (
     <svg
       role='status'
-      className='mr-2 w-8 h-8 text-zinc-900 animate-spin fill-red-700'
+      className={classNames('mr-2 w-8 h-8 text-zinc-900 animate-spin fill-red-700', {
+        'fill-zinc-600': darkmode,
+        'w-5 h-5': size === 's',
+      })}
       viewBox='0 0 100 101'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
