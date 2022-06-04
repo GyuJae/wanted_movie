@@ -29,10 +29,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
         query: { page },
       } = req
       const bookmarks = await prisma.bookmark.findMany({
+        where: {
+          userId: currentUser.id,
+        },
         skip: 25 * (+page - 1),
         take: 25,
       })
-      const totalCount = await prisma.bookmark.count({})
+      const totalCount = await prisma.bookmark.count({
+        where: {
+          userId: currentUser.id,
+        },
+      })
       return res.json({
         ok: true,
         bookmarks,

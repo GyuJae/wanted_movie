@@ -22,6 +22,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ILastBookmarkRe
       })
     }
     const bookmark = await prisma.bookmark.findFirst({
+      where: {
+        userId: currentUser.id,
+      },
       orderBy: {
         createdAt: 'desc',
       },

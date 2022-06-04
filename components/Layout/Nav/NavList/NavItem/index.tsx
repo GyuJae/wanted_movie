@@ -1,11 +1,13 @@
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
+import { loginToastMessageState } from '@atoms/loginToastMessageState'
 import { opacityVariants } from '@animations/variants'
 import { showNavState } from 'atoms/showNavState'
-import { useRecoilValue } from 'recoil'
+import { useMe } from '@hooks/user'
 import { useRouter } from 'next/router'
 
 import { AnimatePresence, motion } from 'framer-motion'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 const CompassIcon = dynamic(() => import('@components/Icons/CompassIcon'), { ssr: false })
 const HouseIcon = dynamic(() => import('@components/Icons/HouseIcon'), { ssr: false })
@@ -41,9 +43,17 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
 
   const router = useRouter()
   const { pathname } = router
+  const setLoginToastMessage = useSetRecoilState(loginToastMessageState)
+  const { data } = useMe()
   const showItem = useRecoilValue(showNavState)
 
-  const handleClickPathname = () => router.replace(categoryPathname)
+  const handleClickPathname = () => {
+    if (categoryName === 'Community' && (!data || !data.ok)) {
+      setLoginToastMessage(true)
+      return
+    }
+    router.replace(categoryPathname)
+  }
 
   return (
     <button type='button' onClick={handleClickPathname} className={styles.item(pathname === categoryPathname)}>

@@ -29,13 +29,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IRecentViewResp
         query: { page },
       } = req
       const recentViews = await prisma.recentView.findMany({
+        where: {
+          userId: currentUser.id,
+        },
         orderBy: {
           createdAt: 'desc',
         },
         skip: 25 * (+page - 1),
         take: 25,
       })
-      const totalCount = await prisma.recentView.count({})
+      const totalCount = await prisma.recentView.count({
+        where: {
+          userId: currentUser.id,
+        },
+      })
       return res.json({
         ok: true,
         recentViews,

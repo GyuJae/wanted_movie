@@ -1,4 +1,6 @@
 import dynamic from 'next/dynamic'
+import { useMe } from '@hooks/user'
+import { useRouter } from 'next/router'
 
 const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
@@ -9,6 +11,9 @@ const styles = {
 }
 
 const Community = () => {
+  const router = useRouter()
+  const { data } = useMe()
+  if (!data || !data.ok) return router.replace('/')
   return (
     <Layout showHeader={false}>
       <div className={styles.wrapper}>

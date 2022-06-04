@@ -22,6 +22,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ILastRecentView
       })
     }
     const recentView = await prisma.recentView.findFirst({
+      where: {
+        userId: currentUser.id,
+      },
       orderBy: {
         createdAt: 'desc',
       },
