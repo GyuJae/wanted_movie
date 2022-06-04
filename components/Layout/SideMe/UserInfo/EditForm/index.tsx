@@ -23,6 +23,24 @@ interface IForm {
   avatarFile?: FileList
 }
 
+const styles = {
+  wrapper: 'flex fixed top-0 left-0 z-30 justify-center items-center w-screen h-screen bg-zinc-900/90',
+  container: 'py-3 w-96 bg-black rounded-md',
+  xButtonContainer: 'px-4 pb-1 border-b-[1px] border-zinc-400',
+  xIcon: 'w-4 fill-zinc-400 hover:fill-zinc-500',
+  form: 'py-2 px-4',
+  cameraLabel: 'flex relative z-40 justify-center items-center py-2 w-full cursor-pointer',
+  previewImage: 'rounded-full border-none outline-none',
+  noPhoto: 'w-32 h-32 bg-gray-500 rounded-full',
+  cameraIconContainer: 'flex absolute justify-center items-center w-36 h-36 bg-black/80',
+  cameraIcon: 'w-4 fill-zinc-700 z-40',
+  usernameLabel: 'text-sm font-semibold',
+  usernameInput: 'py-2 px-3 w-full bg-transparent border-b-2 border-zinc-600 outline-none',
+  saveButton: 'py-2 mt-2 w-full font-semibold bg-red-800 rounded-full',
+  formErrorContainer: 'px-4',
+  formError: 'font-semibold text-red-600',
+}
+
 const EditForm = ({ inView, handleCloseEditForm }: IProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const queryClient = useQueryClient()
@@ -77,54 +95,48 @@ const EditForm = ({ inView, handleCloseEditForm }: IProps) => {
 
   if (!inView || !data || !data.ok) return null
   return (
-    <div className='flex fixed top-0 left-0 z-30 justify-center items-center w-screen h-screen bg-zinc-900/90'>
-      <div ref={ref} className='py-3 w-96 bg-black rounded-md'>
-        <div className='px-4 pb-1 border-b-[1px] border-zinc-400'>
+    <div className={styles.wrapper}>
+      <div ref={ref} className={styles.container}>
+        <div className={styles.xButtonContainer}>
           <button type='button' onClick={handleCloseEditForm}>
-            <XIcon styleClassname='w-4 fill-zinc-400 hover:fill-zinc-500' />
+            <XIcon styleClassname={styles.xIcon} />
           </button>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className='py-2 px-4'>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <fieldset>
-            <label
-              htmlFor='avatar'
-              className='flex relative z-40 justify-center items-center py-2 w-full cursor-pointer'
-            >
+            <label htmlFor='avatar' className={styles.cameraLabel}>
               {avatarPreview ? (
-                <Image
-                  src={avatarPreview}
-                  alt='avatar'
-                  width={120}
-                  height={120}
-                  className='rounded-full border-none outline-none'
-                />
+                <Image src={avatarPreview} alt='avatar' width={120} height={120} className={styles.previewImage} />
               ) : (
-                <div className='w-32 h-32 bg-gray-500 rounded-full' />
+                <div className={styles.noPhoto} />
               )}
-              <div className='flex absolute justify-center items-center w-36 h-36 bg-black/80'>
-                <CameraIcon styleClassname='w-4 fill-zinc-700 z-40' />
+              <div className={styles.cameraIconContainer}>
+                <CameraIcon styleClassname={styles.cameraIcon} />
               </div>
             </label>
             <input id='avatar' type='file' accept='image/*' className='hidden' {...register('avatarFile')} />
           </fieldset>
           <fieldset>
-            <label htmlFor='username' className='text-sm font-semibold'>
+            <label htmlFor='username' className={styles.usernameLabel}>
               Username
             </label>
             <input
               id='username'
-              className='py-2 px-3 w-full bg-transparent border-b-2 border-zinc-600 outline-none'
+              className={styles.usernameInput}
               placeholder='Username'
               autoComplete='off'
               autoCapitalize='off'
               {...register('username', { required: true })}
             />
           </fieldset>
+          <button type='submit' className={styles.saveButton}>
+            Save
+          </button>
         </form>
 
         {formError && (
-          <div className='px-4'>
-            <span className='font-semibold text-red-600'>{formError}</span>
+          <div className={styles.formErrorContainer}>
+            <span className={styles.formError}>{formError}</span>
           </div>
         )}
       </div>
