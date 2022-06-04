@@ -26,6 +26,6 @@
       "@libs/*": ["libs/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Layout/Nav/NavItem"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Layout/Nav/NavList/NavItem/NavItem"],
   "exclude": ["node_modules"]
 }

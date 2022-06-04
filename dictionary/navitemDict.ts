@@ -16,6 +16,10 @@ export const navMenuItems: IProps[] = [
     categoryName: 'Community',
     categoryPathname: '/community',
   },
+  {
+    categoryName: 'Search',
+    categoryPathname: '/search',
+  },
 ]
 
 export const navLibraryItems: IProps[] = [

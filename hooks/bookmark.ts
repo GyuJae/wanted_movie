@@ -8,5 +8,5 @@ export const useLastBookmark = () => {
 }
 
 export const useBookmarkeds = () => {
-  return useQuery<IBookmarkResponse,Error>('bookmarkeds', readBookmarks)
+  return useQuery<IBookmarkResponse, Error>('bookmarkeds', readBookmarks)
 }

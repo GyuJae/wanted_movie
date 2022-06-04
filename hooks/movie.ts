@@ -1,3 +1,4 @@
+import { ISearchKeywordResult } from 'types/search'
 import MoviesService from '@services/movies.service'
 
 import { IMovieCredits, IMovieDetail, IMovieGenres, IMovieResult, MovieCategory } from '../types/movie.d'
@@ -44,4 +45,27 @@ export const useInfiniteMovies = (category: MovieCategory) => {
       retry: 1,
     }
   )
+}
+
+export const useInfiniteSearchMovies = (query: string) => {
+  return useInfiniteQuery<IMovieResult, Error>(
+    ['movies', 'search', query],
+    ({ pageParam = 1 }) => services.getSearch({ query, pageParam }),
+    {
+      getNextPageParam: (lastPage: IMovieResult) => {
+        if (lastPage.page < lastPage.total_pages) return lastPage.page + 1
+        return undefined
+      },
+      enabled: !!query,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+    }
+  )
+}
+
+export const useSearchKeyword = (query: string) => {
+  return useQuery<ISearchKeywordResult, Error>(['search', 'keyword', query], () => services.getSearchKeyword(query), {
+    enabled: !!query,
+  })
 }

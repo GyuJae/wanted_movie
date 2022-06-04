@@ -55,7 +55,7 @@ const TVItem = ({ tv }: IProps) => {
       <div className={styles.subWrapper}>
         <div className={styles.subContainer}>
           <span className={styles.name}>{tv.name}</span>
-          <span className={styles.date}>{tv.first_air_date.split('-')[0]}</span>
+          {tv.first_air_date && <span className={styles.date}>{tv.first_air_date.split('-')[0]}</span>}
           <div className={styles.readMoreBtnContainer}>
             <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
           </div>

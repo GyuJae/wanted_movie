@@ -9,7 +9,6 @@ interface IProps {
   id: string
 }
 
-
 const Main = ({ id }: IProps) => {
   const { data } = useTv(id)
   if (!data) return null
@@ -17,13 +16,15 @@ const Main = ({ id }: IProps) => {
   return (
     <div className='w-screen h-full '>
       <div className='flex relative justify-center w-screen h-screen'>
-        <Image
-          alt={`backdrop-${data.name}`}
-          className='object-fill opacity-30'
-          layout='fill'
-          src={getImage({ path: data.backdrop_path as string, format: 'w1280' })}
-          priority
-        />
+        {data.backdrop_path && (
+          <Image
+            alt={`backdrop-${data.name}`}
+            className='object-fill opacity-30'
+            layout='fill'
+            src={getImage({ path: data.backdrop_path as string, format: 'w1280' })}
+            priority
+          />
+        )}
         <div className='flex justify-center py-9 space-x-4 w-full'>
           <Image
             alt={`poster-${data.name}`}
@@ -35,8 +36,10 @@ const Main = ({ id }: IProps) => {
           />
           <div className='flex flex-col justify-end py-16 space-y-2'>
             <h3 className='text-4xl font-semibold'>
-              {data.name}{' '}
-              <span className='text-3xl font-medium text-zinc-200'>({data.first_air_date.split('-')[0]})</span>
+              {data.name}
+              {data.first_air_date && (
+                <span className='text-3xl font-medium text-zinc-200'>({data.first_air_date.split('-')[0]})</span>
+              )}
             </h3>
             <div className='flex space-x-3'>
               <div>{data.first_air_date}</div>

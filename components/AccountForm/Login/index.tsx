@@ -1,10 +1,10 @@
 import { IResponse } from '@libs/withHandler'
 import dynamic from 'next/dynamic'
 import { login } from '@services/users.service'
-import { useMutation } from 'react-query'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Suspense, useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query'
 
 const Input = dynamic(() => import('../Input'))
 const FormError = dynamic(() => import('../FormError'))
@@ -21,15 +21,17 @@ interface IForm {
 }
 
 const Login = ({ inView, handleClose }: IProps) => {
+  const queryClient = useQueryClient()
   const { register, handleSubmit } = useForm<IForm>({ mode: 'onBlur' })
   const [formError, setFormError] = useState<string | undefined>(undefined)
   const { mutate } = useMutation('login', login, {
     onSuccess: ({ ok, error }: IResponse) => {
-      console.log(ok, error)
       if (error) setFormError(error)
-      if (ok) handleClose()
+      if (ok) {
+        queryClient.refetchQueries(['user', 'me'])
+        handleClose()
+      }
     },
-    onError: (e) => console.log('error', e),
   })
 
   const onSubmit: SubmitHandler<IForm> = (input) => {
@@ -38,7 +40,7 @@ const Login = ({ inView, handleClose }: IProps) => {
 
   if (!inView) return null
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col py-10 px-4 space-y-2 '>
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-3'>
       <Input
         label='Email'
         type='email'
@@ -54,7 +56,7 @@ const Login = ({ inView, handleClose }: IProps) => {
           required: true,
         })}
       />
-      <button type='submit' className='py-2 text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-sm'>
+      <button type='submit' className='py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full'>
         <Suspense fallback={<SpinLoading />}>Login</Suspense>
       </button>
       <FormError inView={Boolean(formError)} message={formError} />

@@ -6,7 +6,7 @@ interface IStatus {
 
 const Status = ({ status, handleSetLogin, handleSetCreateAccount }: IStatus) => {
   return (
-    <div className='flex justify-center pb-10'>
+    <div className='flex justify-center pb-10 text-zinc-400'>
       {status === 'createAccount' && (
         <div className='flex space-x-2'>
           <span>Are you already registered? </span>

@@ -21,47 +21,22 @@ model User {
   password   String
   avatar     String?
   Post       Post[]
-  Comment    Comment[]
-  Like       Like[]
   Bookmark   Bookmark[]
   RecentView RecentView[]
 }
 
 model Post {
-  id         Int       @id @default(autoincrement())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
-  title      String
-  content    String    @db.LongText
+  text       String   @db.LongText
   mediaType  Media
   mediaId    Int
   posterPath String
-  movieTitle String
-  Comment    Comment[]
-  Like       Like[]
-}
-
-model Like {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int
-  comment   String   @db.MediumText
+  mediaTitle String
+  vote       Float
 }
 
 model Bookmark {

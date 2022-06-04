@@ -16,13 +16,15 @@ const Main = ({ id }: IProps) => {
   return (
     <div className='w-full h-full bg-black'>
       <div className='flex relative justify-center w-full h-screen'>
-        <Image
-          alt={`backdrop-${data.title}`}
-          className='object-fill opacity-30'
-          layout='fill'
-          src={getImage({ path: data.backdrop_path as string, format: 'w1280' })}
-          priority
-        />
+        {data.backdrop_path && (
+          <Image
+            alt={`backdrop-${data.title}`}
+            className='object-fill opacity-30'
+            layout='fill'
+            src={getImage({ path: data.backdrop_path as string, format: 'w1280' })}
+            priority
+          />
+        )}
         <div className='flex justify-center py-9 space-x-4 w-full'>
           <Image
             alt={`poster-${data.title}`}

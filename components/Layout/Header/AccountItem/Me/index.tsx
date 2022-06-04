@@ -18,7 +18,7 @@ const Me = ({ inView, me }: IProps) => {
   return (
     <div>
       <button type='button' onClick={handleShowSideMe}>
-        <Avatar path={me.avatar} />
+        <Avatar path={me.avatar} size='small' />
       </button>
     </div>
   )

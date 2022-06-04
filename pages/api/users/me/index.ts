@@ -7,24 +7,23 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 async function handler(req: NextApiRequest, res: NextApiResponse<IMeResponse>) {
   try {
-    const {
-      session: { user },
-    } = req
-    if (!user) {
+    const { session } = req
+    if (!session.user) {
       return res.json({
         ok: false,
         error: 'user not exist',
       })
     }
+    const { user } = session
     const currentUser = await prisma.user.findUnique({
       where: { id: user.id },
       include: {
         Bookmark: {
           select: {
-            mediaId: true
-          }
-        }
-      }
+            mediaId: true,
+          },
+        },
+      },
     })
     if (!currentUser) {
       return res.json({

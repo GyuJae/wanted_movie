@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 
-const Main = dynamic(() => import('./Main'))
+const Back = dynamic(() => import('./Back'))
 const Cast = dynamic(() => import('./Cast'))
+const Main = dynamic(() => import('./Main'))
 const Recommendations = dynamic(() => import('./Recommendations'))
 const Similar = dynamic(() => import('./Similar'))
 
@@ -10,13 +11,14 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'w-screen h-full text-white bg-black',
+  wrapper: 'w-screen min-h-screen text-white bg-black',
   container: 'py-12 px-4 space-y-12',
 }
 
 const TVDetail = ({ id }: IProps) => {
   return (
     <div className={styles.wrapper}>
+      <Back />
       <Main id={id} />
       <div className={styles.container}>
         <Cast id={id} />

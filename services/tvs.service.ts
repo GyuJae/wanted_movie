@@ -82,6 +82,16 @@ class TvsService {
     }
     return response
   }
+
+  public getSearch = async ({ query, pageParam = 1 }: { query: string; pageParam?: number }) => {
+    const response = await this.makeApiCall<ITVResult>(
+      `search/tv?api_key=${this.API_KEY}&query=${query}&page=${pageParam}`
+    )
+    if (!response.results) {
+      throw new Error('Genres not found')
+    }
+    return response
+  }
 }
 
 export default TvsService

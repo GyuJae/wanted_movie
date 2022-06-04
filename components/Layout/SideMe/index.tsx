@@ -9,6 +9,11 @@ import { AnimatePresence, Variants, motion } from 'framer-motion'
 const UserInfo = dynamic(() => import('./UserInfo'))
 const Bookmark = dynamic(() => import('./Bookmark'))
 const RecentView = dynamic(() => import('./RecentView'))
+const SearchForm = dynamic(() => import('@components/SearchPage/SearchForm'))
+
+interface IProps {
+  inView: boolean
+}
 
 const sideVariants: Variants = {
   initial: {
@@ -22,18 +27,19 @@ const sideVariants: Variants = {
   },
 }
 
-const SideMe = () => {
+const SideMe = ({ inView }: IProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [showSideMe, setShowSideMe] = useRecoilState(showSideMeState)
   const handleHiddenSideMe = () => setShowSideMe(false)
 
   useClickAway(ref, handleHiddenSideMe)
   if (!showSideMe) return <AnimatePresence initial={false} />
+  if (!inView) return null
   return (
     <AnimatePresence initial={false}>
       <motion.div
         ref={ref}
-        className='fixed right-0 z-20 py-2 px-4 space-y-4 w-80 h-screen bg-zinc-900'
+        className='flex fixed right-0 z-20 flex-col justify-between py-2 px-4 w-80 h-screen bg-zinc-900'
         variants={sideVariants}
         initial='initial'
         animate='animate'
@@ -42,9 +48,14 @@ const SideMe = () => {
           type: 'tween',
         }}
       >
-        <UserInfo />
-        <RecentView />
-        <Bookmark />
+        <div className='space-y-4'>
+          <UserInfo />
+          <SearchForm />
+        </div>
+        <div className='space-y-4'>
+          <RecentView />
+          <Bookmark />
+        </div>
       </motion.div>
     </AnimatePresence>
   )

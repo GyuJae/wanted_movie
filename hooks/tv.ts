@@ -45,3 +45,21 @@ export const useInfiniteTVs = (category: TvCategory) => {
     }
   )
 }
+
+export const useInfiniteSearchTVs = (query: string) => {
+  return useInfiniteQuery<ITVResult, Error>(
+    ['tvs', 'search', query],
+    ({ pageParam = 1 }) => services.getSearch({ query, pageParam }),
+    {
+      getNextPageParam: (lastPage: ITVResult) => {
+        if (lastPage.page < lastPage.total_pages) return lastPage.page + 1
+        return undefined
+      },
+      enabled: !!query,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      retry: 1,
+    }
+  )
+}

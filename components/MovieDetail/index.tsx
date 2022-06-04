@@ -1,9 +1,11 @@
 import dynamic from 'next/dynamic'
 
-const Main = dynamic(() => import('./Main'))
+const Back = dynamic(() => import('./Back'))
 const Cast = dynamic(() => import('./Cast'))
+const Main = dynamic(() => import('./Main'))
 const Recommendations = dynamic(() => import('./Recommendations'))
 const Similar = dynamic(() => import('./Similar'))
+const DetailLayout = dynamic(() => import('@components/DetailLayout'))
 
 interface IProps {
   id: string
@@ -16,14 +18,17 @@ const styles = {
 
 const MovieDetail = ({ id }: IProps) => {
   return (
-    <div className={styles.wrapper}>
-      <Main id={id} />
-      <div className={styles.container}>
-        <Cast id={id} />
-        <Recommendations id={id} />
-        <Similar id={id} />
+    <DetailLayout>
+      <div className={styles.wrapper}>
+        <Back />
+        <Main id={id} />
+        <div className={styles.container}>
+          <Cast id={id} />
+          <Recommendations id={id} />
+          <Similar id={id} />
+        </div>
       </div>
-    </div>
+    </DetailLayout>
   )
 }
 

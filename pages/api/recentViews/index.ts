@@ -27,8 +27,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IRecentViewResp
     if (req.method === 'GET') {
       const recentViews = await prisma.recentView.findMany({
         orderBy: {
-          createdAt: 'desc'
-        }
+          createdAt: 'desc',
+        },
       })
       return res.json({
         ok: true,
@@ -121,4 +121,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IRecentViewResp
   }
 }
 
-export default withApiSession(withHandler({ methods: ['POST', 'GET', 'DELETE'], handler, isPrivate: false }))
+export default withApiSession(withHandler({ methods: ['POST', 'GET', 'DELETE'], handler, isPrivate: true }))

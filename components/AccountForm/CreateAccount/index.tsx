@@ -22,11 +22,7 @@ interface IForm {
 }
 
 const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IForm>()
+  const { register, handleSubmit } = useForm<IForm>()
 
   const [formError, setFormError] = useState<string | undefined>(undefined)
 
@@ -40,7 +36,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   if (!inView) return null
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col py-10 px-4 space-y-2 '>
+    <form onSubmit={handleSubmit(onSubmit)} className='space-y-3'>
       <Input
         label='Email'
         type='email'
@@ -49,7 +45,6 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         })}
       />
-      <FormError inView={Boolean(errors.email)} message={errors.email?.message} />
       <Input
         label='Username'
         type='text'
@@ -58,7 +53,6 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           maxLength: 10,
         })}
       />
-      <FormError inView={Boolean(errors.username)} message={errors.username?.message} />
       <Input
         label='Password'
         type='password'
@@ -67,9 +61,8 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           maxLength: 16,
         })}
       />
-      <FormError inView={Boolean(errors.password)} message={errors.password?.message} />
-      <button type='submit' className='py-2 text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-sm'>
-        <Suspense fallback={<SpinLoading />}>Create Account</Suspense>
+      <button type='submit' className='py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full'>
+        <Suspense fallback={<SpinLoading />}>Sign Up</Suspense>
       </button>
       <FormError inView={Boolean(formError)} message={formError} />
     </form>

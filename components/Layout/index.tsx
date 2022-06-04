@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { showNavState } from 'atoms/showNavState'
+import { useMe } from '@hooks/user'
 import { useRecoilValue } from 'recoil'
 
 import { Variants, motion } from 'framer-motion'
@@ -8,6 +9,7 @@ import { Variants, motion } from 'framer-motion'
 const Nav = dynamic(() => import('./Nav'))
 const Header = dynamic(() => import('./Header'))
 const SideMe = dynamic(() => import('./SideMe'))
+const LoginToastMessage = dynamic(() => import('./LoginToastMessage'))
 const AccountForm = dynamic(() => import('@components/AccountForm'))
 
 interface IProps {
@@ -28,7 +30,7 @@ const paddingVariants: Variants = {
 
 const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) => {
   const showAllNav = useRecoilValue(showNavState)
-
+  const { data } = useMe()
   return (
     <div className='flex overflow-x-hidden min-h-screen text-white bg-black transition-all'>
       <Head>
@@ -49,7 +51,8 @@ const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) 
           {children}
         </motion.main>
       </div>
-      <SideMe />
+      <SideMe inView={data?.ok as boolean} />
+      <LoginToastMessage />
       <AccountForm />
     </div>
   )

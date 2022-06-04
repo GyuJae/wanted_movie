@@ -1,3 +1,4 @@
+import { ISearchKeywordResult } from 'types/search'
 import axios from 'axios'
 
 import { IMovieCredits, IMovieDetail, IMovieGenres, IMovieResult, MovieCategory } from 'types/movie'
@@ -78,6 +79,24 @@ class MoviesService {
   public getGenres = async () => {
     const response = await this.makeApiCall<IMovieGenres>(`genre/movie/list?api_key=${this.API_KEY}`)
     if (!response.genres) {
+      throw new Error('Genres not found')
+    }
+    return response
+  }
+
+  public getSearch = async ({ query, pageParam = 1 }: { query: string; pageParam?: number }) => {
+    const response = await this.makeApiCall<IMovieResult>(
+      `search/movie?api_key=${this.API_KEY}&query=${query}&page=${pageParam}`
+    )
+    if (!response.results) {
+      throw new Error('Genres not found')
+    }
+    return response
+  }
+
+  public getSearchKeyword = async (query: string) => {
+    const response = await this.makeApiCall<ISearchKeywordResult>(`search/keyword?query=${query}`)
+    if (!response.results) {
       throw new Error('Genres not found')
     }
     return response

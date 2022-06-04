@@ -1,19 +1,10 @@
 import type { NextPage } from 'next'
-import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 
-const Layout = dynamic(() => import('@components/Layout'), { ssr: false })
+const Community = dynamic(() => import('@components/Community'))
 
-const styles = {
-  wrapper: classNames(),
+const CommunityPage: NextPage = () => {
+  return <Community />
 }
 
-const Community: NextPage = () => {
-  return (
-    <Layout title='Community'>
-      <div className={styles.wrapper}>Community</div>
-    </Layout>
-  )
-}
-
-export default Community
+export default CommunityPage

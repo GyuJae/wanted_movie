@@ -2,33 +2,23 @@
 import Link from 'next/link'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
+import { opacityVariants } from '@animations/variants'
 import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
 import { useRouter } from 'next/router'
 
-import { AnimatePresence, Variants, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const CompassIcon = dynamic(() => import('@components/Icons/CompassIcon'))
 const HouseIcon = dynamic(() => import('@components/Icons/HouseIcon'))
 const UsersIcon = dynamic(() => import('@components/Icons/UsersIcon'))
 const ClockIcon = dynamic(() => import('@components/Icons/ClockIcon'))
 const BookMarkIcon = dynamic(() => import('@components/Icons/BookMarkIcon'))
+const SearchIcon = dynamic(() => import('@components/Icons/SearchIcon'))
 
 interface IProps {
   categoryPathname: string
   categoryName: string
-}
-
-const variants: Variants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
 }
 
 const NavItem = ({ categoryPathname, categoryName }: IProps) => {
@@ -38,6 +28,7 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
     Discovery: <CompassIcon styleClassName='w-5' />,
     Recent: <ClockIcon styleClassname='w-5' />,
     Bookmarked: <BookMarkIcon styleClassname='w-4' />,
+    Search: <SearchIcon styleClassname='w-5' />,
   }[categoryName]
 
   const { pathname } = useRouter()
@@ -59,7 +50,7 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
           <div>{symbolIcon}</div>
           <AnimatePresence>
             {showItem && (
-              <motion.span variants={variants} initial='initial' animate='animate' exit='exit' className='pr-5'>
+              <motion.span variants={opacityVariants} initial='initial' animate='animate' exit='exit' className='pr-5'>
                 {categoryName}
               </motion.span>
             )}

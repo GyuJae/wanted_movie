@@ -38,4 +38,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ILastRecentView
   }
 }
 
-export default withApiSession(withHandler({ methods: ['GET'], handler, isPrivate: false }))
+export default withApiSession(withHandler({ methods: ['GET'], handler, isPrivate: true }))

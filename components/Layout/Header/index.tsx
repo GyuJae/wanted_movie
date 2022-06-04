@@ -9,15 +9,16 @@ const headerItems: TMediaTypeState[] = ['movie', 'tv']
 
 const Header = () => {
   return (
-    <header className='flex justify-between p-4 px-6 w-screen border-b-[1px] border-zinc-800'>
+    <header className='flex justify-between  p-4 px-6 w-screen h-14 border-b-[1px] border-zinc-800'>
       <ul className='flex space-x-9 text-sm text-zinc-400'>
         {headerItems.map((headerItem, index) => {
           const key = `${headerItem}-${index}`
           return <HeaderItem key={key} itemName={headerItem} />
         })}
       </ul>
-
-      <AccountItem />
+      <ul>
+        <AccountItem />
+      </ul>
     </header>
   )
 }

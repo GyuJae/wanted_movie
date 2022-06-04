@@ -75,8 +75,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
         where: {
           userId_mediaId: {
             userId: currentUser.id,
-            mediaId: +mediaId
-          }
+            mediaId: +mediaId,
+          },
         },
         select: {
           id: true,
@@ -116,4 +116,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
   }
 }
 
-export default withApiSession(withHandler({ methods: ['POST', 'GET', 'DELETE'], handler, isPrivate: false }))
+export default withApiSession(withHandler({ methods: ['POST', 'GET', 'DELETE'], handler, isPrivate: true }))

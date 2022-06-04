@@ -13,9 +13,14 @@ export interface ILoginInput {
 }
 
 export interface IUserExtendBookmark extends User {
-  Bookmark: {mediaId: number}[]
+  Bookmark: { mediaId: number }[]
 }
 
 export interface IMeResponse extends IResponse {
   user?: IUserExtendBookmark
+}
+
+export interface IEditProfileInput {
+  username?: string
+  avatarId?: number
 }
