@@ -3,6 +3,9 @@ import { Media, RecentView } from '@prisma/client'
 
 export interface IRecentViewResponse extends IResponse {
   recentViews?: RecentView[]
+  totalCount?: number
+  totalPage?: number
+  page?: number
 }
 
 export interface ILastRecentViewResponse extends IResponse {

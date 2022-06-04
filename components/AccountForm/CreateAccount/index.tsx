@@ -27,7 +27,11 @@ const styles = {
 }
 
 const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
-  const { register, handleSubmit } = useForm<IForm>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({ mode: 'onChange' })
 
   const [formError, setFormError] = useState<string | undefined>(undefined)
 
@@ -50,6 +54,8 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         })}
       />
+      <FormError inView={errors.email?.type === 'pattern'} message='This is not email pattern' />
+      <FormError inView={errors.email?.type === 'required'} message='Email Required' />
       <Input
         label='Username'
         type='text'
@@ -58,6 +64,8 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           maxLength: 10,
         })}
       />
+      <FormError inView={errors.username?.type === 'required'} message='Username Required' />
+      <FormError inView={errors.username?.type === 'maxLength'} message='Username Max Length 10' />
       <Input
         label='Password'
         type='password'
@@ -66,6 +74,8 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           maxLength: 16,
         })}
       />
+      <FormError inView={errors.password?.type === 'required'} message='Pssword Required' />
+      <FormError inView={errors.password?.type === 'maxLength'} message='Pssword Max Length 16' />
       <button type='submit' className={styles.button}>
         <Suspense fallback={<SpinLoading />}>Sign Up</Suspense>
       </button>

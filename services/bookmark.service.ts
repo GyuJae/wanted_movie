@@ -6,8 +6,8 @@ export const createBookmark = (createBookmarkInput: ICreateBookmarkInput) => {
   return axios.post('/api/bookmarks', createBookmarkInput).then((res) => res.data)
 }
 
-export const readBookmarks = () => {
-  return axios.get('/api/bookmarks').then((res) => res.data)
+export const readBookmarks = ({ pageParam = 1 }: { pageParam?: number }) => {
+  return axios.get(`/api/bookmarks?page=${pageParam}`).then((res) => res.data)
 }
 
 export const deleteBookmark = (deleteBookmarkInput: IDeleteBookmarkInput) => {

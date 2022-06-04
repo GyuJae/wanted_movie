@@ -3,7 +3,7 @@ interface IProps {
 }
 
 const styles = {
-  container: 'flex flex-col py-2 mb-10',
+  container: 'flex flex-col py-2 pb-6',
   name: 'text-xl font-semibold',
 }
 

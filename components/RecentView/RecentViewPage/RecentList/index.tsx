@@ -1,18 +1,22 @@
+import { AnimatePresence } from 'framer-motion'
+import { IRecentViewResponse } from 'types/recent'
 import dynamic from 'next/dynamic'
-import { useRecentViews } from '@hooks/recentView'
 
 const RecentItem = dynamic(() => import('./RecentItem'))
 
-const RecentList = () => {
-  const { data } = useRecentViews()
+interface IProps {
+  data?: IRecentViewResponse
+}
+
+const RecentList = ({ data }: IProps) => {
   if (!data || !data.ok || !data.recentViews) return null
   return (
-    <div className='grid grid-cols-2 gap-4 justify-center py-4 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'>
+    <AnimatePresence>
       {data.recentViews.map((recentView, index) => {
         const key = `${recentView.id}-${index}`
         return <RecentItem key={key} recentView={recentView} />
       })}
-    </div>
+    </AnimatePresence>
   )
 }
 

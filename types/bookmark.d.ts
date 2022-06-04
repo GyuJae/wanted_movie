@@ -3,6 +3,9 @@ import { Bookmark, Media } from '@prisma/client'
 
 export interface IBookmarkResponse extends IResponse {
   bookmarks?: Bookmark[]
+  totalCount?: number
+  totalPage?: number
+  page?: number
 }
 
 export interface ILastBookmarkResponse extends IResponse {

@@ -1,22 +1,22 @@
+import { AnimatePresence } from 'framer-motion'
+import { IBookmarkResponse } from 'types/bookmark'
 import dynamic from 'next/dynamic'
-import { useBookmarkeds } from '@hooks/bookmark'
 
 const BookmarkedItem = dynamic(() => import('./BookmarkedItem'))
 
-const styles = {
-  wrapper: 'grid grid-cols-2 gap-4 justify-center py-4 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6',
+interface IProps {
+  data?: IBookmarkResponse
 }
 
-const BookmarkedList = () => {
-  const { data } = useBookmarkeds()
+const BookmarkedList = ({ data }: IProps) => {
   if (!data || !data.ok || !data.bookmarks) return null
   return (
-    <div className={styles.wrapper}>
+    <AnimatePresence>
       {data.bookmarks.map((bookmarked, index) => {
         const key = `${bookmarked.id}-${index}`
         return <BookmarkedItem key={key} bookmarked={bookmarked} />
       })}
-    </div>
+    </AnimatePresence>
   )
 }
 

@@ -25,10 +25,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IBookmarkRespon
       })
     }
     if (req.method === 'GET') {
-      const bookmarks = await prisma.bookmark.findMany({})
+      const {
+        query: { page },
+      } = req
+      const bookmarks = await prisma.bookmark.findMany({
+        skip: 25 * (+page - 1),
+        take: 25,
+      })
+      const totalCount = await prisma.bookmark.count({})
       return res.json({
         ok: true,
         bookmarks,
+        totalCount,
+        totalPage: Math.ceil(totalCount / 25),
+        page: +page,
       })
     }
     if (req.method === 'POST') {

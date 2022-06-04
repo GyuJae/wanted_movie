@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 const Layout = dynamic(() => import('@components/Layout'))
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
-const BookmarkedList = dynamic(() => import('./BookmarkedList'))
+const BookmarkedPage = dynamic(() => import('./BookmarkedPage'))
 
 const styles = {
   wrapper: 'px-4 pb-10',
@@ -13,7 +13,7 @@ const Bookmarked = () => {
     <Layout showHeader={false}>
       <div className={styles.wrapper}>
         <CategoryTitle cateogoryName='Bookmarked' />
-        <BookmarkedList />
+        <BookmarkedPage />
       </div>
     </Layout>
   )

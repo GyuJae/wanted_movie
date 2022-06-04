@@ -6,8 +6,8 @@ export const createRecentView = (createRecentViewInput: ICreateRecentViewInput) 
   return axios.post('/api/recentViews', createRecentViewInput).then((res) => res.data)
 }
 
-export const readRecentViews = () => {
-  return axios.get('/api/recentViews').then((res) => res.data)
+export const readRecentViews = ({ pageParam = 1 }: { pageParam?: number }) => {
+  return axios.get(`/api/recentViews?page=${pageParam}`).then((res) => res.data)
 }
 
 export const deleteRecentView = (deleteRecentViewInput: IDeleteRecentViewInput) => {

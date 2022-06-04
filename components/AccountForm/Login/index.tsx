@@ -27,7 +27,11 @@ const styles = {
 
 const Login = ({ inView, handleClose }: IProps) => {
   const queryClient = useQueryClient()
-  const { register, handleSubmit } = useForm<IForm>({ mode: 'onBlur' })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({ mode: 'onChange' })
   const [formError, setFormError] = useState<string | undefined>(undefined)
   const { mutate } = useMutation('login', login, {
     onSuccess: ({ ok, error }: IResponse) => {
@@ -54,6 +58,8 @@ const Login = ({ inView, handleClose }: IProps) => {
           pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         })}
       />
+      <FormError inView={errors.email?.type === 'pattern'} message='This is not email pattern' />
+      <FormError inView={errors.email?.type === 'required'} message='Email Required' />
       <Input
         label='Password'
         type='password'
@@ -61,6 +67,7 @@ const Login = ({ inView, handleClose }: IProps) => {
           required: true,
         })}
       />
+      <FormError inView={errors.password?.type === 'required'} message='Password Required' />
       <button type='submit' className={styles.button}>
         <Suspense fallback={<SpinLoading />}>Login</Suspense>
       </button>

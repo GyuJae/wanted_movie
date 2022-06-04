@@ -4,7 +4,7 @@ interface IProps {
 }
 
 const styles = {
-  error: 'flex justify-center items-center py-1 w-full text-sm font-semibold text-red-700',
+  error: 'flex justify-center items-center w-full text-sm font-semibold text-red-700',
 }
 
 const Error = ({ inView, message }: IProps) => {

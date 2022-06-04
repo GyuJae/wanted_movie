@@ -25,14 +25,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IRecentViewResp
       })
     }
     if (req.method === 'GET') {
+      const {
+        query: { page },
+      } = req
       const recentViews = await prisma.recentView.findMany({
         orderBy: {
           createdAt: 'desc',
         },
+        skip: 25 * (+page - 1),
+        take: 25,
       })
+      const totalCount = await prisma.recentView.count({})
       return res.json({
         ok: true,
         recentViews,
+        totalCount,
+        totalPage: Math.ceil(totalCount / 25),
+        page: +page,
       })
     }
     if (req.method === 'POST') {
