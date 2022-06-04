@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
-import RecentView from '@components/RecentView'
+import dynamic from 'next/dynamic'
+
+const RecentView = dynamic(() => import('@components/RecentView'), { ssr: false })
 
 const Recent: NextPage = () => {
   return <RecentView />

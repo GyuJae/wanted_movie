@@ -1,6 +1,8 @@
-import MovieDetail from '@components/MovieDetail'
+import dynamic from 'next/dynamic'
 
 import type { GetServerSideProps, NextPage } from 'next'
+
+const MovieDetail = dynamic(() => import('@components/MovieDetail'), { ssr: false })
 
 interface IProps {
   id: string
