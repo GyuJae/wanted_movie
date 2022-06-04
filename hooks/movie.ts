@@ -57,9 +57,6 @@ export const useInfiniteSearchMovies = (query: string) => {
         return undefined
       },
       enabled: !!query,
-      refetchOnWindowFocus: true,
-      refetchOnMount: true,
-      refetchOnReconnect: true,
     }
   )
 }

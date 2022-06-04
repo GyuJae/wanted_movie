@@ -38,9 +38,6 @@ export const useInfiniteTVs = (category: TvCategory) => {
         if (lastPage.page < lastPage.total_pages) return lastPage.page + 1
         return undefined
       },
-      refetchOnWindowFocus: false,
-      refetchOnMount: true,
-      refetchOnReconnect: true,
       retry: 1,
     }
   )

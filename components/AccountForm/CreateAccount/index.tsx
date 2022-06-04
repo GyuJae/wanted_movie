@@ -36,7 +36,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   if (!inView) return null
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-3'>
+    <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
       <Input
         label='Email'
         type='email'

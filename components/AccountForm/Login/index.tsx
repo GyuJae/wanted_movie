@@ -20,6 +20,11 @@ interface IForm {
   password: string
 }
 
+const styles = {
+  container: 'flex flex-col space-y-3',
+  button: 'py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+}
+
 const Login = ({ inView, handleClose }: IProps) => {
   const queryClient = useQueryClient()
   const { register, handleSubmit } = useForm<IForm>({ mode: 'onBlur' })
@@ -40,7 +45,7 @@ const Login = ({ inView, handleClose }: IProps) => {
 
   if (!inView) return null
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-3'>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       <Input
         label='Email'
         type='email'
@@ -56,7 +61,7 @@ const Login = ({ inView, handleClose }: IProps) => {
           required: true,
         })}
       />
-      <button type='submit' className='py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full'>
+      <button type='submit' className={styles.button}>
         <Suspense fallback={<SpinLoading />}>Login</Suspense>
       </button>
       <FormError inView={Boolean(formError)} message={formError} />

@@ -4,21 +4,27 @@ interface IStatus {
   handleSetCreateAccount: () => void
 }
 
+const styles = {
+  wrapper: 'flex justify-center pb-10 text-sm text-zinc-400',
+  container: 'flex space-x-2',
+  button: 'font-semibold text-red-700 hover:underline',
+}
+
 const Status = ({ status, handleSetLogin, handleSetCreateAccount }: IStatus) => {
   return (
-    <div className='flex justify-center pb-10 text-zinc-400'>
+    <div className={styles.wrapper}>
       {status === 'createAccount' && (
-        <div className='flex space-x-2'>
-          <span>Are you already registered? </span>
-          <button type='button' onClick={handleSetLogin} className='text-sm hover:underline'>
+        <div className={styles.container}>
+          <span>Are you already sign up? </span>
+          <button type='button' onClick={handleSetLogin} className={styles.button}>
             log in
           </button>
         </div>
       )}
       {status === 'login' && (
-        <div className='flex space-x-2'>
-          <span>Are you not registered?</span>
-          <button type='button' onClick={handleSetCreateAccount} className='text-sm hover:underline'>
+        <div className={styles.container}>
+          <span>Not a member ?</span>
+          <button type='button' onClick={handleSetCreateAccount} className={styles.button}>
             create account
           </button>
         </div>

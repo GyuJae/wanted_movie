@@ -1,13 +1,18 @@
 interface IProps {
   status: 'login' | 'createAccount'
 }
+
+const styles = {
+  container: 'flex flex-col py-2 mb-10',
+  name: 'text-xl font-semibold',
+}
+
 const TagName = ({ status }: IProps) => {
+  const tagName = status === 'login' ? 'Log in' : 'Create Account'
+
   return (
-    <div className='flex flex-col py-2'>
-      <span className='text-xl font-semibold'>{status === 'login' ? 'Login' : 'Create Account'}</span>
-      {/* <span className='text-sm text-zinc-400'>
-        {status === 'login' ? 'Enter your details to get sign in to your account' : 'Fill Your Details'}
-      </span> */}
+    <div className={styles.container}>
+      <span className={styles.name}>{tagName}</span>
     </div>
   )
 }

@@ -10,6 +10,11 @@ const Login = dynamic(() => import('./Login'))
 const Status = dynamic(() => import('./Status'))
 const TagName = dynamic(() => import('./TagName'))
 
+const styles = {
+  wrapper: 'flex fixed top-0 left-0 z-20 justify-center items-center w-screen h-screen bg-zinc-900/90',
+  container: 'py-4 px-8 space-y-2 w-[30rem] bg-black rounded-xl',
+}
+
 const AccountForm = () => {
   const [open, setOpen] = useRecoilState(accountOpenState)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -23,8 +28,8 @@ const AccountForm = () => {
 
   if (!open) return null
   return (
-    <div className='flex fixed top-0 left-0 z-20 justify-center items-center w-screen h-screen bg-zinc-900/90'>
-      <div ref={containerRef} className='px-4 space-y-2 w-96 bg-black rounded-xl'>
+    <div className={styles.wrapper}>
+      <div ref={containerRef} className={styles.container}>
         <TagName status={status} />
         <Login inView={status === 'login'} handleClose={handleClose} />
         <CreateAccount inView={status === 'createAccount'} handleSetLogin={handleSetLogin} />
