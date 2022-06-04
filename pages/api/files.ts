@@ -9,7 +9,6 @@ export interface IFilesResponse extends IResponse {
 
 async function handler(req: NextApiRequest, res: NextApiResponse<IFilesResponse>) {
   try {
-    console.log(process.env.CF_ACCOUNT_ID)
     const response = await (
       await fetch(
         `https://api.cloudflare.com/client/v4/accounts/${process.env.CF_ACCOUNT_ID}/images/v2/direct_upload`,

@@ -7,6 +7,12 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 async function handler(req: NextApiRequest, res: NextApiResponse<IMeResponse>) {
   try {
+    if (!prisma) {
+      return res.json({
+        ok: false,
+        error: 'Prisma is null',
+      })
+    }
     const { session } = req
     if (!session.user) {
       return res.json({
