@@ -3,7 +3,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
-import { useTvs } from '@hooks/tv'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
 const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))

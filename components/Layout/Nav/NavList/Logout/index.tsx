@@ -11,6 +11,11 @@ import { useMutation, useQueryClient } from 'react-query'
 
 const LogoutIcon = dynamic(() => import('@components/Icons/LogoutIcon'))
 
+const styles = {
+  wrapper: 'flex items-center px-5 space-x-3 h-12 text-sm hover:bg-zinc-800',
+  icon: 'w-5 fill-zinc-600',
+}
+
 const Logout = () => {
   const queryClient = useQueryClient()
   const showNav = useRecoilValue(showNavState)
@@ -24,12 +29,8 @@ const Logout = () => {
   const handleLogout = () => mutate()
   if (!data || !data.ok) return null
   return (
-    <button
-      type='button'
-      onClick={handleLogout}
-      className='flex items-center px-5 space-x-3 h-12 text-sm hover:bg-zinc-800'
-    >
-      <LogoutIcon styleClassname='w-5 fill-zinc-600' />
+    <button type='button' onClick={handleLogout} className={styles.wrapper}>
+      <LogoutIcon styleClassname={styles.icon} />
       <AnimatePresence initial={false}>
         {showNav && (
           <motion.div variants={opacityVariants} initial='initial' animate='animate' exit='exit'>

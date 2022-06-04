@@ -18,7 +18,6 @@ const SearchForm = () => {
   const onSubmit: SubmitHandler<IForm> = ({ query }) => {
     if (!query) return
     router.push(`/search?query=${query}`)
-    router.reload()
   }
   return (
     <div className='relative'>

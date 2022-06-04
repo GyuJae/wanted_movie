@@ -10,6 +10,15 @@ interface IProps {
   voteValue: number
 }
 
+const styles = {
+  wrapper: 'z-40 w-14 h-8 rounded-full border-[1px] border-zinc-800',
+  openBtn: 'flex justify-center items-center space-x-1 w-full h-full',
+  starIcon: 'w-4 fill-red-700',
+  voteValue: 'text-sm text-zinc-400',
+  btnContainer: 'overflow-y-scroll mt-2 w-20 h-24 bg-zinc-900 rounded-md scrollBar',
+  btnItem: 'flex justify-center items-center space-x-2 w-full h-6 hover:bg-zinc-800',
+}
+
 const Vote = ({ voteValue, handleVoteValue }: IProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState<boolean>(false)
@@ -28,13 +37,13 @@ const Vote = ({ voteValue, handleVoteValue }: IProps) => {
   useClickAway(ref, handleClose)
 
   return (
-    <div ref={ref} className='z-40 w-14 h-8 rounded-full border-[1px] border-zinc-800'>
-      <button type='button' className='flex justify-center items-center space-x-1 w-full h-full' onClick={handleOpen}>
-        <StarIcon styleClassName='w-4 fill-red-700' />
-        <span className='text-sm text-zinc-400'>{voteValue.toFixed(1)}</span>
+    <div ref={ref} className={styles.wrapper}>
+      <button type='button' className={styles.openBtn} onClick={handleOpen}>
+        <StarIcon styleClassName={styles.starIcon} />
+        <span className={styles.voteValue}>{voteValue.toFixed(1)}</span>
       </button>
       {open && (
-        <ul className='overflow-y-scroll mt-2 w-20 h-24 bg-zinc-900 rounded-md scrollBar'>
+        <ul className={styles.btnContainer}>
           {Array(11)
             .fill(0)
             .map((value, index) => (
@@ -45,9 +54,9 @@ const Vote = ({ voteValue, handleVoteValue }: IProps) => {
                 onClick={handleClickVote}
                 className='w-full'
               >
-                <li className='flex justify-center items-center space-x-2 w-full h-6 hover:bg-zinc-800'>
-                  <StarIcon styleClassName='w-4 fill-red-700' />
-                  <span className='text-sm text-zinc-400'>{(value + index * 0.5).toFixed(1)}</span>
+                <li className={styles.btnItem}>
+                  <StarIcon styleClassName={styles.starIcon} />
+                  <span className={styles.voteValue}>{(value + index * 0.5).toFixed(1)}</span>
                 </li>
               </button>
             ))}

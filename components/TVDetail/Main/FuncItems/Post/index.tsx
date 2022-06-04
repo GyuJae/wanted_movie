@@ -12,6 +12,11 @@ interface IProps {
   tv: ITVDetail
 }
 
+const styles = {
+  button: 'z-20 p-3 bg-zinc-900 hover:bg-zinc-800 rounded-full',
+  icon: 'w-4 h-4 fill-zinc-500 pointer-event-none',
+}
+
 const Post = ({ tv }: IProps) => {
   const [openForm, setOpenForm] = useState<boolean>(false)
   const setOpenLoginToastMessage = useSetRecoilState(loginToastMessageState)
@@ -26,8 +31,8 @@ const Post = ({ tv }: IProps) => {
   if (!meData || !tv.backdrop_path) return null
   return (
     <>
-      <button type='button' onClick={handleClickPencli} className='z-20 p-3 bg-zinc-900 hover:bg-zinc-800 rounded-full'>
-        <PencliIcon styleClassname='w-4 h-4  fill-zinc-500 pointer-event-none' />
+      <button type='button' onClick={handleClickPencli} className={styles.button}>
+        <PencliIcon styleClassname={styles.icon} />
       </button>
       <PostForm tv={tv} inView={openForm} setOpenForm={setOpenForm} />
     </>

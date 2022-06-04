@@ -12,7 +12,6 @@ const HeaderItem = ({ itemName }: IProps) => {
   const itemDict: Record<TMediaTypeState, string> = {
     movie: 'Movies',
     tv: 'TV Shows',
-    person: 'People',
   }
 
   const handleClick = () => {

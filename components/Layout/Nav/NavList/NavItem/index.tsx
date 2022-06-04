@@ -21,6 +21,16 @@ interface IProps {
   categoryName: string
 }
 
+const styles = {
+  item: (current: boolean) =>
+    classNames('relative flex pl-5 mt-1  space-x-3 h-12 justify-start items-center text-sm hover:bg-zinc-800', {
+      'text-white font-semibold fill-red-600': current,
+      'fill-zinc-600': !current,
+    }),
+  redBar: 'absolute right-0 w-1 h-5 bg-red-600 rounded-l-md',
+  categoryName: 'pr-5',
+}
+
 const NavItem = ({ categoryPathname, categoryName }: IProps) => {
   const symbolIcon = {
     Home: <HouseIcon styleClassName='w-5' />,
@@ -38,26 +48,22 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
   return (
     <Link href={categoryPathname}>
       <a>
-        <li
-          className={classNames(
-            'relative flex pl-5 mt-1  space-x-3 h-12 justify-start items-center text-sm hover:bg-zinc-800',
-            {
-              'text-white font-semibold fill-red-600': pathname === categoryPathname,
-              'fill-zinc-600': pathname !== categoryPathname,
-            }
-          )}
-        >
+        <li className={styles.item(pathname === categoryPathname)}>
           <div>{symbolIcon}</div>
           <AnimatePresence>
             {showItem && (
-              <motion.span variants={opacityVariants} initial='initial' animate='animate' exit='exit' className='pr-5'>
+              <motion.span
+                variants={opacityVariants}
+                initial='initial'
+                animate='animate'
+                exit='exit'
+                className={styles.categoryName}
+              >
                 {categoryName}
               </motion.span>
             )}
           </AnimatePresence>
-          {pathname === categoryPathname && showItem && (
-            <div className='absolute right-0 w-1 h-5 bg-red-600 rounded-l-md' />
-          )}
+          {pathname === categoryPathname && showItem && <div className={styles.redBar} />}
         </li>
       </a>
     </Link>

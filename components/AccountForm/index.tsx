@@ -18,7 +18,7 @@ const styles = {
 const AccountForm = () => {
   const [open, setOpen] = useRecoilState(accountOpenState)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [status, setStatus] = useState<'login' | 'createAccount'>('createAccount')
+  const [status, setStatus] = useState<'login' | 'createAccount'>('login')
 
   const handleClose = () => setOpen(false)
   const handleSetLogin = () => setStatus('login')

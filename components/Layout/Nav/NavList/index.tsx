@@ -6,32 +6,42 @@ import { navLibraryItems, navMenuItems } from 'dictionary/navitemDict'
 const NavItem = dynamic(() => import('./NavItem'))
 const Logout = dynamic(() => import('./Logout'))
 
+const styles = {
+  wrapper: 'flex flex-col justify-between h-full',
+  container: 'space-y-2',
+  menu: 'pl-3 text-xs text-zinc-400',
+  libraryContainer: 'py-2',
+  library: 'pl-2 text-xs text-zinc-400',
+  listContainer: 'mt-2',
+  brBar: 'mx-auto mt-7 w-10/12 h-[1px] bg-zinc-700',
+}
+
 const NavList = () => {
   const { data } = useMe()
   if (!data) return null
   return (
-    <div className='flex flex-col justify-between h-full'>
-      <div className='space-y-2'>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
         <div>
-          <h3 className='pl-3 text-xs text-zinc-400'>MENU</h3>
-          <ul className='mt-2'>
+          <h3 className={styles.menu}>MENU</h3>
+          <ul className={styles.listContainer}>
             {navMenuItems.map((item, index) => {
               const key = `${item.categoryName}-${index}`
               return <NavItem key={key} {...item} />
             })}
           </ul>
-          <div className='mx-auto mt-7 w-10/12 h-[1px] bg-zinc-700' />
+          <div className={styles.brBar} />
         </div>
         {data.ok && (
-          <div className='py-2'>
-            <h3 className='pl-2 text-xs text-zinc-400'>LIBRARY</h3>
-            <ul className='mt-2'>
+          <div className={styles.libraryContainer}>
+            <h3 className={styles.library}>LIBRARY</h3>
+            <ul className={styles.listContainer}>
               {navLibraryItems.map((item, index) => {
                 const key = `${item.categoryName}-${index}`
                 return <NavItem key={key} {...item} />
               })}
             </ul>
-            <div className='mx-auto mt-7 w-10/12 h-[1px] bg-zinc-700' />
+            <div className={styles.brBar} />
           </div>
         )}
       </div>

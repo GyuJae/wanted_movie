@@ -21,7 +21,7 @@ interface IForm {
 }
 
 const styles = {
-  container: 'flex flex-col space-y-3',
+  container: 'space-y-3',
   button: 'py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
 }
 

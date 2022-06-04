@@ -1,9 +1,8 @@
+import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useInfiniteSearchMovies } from '@hooks/movie'
 import { useRouter } from 'next/router'
-
-import { Suspense, useEffect } from 'react'
 
 const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'))
 const MoviePage = dynamic(() => import('@components/Discovery/Movies/MovieList/MoviePage'))
@@ -20,17 +19,16 @@ const styles = {
 }
 
 const Movies = ({ inView }: IProps) => {
+  const router = useRouter()
   const {
     query: { query },
-  } = useRouter()
-  const { data, fetchNextPage, isFetching, hasNextPage, refetch } = useInfiniteSearchMovies(query as string)
+  } = router
+  const { data, fetchNextPage, isFetching, hasNextPage } = useInfiniteSearchMovies(query as string)
   const handleFetch = () => {
     if (isFetching) return
     fetchNextPage()
   }
-  useEffect(() => {
-    refetch()
-  }, [query, refetch])
+
   if (!inView || !data || !query) return null
   return (
     <div className={styles.wrapper}>

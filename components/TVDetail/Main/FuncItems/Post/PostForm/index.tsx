@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const Avatar = dynamic(() => import('@components/Avatar'))
-const Vote = dynamic(() => import('./Vote'))
+const Vote = dynamic(() => import('@components/MovieDetail/Main/FuncItems/Post/PostForm/Vote'))
 
 interface IProps {
   inView: boolean
@@ -22,6 +22,17 @@ interface IProps {
 interface IForm {
   text: string
   vote: number
+}
+
+const styles = {
+  wrapper: 'flex fixed top-0 left-0 z-20 justify-center items-center w-screen h-screen bg-zinc-900/90',
+  container: 'py-2 min-w-[37rem]  bg-black rounded-md',
+  xButtonContainer: 'py-3 px-4 border-b-[1px] border-zinc-800',
+  xIcon: 'w-4 fill-zinc-700 hover:fill-zinc-800',
+  subContainer: 'flex py-2 px-4 space-x-4',
+  form: 'flex flex-col py-3 space-y-2 w-11/12',
+  input: 'py-1 px-2 w-full bg-transparent border-b-2 border-zinc-700 outline-none',
+  button: 'py-2 px-4 bg-red-700 rounded-full',
 }
 
 const PostForm = ({ inView, setOpenForm, tv }: IProps) => {
@@ -57,28 +68,29 @@ const PostForm = ({ inView, setOpenForm, tv }: IProps) => {
   useClickAway(ref, handleClose)
 
   if (!inView || !meData || !meData.user) return null
+
   return (
-    <div className='flex fixed top-0 left-0 z-20 justify-center items-center w-screen h-screen bg-zinc-900/90'>
-      <div ref={ref} className='py-2 min-w-[37rem]  bg-black rounded-md'>
-        <div className='py-3 px-4 border-b-[1px] border-zinc-800'>
+    <div className={styles.wrapper}>
+      <div ref={ref} className={styles.container}>
+        <div className={styles.xButtonContainer}>
           <button type='button' onClick={handleClose}>
-            <XIcon styleClassname='w-4 fill-zinc-700 hover:fill-zinc-800' />
+            <XIcon styleClassname={styles.xIcon} />
           </button>
         </div>
-        <div className='flex py-2 px-4 space-x-4'>
+        <div className={styles.subContainer}>
           <Avatar path={meData.user.avatar} />
-          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col py-3 space-y-2 w-11/12'>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <input
               {...register('text', { required: true })}
-              className='py-1 px-2 w-full bg-transparent border-b-2 border-zinc-700 outline-none'
-              placeholder='What do you think this movie?'
+              className={styles.input}
+              placeholder='What do you think this TV Show?'
               autoComplete='off'
               autoCapitalize='off'
             />
             <Vote handleVoteValue={handleVoteValue} voteValue={voteValue} />
             <input {...register('vote', { min: 0, max: 5, valueAsNumber: true })} className='hidden' />
-            <button type='submit' className='py-2 px-4 bg-red-700 rounded-full'>
-              Post
+            <button type='submit' className={styles.button}>
+              Comment
             </button>
           </form>
         </div>

@@ -15,6 +15,12 @@ interface IProps {
   tv: ITVDetail
 }
 
+const styles = {
+  button: 'z-20 p-3 bg-zinc-900 hover:bg-zinc-800 rounded-full',
+  icon: (currentBookmarked?: boolean) =>
+    classNames('w-4 h-4 fill-zinc-500 pointer-event-none', { 'fill-red-600': currentBookmarked }),
+}
+
 const Bookmark = ({ tv }: IProps) => {
   const setLoginToastMessage = useSetRecoilState(loginToastMessageState)
   const queryClient = useQueryClient()
@@ -61,14 +67,8 @@ const Bookmark = ({ tv }: IProps) => {
     }
   }
   return (
-    <button
-      type='button'
-      onClick={handleClickBookmark}
-      className='z-20 p-3  bg-zinc-900 hover:bg-zinc-800 rounded-full '
-    >
-      <BookMarkIcon
-        styleClassname={classNames('w-4 h-4 fill-zinc-500 pointer-event-none', { 'fill-red-600': currentBookmarked })}
-      />
+    <button type='button' onClick={handleClickBookmark} className={styles.button}>
+      <BookMarkIcon styleClassname={styles.icon(currentBookmarked)} />
     </button>
   )
 }

@@ -27,6 +27,11 @@ const sideVariants: Variants = {
   },
 }
 
+const styles = {
+  wrapper: 'flex fixed right-0 z-20 flex-col justify-between py-2 px-4 w-80 h-screen bg-zinc-900',
+  container: 'space-y-4',
+}
+
 const SideMe = ({ inView }: IProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [showSideMe, setShowSideMe] = useRecoilState(showSideMeState)
@@ -39,7 +44,7 @@ const SideMe = ({ inView }: IProps) => {
     <AnimatePresence initial={false}>
       <motion.div
         ref={ref}
-        className='flex fixed right-0 z-20 flex-col justify-between py-2 px-4 w-80 h-screen bg-zinc-900'
+        className={styles.wrapper}
         variants={sideVariants}
         initial='initial'
         animate='animate'
@@ -48,11 +53,11 @@ const SideMe = ({ inView }: IProps) => {
           type: 'tween',
         }}
       >
-        <div className='space-y-4'>
+        <div className={styles.container}>
           <UserInfo />
           <SearchForm />
         </div>
-        <div className='space-y-4'>
+        <div className={styles.container}>
           <RecentView />
           <Bookmark />
         </div>

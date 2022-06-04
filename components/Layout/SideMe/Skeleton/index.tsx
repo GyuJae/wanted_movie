@@ -1,5 +1,9 @@
 import { motion } from 'framer-motion'
 
+const styles = {
+  wrapper: 'min-w-[19rem] h-48 bg-zinc-800 rounded-xl',
+}
+
 const Skeleton = () => {
   return (
     <motion.div
@@ -10,7 +14,7 @@ const Skeleton = () => {
         duration: 1.6,
         repeat: Infinity,
       }}
-      className='min-w-[19rem] h-48 bg-zinc-800 rounded-xl'
+      className={styles.wrapper}
     />
   )
 }

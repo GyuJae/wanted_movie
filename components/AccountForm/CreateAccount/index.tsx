@@ -21,6 +21,11 @@ interface IForm {
   password: string
 }
 
+const styles = {
+  container: 'space-y-3',
+  button: 'py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+}
+
 const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
   const { register, handleSubmit } = useForm<IForm>()
 
@@ -36,7 +41,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   if (!inView) return null
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
       <Input
         label='Email'
         type='email'
@@ -61,7 +66,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
           maxLength: 16,
         })}
       />
-      <button type='submit' className='py-2 w-full text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full'>
+      <button type='submit' className={styles.button}>
         <Suspense fallback={<SpinLoading />}>Sign Up</Suspense>
       </button>
       <FormError inView={Boolean(formError)} message={formError} />

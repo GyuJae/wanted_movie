@@ -57,6 +57,10 @@ export const useInfiniteSearchMovies = (query: string) => {
         return undefined
       },
       enabled: !!query,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      retry: 1,
     }
   )
 }

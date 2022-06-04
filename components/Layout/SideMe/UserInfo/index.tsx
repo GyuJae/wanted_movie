@@ -6,6 +6,15 @@ const Avatar = dynamic(() => import('@components/Avatar'))
 const EditForm = dynamic(() => import('./EditForm'))
 const PencliIcon = dynamic(() => import('@components/Icons/PencliIcon'))
 
+const styles = {
+  wrapper: 'flex justify-between px-1',
+  container: 'flex space-x-3',
+  subContainer: 'flex flex-col justify-center',
+  username: 'text-lg',
+  email: 'text-xs text-zinc-500',
+  pencliIcon: 'w-3 fill-zinc-400',
+}
+
 const UserInfo = () => {
   const [openEditForm, setOpenEditForm] = useState<boolean>(false)
   const { data } = useMe()
@@ -16,16 +25,16 @@ const UserInfo = () => {
   if (!data || !data.user) return null
   const { user } = data
   return (
-    <div className='flex justify-between px-1'>
-      <div className='flex space-x-3'>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
         <Avatar path={user.avatar} />
-        <div className='flex flex-col justify-center'>
-          <span className='text-lg'>{user.username}</span>
-          <span className='text-xs text-zinc-500'>{user.email}</span>
+        <div className={styles.subContainer}>
+          <span className={styles.username}>{user.username}</span>
+          <span className={styles.email}>{user.email}</span>
         </div>
       </div>
       <button type='button' onClick={handleOpenEditForm}>
-        <PencliIcon styleClassname='w-3 fill-zinc-400' />
+        <PencliIcon styleClassname={styles.pencliIcon} />
       </button>
       <EditForm inView={openEditForm} handleCloseEditForm={handleCloseEditForm} />
     </div>

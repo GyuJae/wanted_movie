@@ -28,16 +28,21 @@ const paddingVariants: Variants = {
   }),
 }
 
+const styles = {
+  wrapper: 'flex overflow-x-hidden min-h-screen text-white bg-black transition-all',
+  container: 'flex flex-col flex-1 min-h-screen',
+}
+
 const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) => {
   const showAllNav = useRecoilValue(showNavState)
   const { data } = useMe()
   return (
-    <div className='flex overflow-x-hidden min-h-screen text-white bg-black transition-all'>
+    <div className={styles.wrapper}>
       <Head>
         <title>{title ? `${title} | Wanted Movie App` : 'Wanted Movie App'}</title>
       </Head>
       <div>{showNav && <Nav />}</div>
-      <div className='flex flex-col flex-1 min-h-screen'>
+      <div className={styles.container}>
         <motion.div variants={paddingVariants} animate='animate' custom={showAllNav} initial={false}>
           {showHeader && <Header />}
         </motion.div>

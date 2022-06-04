@@ -26,6 +26,17 @@ const variants: Variants = {
   },
 }
 
+const styles = {
+  wrapper: 'flex fixed top-10 right-10 z-30 py-3 px-2 space-x-4 w-[20rem] h-20 bg-rose-700 rounded-md',
+  xBtn: 'absolute right-3',
+  xIcon: 'w-2 fill-zinc-200 hover:fill-zinc-300',
+  exclamationIcon: 'w-8 fill-white',
+  container: 'flex flex-col',
+  mainMessage: 'text-xl font-semibold',
+  subMessage: 'flex items-center space-x-1 text-sm text-zinc-200',
+  yesBtn: 'px-2 text-base hover:underline rounded-sm',
+}
+
 const LoginToastMessage = () => {
   const ref = useRef<HTMLDivElement>(null)
   const setLoginForm = useSetRecoilState(accountOpenState)
@@ -52,17 +63,17 @@ const LoginToastMessage = () => {
         transition={{
           type: 'tween',
         }}
-        className='flex fixed top-10 right-10 z-30 py-3 px-2 space-x-4 w-[20rem] h-20 bg-rose-700 rounded-md'
+        className={styles.wrapper}
       >
-        <button type='button' onClick={handleCloseToastMessage} className='absolute right-3'>
-          <XIcon styleClassname='w-2 fill-zinc-200 hover:fill-zinc-300' />
+        <button type='button' onClick={handleCloseToastMessage} className={styles.xBtn}>
+          <XIcon styleClassname={styles.xIcon} />
         </button>
-        <ExclamationIcon styleClassName='w-8 fill-white' />
-        <div className='flex flex-col'>
-          <span className='text-xl font-semibold'>Required login</span>
-          <div className='flex items-center space-x-1 text-sm text-zinc-200'>
+        <ExclamationIcon styleClassName={styles.exclamationIcon} />
+        <div className={styles.container}>
+          <span className={styles.mainMessage}>Required login</span>
+          <div className={styles.subMessage}>
             <span>go to the login screen?</span>
-            <button type='button' onClick={handleOpenLoginForm} className='px-2 text-base hover:underline rounded-sm'>
+            <button type='button' onClick={handleOpenLoginForm} className={styles.yesBtn}>
               Yes
             </button>
           </div>

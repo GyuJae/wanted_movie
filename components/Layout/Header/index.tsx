@@ -7,10 +7,15 @@ const AccountItem = dynamic(() => import('./AccountItem'))
 
 const headerItems: TMediaTypeState[] = ['movie', 'tv']
 
+const styles = {
+  header: 'flex justify-between  p-4 px-6 w-screen h-14 border-b-[1px] border-zinc-800',
+  listContainer: 'flex space-x-9 text-sm text-zinc-400',
+}
+
 const Header = () => {
   return (
-    <header className='flex justify-between  p-4 px-6 w-screen h-14 border-b-[1px] border-zinc-800'>
-      <ul className='flex space-x-9 text-sm text-zinc-400'>
+    <header className={styles.header}>
+      <ul className={styles.listContainer}>
         {headerItems.map((headerItem, index) => {
           const key = `${headerItem}-${index}`
           return <HeaderItem key={key} itemName={headerItem} />

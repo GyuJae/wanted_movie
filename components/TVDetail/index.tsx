@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const Back = dynamic(() => import('./Back'))
+const Back = dynamic(() => import('@components/MovieDetail/Back'))
 const Cast = dynamic(() => import('./Cast'))
 const Main = dynamic(() => import('./Main'))
 const Recommendations = dynamic(() => import('./Recommendations'))
