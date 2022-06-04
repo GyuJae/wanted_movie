@@ -78,6 +78,8 @@ Framer motion 라이브러리를 이용하여 drag를 사용해서 옆에서 영
 ```
 </details>
 
+<br />
+
 ### Data Fetching
 
 <details>
@@ -155,6 +157,8 @@ export const useSearchKeyword = (query: string) => {
 ```
 
 </details>
+
+<br/>
 
 ### CRUD Apis
 
@@ -246,6 +250,7 @@ enum Media {
 ```
 
 #### Apis
+
 ```ts
 import prisma from '@libs/client'
 
@@ -310,8 +315,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
 export default withHandler({ methods: ['POST'], handler, isPrivate: false })
 
 ```
+</details>
 
-#### Cloudflare
+<br/>
+
+### Cloudflare
+
+<details>
+  <summary>구현 방법</summary>
+
+<img src='https://user-images.githubusercontent.com/58322754/172020949-6b4330dd-3a72-4741-9d96-a68ed0ce90be.png' >
+
 ```tsx
 const { mutate } = useMutation(['user', 'me', 'edit'], edit, {
     onSuccess: ({ ok, error }: IResponse) => {
@@ -323,39 +337,82 @@ const { mutate } = useMutation(['user', 'me', 'edit'], edit, {
     },
   })
 
-  const onSubmit: SubmitHandler<IForm> = async ({ username, avatarFile }) => {
-    if (avatarFile && avatarFile.length > 0) {
-      const { uploadURL } = await (await fetch('/api/files')).json()
-      const form = new FormData()
-      form.append('file', avatarFile[0], `${data?.user?.id}-avatar-${username}`)
-      const {
-        result: { id },
-      } = await (
-        await fetch(uploadURL, {
-          method: 'POST',
-          body: form,
-        })
-      ).json()
-      mutate({ username, avatarId: id })
-    } else {
-      mutate({ username })
-    }
+const onSubmit: SubmitHandler<IForm> = async ({ username, avatarFile }) => {
+  if (avatarFile && avatarFile.length > 0) {
+    const { uploadURL } = await (await fetch('/api/files')).json()
+    const form = new FormData()
+    form.append('file', avatarFile[0], `${data?.user?.id}-avatar-${username}`)
+    const {
+      result: { id },
+    } = await (
+      await fetch(uploadURL, {
+        method: 'POST',
+        body: form,
+      })
+    ).json()
+    mutate({ username, avatarId: id })
+  } else {
+    mutate({ username })
   }
+}
 
-  useEffect(() => {
-    if (data?.user?.username) setValue('username', data.user.username)
-  }, [data?.user?.username, setValue])
+useEffect(() => {
+  if (data?.user?.username) setValue('username', data.user.username)
+}, [data?.user?.username, setValue])
 
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(
-    data?.user?.avatar ? fileToUrl({ path: data.user.avatar, variant: 'avatar' }) : null
-  )
-  const avatar = watch('avatarFile')
-  useEffect(() => {
-    if (avatar && avatar.length > 0) {
-      const file = avatar[0]
-      setAvatarPreview(URL.createObjectURL(file))
-    }
-  }, [avatar])
+const [avatarPreview, setAvatarPreview] = useState<string | null>(
+  data?.user?.avatar ? fileToUrl({ path: data.user.avatar, variant: 'avatar' }) : null
+)
+const avatar = watch('avatarFile')
+useEffect(() => {
+  if (avatar && avatar.length > 0) {
+    const file = avatar[0]
+    setAvatarPreview(URL.createObjectURL(file))
+  }
+}, [avatar])
+
+```
+</details>
+
+
+<br/>
+
+### Toast Message
+
+<details>
+    <summary>구현 방법</summary>
+
+<img src='https://user-images.githubusercontent.com/58322754/172020508-e5ba8e2f-bdd3-48f6-b2bb-5d1cec436540.png'>
+
+로그인이 되지 않은 상태에서 로그인이 필요한 기능을 사용시에 메세지가 나온다. frmaer motion를 애니메이션 효과를 주웠고, recoil를 이용하여 전역에서 사용할 수 있도록 하였다.
+```tsx
+<AnimatePresence>
+      <motion.div
+        ref={ref}
+        variants={variants}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        transition={{
+          type: 'tween',
+        }}
+        className={styles.wrapper}
+      >
+        <button type='button' onClick={handleCloseToastMessage} className={styles.xBtn}>
+          <XIcon styleClassname={styles.xIcon} />
+        </button>
+        <ExclamationIcon styleClassName={styles.exclamationIcon} />
+        <div className={styles.container}>
+          <span className={styles.mainMessage}>Required login</span>
+          <div className={styles.subMessage}>
+            <span>go to the login screen?</span>
+            <button type='button' onClick={handleOpenLoginForm} className={styles.yesBtn}>
+              Yes
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
 
 ```
 </details>
