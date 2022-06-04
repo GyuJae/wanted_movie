@@ -3,13 +3,14 @@ import { showNavState } from 'atoms/showNavState'
 import { useRecoilValue } from 'recoil'
 
 const styles = {
+  wrapper: 'flex space-x-4',
   container: 'w-[19rem] h-48 bg-zinc-800 rounded-xl',
 }
 
 const Loading = () => {
   const showNavValue = useRecoilValue(showNavState)
   return (
-    <div className='flex space-x-4'>
+    <div className={styles.wrapper}>
       {Array(10)
         .fill(1)
         .map((item, index) => {

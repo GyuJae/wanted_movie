@@ -10,7 +10,7 @@ declare module 'iron-session' {
 
 const cookieOptions = {
   cookieName: 'wantedMovieSession',
-  password: 'aiounwecio32h484hdjkhf832nkjlnlds!@jdiji88d2nksi123@@',
+  password: process.env.COOKIE_PASSWORD!,
 }
 
 export function withApiSession(fn: any) {

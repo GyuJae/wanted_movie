@@ -1,19 +1,27 @@
+import { IMovieResult } from 'types/movie'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
-import { useMovies } from '@hooks/movie'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
 const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
   inView: boolean
+  data?: IMovieResult
 }
 
-const Movies = ({ inView }: IProps) => {
-  const { data } = useMovies('upcoming')
+const styles = {
+  wrapper: 'relative min-w-[19rem] h-48',
+  image: 'object-cover rounded-xl pointer-events-none',
+  container: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col',
+  title: 'text-base font-semibold',
+  date: 'text-xs',
+}
 
+const Movies = ({ inView, data }: IProps) => {
   if (!inView || !data) return null
 
   return (
@@ -22,18 +30,20 @@ const Movies = ({ inView }: IProps) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[19rem] h-48'>
+          <motion.div key={key} className={styles.wrapper}>
             <Image
               alt={movie.title}
               layout='fill'
               src={getImage({ path: movie.backdrop_path, format: 'w780' })}
-              className='object-cover rounded-xl pointer-events-none'
+              className={styles.image}
               priority
             />
-            <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-              <motion.div className='flex flex-col'>
-                <motion.span className='text-base font-semibold'>{movie.title}</motion.span>
-                <motion.span className='text-xs'>{movie.release_date.split('-')[0]}</motion.span>
+            <motion.div className={styles.container}>
+              <motion.div className={styles.subContainer}>
+                <motion.span className={styles.title}>{movie.title}</motion.span>
+                {movie.release_date && (
+                  <motion.span className={styles.date}>{movie.release_date.split('-')[0]}</motion.span>
+                )}
               </motion.div>
               <ReadMoreBtn mediaId={movie.id} mediaType='movie' media={movie} />
             </motion.div>

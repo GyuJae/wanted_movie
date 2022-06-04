@@ -13,18 +13,21 @@ const TVShows = dynamic(() => import('./TVShows'))
 const TimeToggle = dynamic(() => import('./TimeToggle'))
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 
+const styles = {
+  wrapper: 'space-y-4',
+  categoryContainer: 'flex items-center space-x-4',
+}
+
 const Trendings = () => {
   const mediaType = useRecoilValue(mediaTypeState)
   const timeTrending = useRecoilValue(timeTrendingState)
   const { data } = useTrendings(mediaType, timeTrending)
 
   return (
-    <div className='space-y-4'>
-      <div className='flex items-center space-x-4'>
+    <div className={styles.wrapper}>
+      <div className={styles.categoryContainer}>
         <CategoryTitle cateogoryName='Trending' />
-        <div className='pt-1'>
-          <TimeToggle />
-        </div>
+        <TimeToggle />
       </div>
       <Suspense fallback={<Skeleton />}>
         <Movies inView={Boolean(mediaType === 'movie' && data && data.results)} movies={data?.results as IMovie[]} />

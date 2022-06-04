@@ -4,10 +4,14 @@ const Layout = dynamic(() => import('@components/Layout'))
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'))
 const BookmarkedList = dynamic(() => import('./BookmarkedList'))
 
+const styles = {
+  wrapper: 'px-4 pb-10',
+}
+
 const Bookmarked = () => {
   return (
     <Layout showHeader={false}>
-      <div className='px-4 pb-10'>
+      <div className={styles.wrapper}>
         <CategoryTitle cateogoryName='Bookmarked' />
         <BookmarkedList />
       </div>

@@ -1,3 +1,4 @@
+import { ITVResult } from 'types/tv'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
@@ -9,11 +10,19 @@ const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
   inView: boolean
+  data?: ITVResult
 }
 
-const TVShows = ({ inView }: IProps) => {
-  const { data } = useTvs('airing_today')
+const styles = {
+  wrapper: 'relative min-w-[19rem] h-48',
+  image: 'object-cover rounded-xl pointer-events-none',
+  container: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col',
+  name: 'text-base font-semibold',
+  date: 'text-xs',
+}
 
+const TVShows = ({ inView, data }: IProps) => {
   if (!inView || !data) return null
 
   return (
@@ -22,18 +31,20 @@ const TVShows = ({ inView }: IProps) => {
         const key = `${tv.id}-${index}`
         if (!tv.backdrop_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[19rem] h-48 '>
+          <motion.div key={key} className={styles.wrapper}>
             <Image
               alt={tv.name}
               layout='fill'
               src={getImage({ path: tv.backdrop_path, format: 'w780' })}
-              className='object-cover rounded-xl pointer-events-none'
+              className={styles.image}
               priority
             />
-            <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-              <motion.div className='flex flex-col'>
-                <motion.span className='text-base font-semibold'>{tv.name}</motion.span>
-                <motion.span className='text-xs'>{tv.first_air_date.split('-')[0]}</motion.span>
+            <motion.div className={styles.container}>
+              <motion.div className={styles.subContainer}>
+                <motion.span className={styles.name}>{tv.name}</motion.span>
+                {tv.first_air_date && (
+                  <motion.span className={styles.date}>{tv.first_air_date.split('-')[0]}</motion.span>
+                )}
               </motion.div>
               <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
             </motion.div>

@@ -1,8 +1,8 @@
+import { ITVResult } from 'types/tv'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
-import { useTvs } from '@hooks/tv'
 
 const Carousel = dynamic(() => import('@components/Carousel'))
 const StarIcon = dynamic(() => import('@components/Icons/StarIcon'))
@@ -10,11 +10,24 @@ const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'))
 
 interface IProps {
   inView: boolean
+  showStar?: boolean
+  data?: ITVResult
 }
 
-const TVShows = ({ inView }: IProps) => {
-  const { data } = useTvs('top_rated')
+const styles = {
+  wrapper: 'relative min-w-[13rem] min-h-[13rem]',
+  image: 'object-cover object-top rounded-xl pointer-events-none',
+  voteContainer: 'flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl',
+  starIcon: 'w-3 h-3 fill-yellow-500 mt-[1px]',
+  vote: 'text-xs font-semibold',
+  subWrapper: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col mb-2',
+  name: 'text-base font-semibold',
+  date: 'text-xs',
+  readMoreBtnContainer: 'absolute right-2 bottom-2',
+}
 
+const TVShows = ({ inView, showStar = true, data }: IProps) => {
   if (!inView || !data) return null
 
   return (
@@ -23,23 +36,27 @@ const TVShows = ({ inView }: IProps) => {
         const key = `${tv.id}-${index}`
         if (!tv.poster_path) return null
         return (
-          <motion.div key={key} className='relative min-w-[13rem] min-h-[13rem]'>
+          <motion.div key={key} className={styles.wrapper}>
             <Image
               alt={tv.name}
               layout='fill'
               src={getImage({ path: tv.poster_path, format: 'w500' })}
-              className='object-cover object-top rounded-xl pointer-events-none'
+              className={styles.image}
               priority
             />
-            <motion.div className='flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl'>
-              <StarIcon styleClassName='w-3 h-3 fill-yellow-500 mt-[1px]  ' />
-              <span className='text-xs font-semibold'>{tv.vote_average}</span>
-            </motion.div>
-            <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-              <motion.div className='flex flex-col mb-2'>
-                <motion.span className='text-base font-semibold'>{tv.name}</motion.span>
-                <motion.span className='text-xs'>{tv.first_air_date.split('-')[0]}</motion.span>
-                <motion.div className='absolute right-2 bottom-2'>
+            {showStar && (
+              <motion.div className={styles.voteContainer}>
+                <StarIcon styleClassName={styles.starIcon} />
+                <motion.span className={styles.vote}>{tv.vote_average}</motion.span>
+              </motion.div>
+            )}
+            <motion.div className={styles.subWrapper}>
+              <motion.div className={styles.subContainer}>
+                <motion.span className={styles.name}>{tv.name}</motion.span>
+                {tv.first_air_date && (
+                  <motion.span className={styles.date}>{tv.first_air_date.split('-')[0]}</motion.span>
+                )}
+                <motion.div className={styles.readMoreBtnContainer}>
                   <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
                 </motion.div>
               </motion.div>

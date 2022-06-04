@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion'
 
+const styles = {
+  wrapper: 'flex space-x-4',
+  container: 'min-w-[19rem] h-48 bg-zinc-800 rounded-xl',
+}
+
 const Loading = () => {
   return (
-    <div className='flex space-x-4'>
+    <div className={styles.wrapper}>
       {Array(10)
         .fill(1)
         .map((item, index) => {
@@ -17,7 +22,7 @@ const Loading = () => {
                 duration: 1.6,
                 repeat: Infinity,
               }}
-              className='min-w-[19rem] h-48 bg-zinc-800 rounded-xl'
+              className={styles.container}
             />
           )
         })}

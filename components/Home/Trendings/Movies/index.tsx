@@ -13,6 +13,16 @@ interface IProps {
   movies: IMovie[]
 }
 
+const styles = {
+  wrapper: 'relative min-w-[22rem] h-60',
+  image: 'object-cover rounded-xl pointer-events-none',
+  container: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col',
+  name: 'text-lg font-semibold',
+  date: 'text-sm',
+  vote: 'text-xs font-semibold',
+}
+
 const Movies = ({ inView, movies }: IProps) => {
   if (!inView) return null
   return (
@@ -28,20 +38,20 @@ const Movies = ({ inView, movies }: IProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key={key}
-              className='relative min-w-[22rem] h-60'
+              className={styles.wrapper}
             >
               <Image
                 alt={movie.title}
                 layout='fill'
                 src={getImage({ path: movie.backdrop_path, format: 'w780' })}
-                className='object-cover rounded-xl pointer-events-none'
+                className={styles.image}
                 priority
               />
-              <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-                <motion.div className='flex flex-col'>
-                  <motion.span className='text-lg font-semibold'>{movie.title}</motion.span>
-                  <motion.span className='text-sm'>{movie.release_date.split('-')[0]}</motion.span>
-                  <motion.span className='text-xs font-semibold'>{movie.vote_average} rating</motion.span>
+              <motion.div className={styles.container}>
+                <motion.div className={styles.subContainer}>
+                  <motion.span className={styles.name}>{movie.title}</motion.span>
+                  <motion.span className={styles.date}>{movie.release_date.split('-')[0]}</motion.span>
+                  <motion.span className={styles.vote}>{movie.vote_average} rating</motion.span>
                 </motion.div>
                 <motion.div>
                   <ReadMoreBtn mediaType='movie' mediaId={movie.id} media={movie} />

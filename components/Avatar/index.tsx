@@ -14,6 +14,7 @@ const styles = {
       'w-8 h-8': size === 'small',
       'w-16 h-16': size === 'big',
     }),
+  image: 'rounded-full',
 }
 
 const Avatar = ({ path, size = 'medium' }: IProps) => {
@@ -25,7 +26,7 @@ const Avatar = ({ path, size = 'medium' }: IProps) => {
         layout='fill'
         alt='avatar'
         priority
-        className='rounded-full'
+        className={styles.image}
       />
     </div>
   )

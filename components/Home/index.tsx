@@ -8,10 +8,14 @@ const Trendings = dynamic(() => import('@components/Home/Trendings'), { ssr: fal
 const TopRated = dynamic(() => import('@components/Home/TopRated'), { ssr: false })
 const Popular = dynamic(() => import('@components/Home/Popular'), { ssr: false })
 
+const styles = {
+  wrapper: 'px-4 pb-10 space-y-12',
+}
+
 const HomePage = () => {
   return (
     <Layout title='Home'>
-      <div className='px-4 pb-10 space-y-12'>
+      <div className={styles.wrapper}>
         <Trendings />
         <Current />
         <TopRated />

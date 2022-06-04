@@ -12,6 +12,17 @@ interface IProps {
   inView: boolean
   tvs: ITV[]
 }
+
+const styles = {
+  wrapper: 'relative min-w-[22rem] h-60',
+  image: 'object-cover rounded-xl pointer-events-none',
+  container: 'flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl',
+  subContainer: 'flex flex-col',
+  name: 'text-lg font-semibold',
+  date: 'text-sm',
+  vote: 'text-xs font-semibold',
+}
+
 const TVShows = ({ inView, tvs }: IProps) => {
   if (!inView) return null
 
@@ -28,20 +39,20 @@ const TVShows = ({ inView, tvs }: IProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               key={key}
-              className='relative min-w-[22rem] h-60'
+              className={styles.wrapper}
             >
               <Image
                 alt={tv.name}
                 layout='fill'
                 src={getImage({ path: tv.backdrop_path, format: 'w780' })}
-                className='object-cover rounded-xl pointer-events-none'
+                className={styles.image}
                 priority
               />
-              <motion.div className='flex absolute bottom-0 justify-between items-end p-5 w-full bg-gradient-to-t from-black rounded-b-xl'>
-                <motion.div className='flex flex-col'>
-                  <motion.span className='text-lg font-semibold'>{tv.name}</motion.span>
-                  <motion.span className='text-sm'>{tv.first_air_date.split('-')[0]}</motion.span>
-                  <motion.span className='text-xs font-semibold'>{tv.vote_average} rating</motion.span>
+              <motion.div className={styles.container}>
+                <motion.div className={styles.subContainer}>
+                  <motion.span className={styles.name}>{tv.name}</motion.span>
+                  <motion.span className={styles.date}>{tv.first_air_date.split('-')[0]}</motion.span>
+                  <motion.span className={styles.vote}>{tv.vote_average} rating</motion.span>
                 </motion.div>
                 <motion.div>
                   <ReadMoreBtn mediaType='tv' mediaId={tv.id} media={tv} />
