@@ -40,7 +40,7 @@ const PostForm = ({ inView, setOpenForm, tv }: IProps) => {
   const handleClose = () => setOpenForm(false)
   const { data: meData } = useMe()
   const { register, handleSubmit, watch, setValue } = useForm<IForm>()
-  const { mutate } = useMutation(['post', 'create'], createPost, {
+  const { mutate, isLoading } = useMutation(['post', 'create'], createPost, {
     onSuccess: ({ ok }: IPostResponse) => {
       if (ok) handleClose()
     },
@@ -54,7 +54,7 @@ const PostForm = ({ inView, setOpenForm, tv }: IProps) => {
   }, [setValue])
 
   const onSubmit: SubmitHandler<IForm> = ({ text, vote }) => {
-    if (!tv.poster_path) return
+    if (!tv.poster_path || isLoading) return
     mutate({
       text,
       mediaType: 'tv',

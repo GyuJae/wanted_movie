@@ -40,7 +40,7 @@ const PostForm = ({ inView, setOpenForm, movie }: IProps) => {
   const handleClose = () => setOpenForm(false)
   const { data: meData } = useMe()
   const { register, handleSubmit, setValue, watch } = useForm<IForm>()
-  const { mutate } = useMutation(['post', 'create'], createPost, {
+  const { mutate, isLoading } = useMutation(['post', 'create'], createPost, {
     onSuccess: ({ ok }: IPostResponse) => {
       if (ok) handleClose()
     },
@@ -54,7 +54,7 @@ const PostForm = ({ inView, setOpenForm, movie }: IProps) => {
   }, [setValue])
 
   const onSubmit: SubmitHandler<IForm> = ({ text, vote }) => {
-    if (!movie.poster_path) return
+    if (!movie.poster_path || isLoading) return
     mutate({
       text,
       mediaType: 'movie',
