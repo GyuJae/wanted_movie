@@ -37,7 +37,6 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
 
   const { mutate } = useMutation(['createAccount'], createAccount, {
     onSuccess: ({ ok, error }: IResponse) => {
-      console.log(ok, error)
       if (error) setFormError(error)
       if (ok) handleSetLogin()
     },
