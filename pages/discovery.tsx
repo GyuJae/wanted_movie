@@ -1,6 +1,4 @@
-import dynamic from 'next/dynamic'
-
-const DiscoveryPage = dynamic(() => import('@components/Discovery'))
+import DiscoveryPage from '@components/Discovery'
 
 const Discovery = () => {
   return <DiscoveryPage />

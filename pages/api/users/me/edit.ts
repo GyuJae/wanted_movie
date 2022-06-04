@@ -6,12 +6,6 @@ import withHandler, { IResponse } from '@libs/withHandler'
 
 async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
   try {
-    if (!prisma) {
-      return res.json({
-        ok: false,
-        error: 'Prisma is null',
-      })
-    }
     const {
       body: { username, avatarId },
       session: { user },

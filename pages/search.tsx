@@ -1,7 +1,5 @@
 import type { NextPage } from 'next'
-import dynamic from 'next/dynamic'
-
-const SearchPage = dynamic(() => import('@components/SearchPage'))
+import SearchPage from '@components/SearchPage'
 
 const Page: NextPage = () => {
   return <SearchPage />

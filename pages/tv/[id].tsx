@@ -1,8 +1,6 @@
-import dynamic from 'next/dynamic'
+import TVDetail from '@components/TVDetail'
 
 import type { GetServerSideProps, NextPage } from 'next'
-
-const TVDetail = dynamic(() => import('@components/TVDetail'))
 
 interface IProps {
   id: string
