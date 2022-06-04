@@ -4,10 +4,10 @@ import { ITVCredits, ITVDetail, ITVGenres, ITVResult, TvCategory } from 'types/t
 
 class TvsService {
   private apiURL: string
-  private API_KEY: string
+  private NEXT_PUBLIC_API_KEY: string
   constructor() {
     this.apiURL = 'https://api.themoviedb.org/3/'
-    this.API_KEY = process.env.API_KEY as string
+    this.NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
   }
   private makeApiCall = async <T>(apiPath: string): Promise<T> => {
     const response = await axios.get(`${this.apiURL}${apiPath}`, {
@@ -22,7 +22,7 @@ class TvsService {
   }
 
   public getTvs = async (category: TvCategory): Promise<ITVResult> => {
-    const response = await this.makeApiCall<ITVResult>(`tv/${category}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVResult>(`tv/${category}?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.results) {
       throw new Error('TVs not found')
     }
@@ -36,7 +36,9 @@ class TvsService {
     category: TvCategory
     pageParam?: number
   }): Promise<ITVResult> => {
-    const response = await this.makeApiCall<ITVResult>(`tv/${category}?api_key=${this.API_KEY}&page=${pageParam}`)
+    const response = await this.makeApiCall<ITVResult>(
+      `tv/${category}?api_key=${this.NEXT_PUBLIC_API_KEY}&page=${pageParam}`
+    )
     if (!response.results) {
       throw new Error('TV Shows not found')
     }
@@ -44,7 +46,7 @@ class TvsService {
   }
 
   public getTV = async (id: string) => {
-    const response = await this.makeApiCall<ITVDetail>(`tv/${id}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVDetail>(`tv/${id}?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.id) {
       throw new Error('TV not found')
     }
@@ -52,7 +54,7 @@ class TvsService {
   }
 
   public getRecommendations = async (id: string) => {
-    const response = await this.makeApiCall<ITVResult>(`tv/${id}/recommendations?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVResult>(`tv/${id}/recommendations?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -60,7 +62,7 @@ class TvsService {
   }
 
   public getCredits = async (id: string) => {
-    const response = await this.makeApiCall<ITVCredits>(`tv/${id}/credits?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVCredits>(`tv/${id}/credits?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
     }
@@ -68,7 +70,7 @@ class TvsService {
   }
 
   public getSimilar = async (id: string) => {
-    const response = await this.makeApiCall<ITVResult>(`tv/${id}/similar?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVResult>(`tv/${id}/similar?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -76,7 +78,7 @@ class TvsService {
   }
 
   public getGenres = async () => {
-    const response = await this.makeApiCall<ITVGenres>(`genre/movie/list?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITVGenres>(`genre/movie/list?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.genres) {
       throw new Error('Genres not found')
     }
@@ -85,7 +87,7 @@ class TvsService {
 
   public getSearch = async ({ query, pageParam = 1 }: { query: string; pageParam?: number }) => {
     const response = await this.makeApiCall<ITVResult>(
-      `search/tv?api_key=${this.API_KEY}&query=${query}&page=${pageParam}`
+      `search/tv?api_key=${this.NEXT_PUBLIC_API_KEY}&query=${query}&page=${pageParam}`
     )
     if (!response.results) {
       throw new Error('Genres not found')

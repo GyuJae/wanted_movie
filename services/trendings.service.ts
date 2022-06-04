@@ -4,10 +4,10 @@ import { ITrendingResponse, TMediaType } from '../types/trending.d'
 
 class TrendingsService {
   private apiURL: string
-  private API_KEY: string
+  private NEXT_PUBLIC_API_KEY: string
   constructor() {
     this.apiURL = 'https://api.themoviedb.org/3/trending/'
-    this.API_KEY = process.env.API_KEY as string
+    this.NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
   }
   private makeApiCall = async <T>(apiPath: string): Promise<T> => {
     const response = await axios.get(`${this.apiURL}${apiPath}`, {
@@ -22,7 +22,9 @@ class TrendingsService {
   }
 
   public getTrendings = async (mediaType: TMediaType, time: 'day' | 'week'): Promise<ITrendingResponse> => {
-    const response = await this.makeApiCall<ITrendingResponse>(`${mediaType}/${time}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<ITrendingResponse>(
+      `${mediaType}/${time}?api_key=${this.NEXT_PUBLIC_API_KEY}`
+    )
     if (!response.results) {
       throw new Error('Trending not found')
     }

@@ -5,10 +5,10 @@ import { IMovieCredits, IMovieDetail, IMovieGenres, IMovieResult, MovieCategory 
 
 class MoviesService {
   private apiURL: string
-  private API_KEY: string
+  private NEXT_PUBLIC_API_KEY: string
   constructor() {
     this.apiURL = 'https://api.themoviedb.org/3/'
-    this.API_KEY = process.env.API_KEY as string
+    this.NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY as string
   }
   private makeApiCall = async <T>(apiPath: string): Promise<T> => {
     const response = await axios.get(`${this.apiURL}${apiPath}`, {
@@ -23,7 +23,7 @@ class MoviesService {
   }
 
   public getMovies = async (category: MovieCategory): Promise<IMovieResult> => {
-    const response = await this.makeApiCall<IMovieResult>(`movie/${category}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(`movie/${category}?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -37,7 +37,9 @@ class MoviesService {
     category: MovieCategory
     pageParam?: number
   }): Promise<IMovieResult> => {
-    const response = await this.makeApiCall<IMovieResult>(`movie/${category}?api_key=${this.API_KEY}&page=${pageParam}`)
+    const response = await this.makeApiCall<IMovieResult>(
+      `movie/${category}?api_key=${this.NEXT_PUBLIC_API_KEY}&page=${pageParam}`
+    )
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -45,7 +47,7 @@ class MoviesService {
   }
 
   public getMovie = async (id: string) => {
-    const response = await this.makeApiCall<IMovieDetail>(`movie/${id}?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieDetail>(`movie/${id}?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
     }
@@ -53,7 +55,9 @@ class MoviesService {
   }
 
   public getRecommendations = async (id: string) => {
-    const response = await this.makeApiCall<IMovieResult>(`movie/${id}/recommendations?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(
+      `movie/${id}/recommendations?api_key=${this.NEXT_PUBLIC_API_KEY}`
+    )
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -61,7 +65,7 @@ class MoviesService {
   }
 
   public getCredits = async (id: string) => {
-    const response = await this.makeApiCall<IMovieCredits>(`movie/${id}/credits?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieCredits>(`movie/${id}/credits?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.id) {
       throw new Error('Movie not found')
     }
@@ -69,7 +73,7 @@ class MoviesService {
   }
 
   public getSimilar = async (id: string) => {
-    const response = await this.makeApiCall<IMovieResult>(`movie/${id}/similar?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieResult>(`movie/${id}/similar?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.results) {
       throw new Error('Movies not found')
     }
@@ -77,7 +81,7 @@ class MoviesService {
   }
 
   public getGenres = async () => {
-    const response = await this.makeApiCall<IMovieGenres>(`genre/movie/list?api_key=${this.API_KEY}`)
+    const response = await this.makeApiCall<IMovieGenres>(`genre/movie/list?api_key=${this.NEXT_PUBLIC_API_KEY}`)
     if (!response.genres) {
       throw new Error('Genres not found')
     }
@@ -86,7 +90,7 @@ class MoviesService {
 
   public getSearch = async ({ query, pageParam = 1 }: { query: string; pageParam?: number }) => {
     const response = await this.makeApiCall<IMovieResult>(
-      `search/movie?api_key=${this.API_KEY}&query=${query}&page=${pageParam}`
+      `search/movie?api_key=${this.NEXT_PUBLIC_API_KEY}&query=${query}&page=${pageParam}`
     )
     if (!response.results) {
       throw new Error('Genres not found')
@@ -95,7 +99,9 @@ class MoviesService {
   }
 
   public getSearchKeyword = async (query: string) => {
-    const response = await this.makeApiCall<ISearchKeywordResult>(`search/keyword?query=${query}`)
+    const response = await this.makeApiCall<ISearchKeywordResult>(
+      `search/keyword?api_key=${this.NEXT_PUBLIC_API_KEY}&query=${query}`
+    )
     if (!response.results) {
       throw new Error('Genres not found')
     }
