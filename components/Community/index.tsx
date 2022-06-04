@@ -13,7 +13,7 @@ const styles = {
 const Community = () => {
   const router = useRouter()
   const { data } = useMe()
-  if (!data || !data.ok) return router.replace('/')
+  if (!data || !data.ok) router.replace('/')
   return (
     <Layout showHeader={false}>
       <div className={styles.wrapper}>
