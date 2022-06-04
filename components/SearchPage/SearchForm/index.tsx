@@ -17,7 +17,7 @@ const SearchForm = () => {
   const { register, handleSubmit } = useForm<IForm>()
   const onSubmit: SubmitHandler<IForm> = ({ query }) => {
     if (!query) return
-    router.push(`/search?query=${query}`)
+    router.push(`/search?query=${query}`).then(() => router.reload())
   }
   return (
     <div className='relative'>

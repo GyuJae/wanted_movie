@@ -22,6 +22,7 @@ const Bookmark = () => {
 
   const handleGoBookmarked = () => router.push('/me/bookmarked')
 
+  if (!data || !data.bookmark) return null
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

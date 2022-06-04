@@ -52,7 +52,7 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
       setLoginToastMessage(true)
       return
     }
-    router.replace(categoryPathname)
+    router.push(categoryPathname).then(() => router.reload())
   }
 
   return (

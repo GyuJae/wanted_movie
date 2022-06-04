@@ -5,7 +5,7 @@ const LeftArrow = dynamic(() => import('@components/Icons/LeftArrow'), { ssr: fa
 
 const Back = () => {
   const router = useRouter()
-  const handleClick = () => router.back()
+  const handleClick = () => router.push('/').then(() => router.reload())
   return (
     <button type='button' onClick={handleClick} className='absolute top-4 left-4 z-20'>
       <LeftArrow styleClassname='w-4 fill-zinc-700' />

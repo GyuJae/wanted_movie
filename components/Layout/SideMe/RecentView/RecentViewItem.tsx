@@ -25,7 +25,7 @@ const styles = {
 }
 
 const RecentViewItem = ({ inView, recentView }: IProps) => {
-  if (!inView || !recentView) return <div>Not Yet</div>
+  if (!inView || !recentView) return null
   return (
     <div className={styles.wrapper}>
       <Image

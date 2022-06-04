@@ -25,7 +25,7 @@ const styles = {
 }
 
 const BookmarkItem = ({ inView, bookmarked }: IProps) => {
-  if (!inView || !bookmarked) return <div>Not Yet</div>
+  if (!inView || !bookmarked) return null
   return (
     <div className={styles.wrapper}>
       <Image

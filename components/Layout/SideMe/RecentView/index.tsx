@@ -19,7 +19,7 @@ const styles = {
 
 const RecentView = () => {
   const { data } = useLastRecentView()
-
+  if (!data || !data.recentView) return null
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

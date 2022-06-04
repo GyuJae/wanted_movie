@@ -38,6 +38,8 @@ const Login = ({ inView, handleClose }: IProps) => {
       if (error) setFormError(error)
       if (ok) {
         queryClient.refetchQueries(['user', 'me'])
+        queryClient.refetchQueries(['bookmark', 'last'])
+        queryClient.refetchQueries(['recentView', 'last'])
         handleClose()
       }
     },
