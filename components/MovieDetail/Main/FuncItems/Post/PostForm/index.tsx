@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const Avatar = dynamic(() => import('@components/Avatar'), { ssr: false })
+const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 const Vote = dynamic(() => import('./Vote'), { ssr: false })
 
 interface IProps {
@@ -90,7 +91,7 @@ const PostForm = ({ inView, setOpenForm, movie }: IProps) => {
             <Vote handleVoteValue={handleVoteValue} voteValue={voteValue} />
             <input {...register('vote', { min: 0, max: 5, valueAsNumber: true })} className='hidden' />
             <button type='submit' className={styles.button}>
-              Comment
+              {isLoading ? <SpinLoading size='s' backWhite darkmode={false} /> : 'Comment'}
             </button>
           </form>
         </div>
