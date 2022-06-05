@@ -3,7 +3,7 @@
 <img src="https://user-images.githubusercontent.com/58322754/172021721-95609891-87dc-4075-9c02-c79e9087ed67.png">
 
 - **Github Repository URL** <br/> https://github.com/GyuJae/wanted_movie
-- **배포 URL** <br/> https://wanted-movie-4pfdhsmue-gyujae.vercel.app/
+- **배포 URL** <br/> https://wanted-movie-gyujae.vercel.app/
 
 <br/>
 
