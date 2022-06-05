@@ -4,15 +4,17 @@ import classNames from 'classnames'
 interface IProps {
   size?: 's' | 'm'
   darkmode?: boolean
+  backWhite?: boolean
 }
 
-const SpinLoading = ({ size = 'm', darkmode = false }: IProps) => {
+const SpinLoading = ({ size = 'm', darkmode = false, backWhite = false }: IProps) => {
   return (
     <svg
       role='status'
-      className={classNames('mr-2 w-8 h-8 text-zinc-900 animate-spin fill-red-700', {
+      className={classNames('mr-2 w-8 h-8 animate-spin fill-red-700', {
         'fill-zinc-600': darkmode,
         'w-5 h-5': size === 's',
+        'text-zinc-900': !backWhite,
       })}
       viewBox='0 0 100 101'
       fill='none'

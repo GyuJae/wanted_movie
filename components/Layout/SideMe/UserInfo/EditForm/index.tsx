@@ -131,7 +131,7 @@ const EditForm = ({ inView, handleCloseEditForm }: IProps) => {
             />
           </fieldset>
           <button type='submit' className={styles.saveButton}>
-            {isLoading ? <SpinLoading size='s' /> : 'Save'}
+            {isLoading ? <SpinLoading size='s' backWhite /> : 'Save'}
           </button>
         </form>
 
