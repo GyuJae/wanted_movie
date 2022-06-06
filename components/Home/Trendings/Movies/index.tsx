@@ -3,8 +3,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
-
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
 const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
@@ -30,40 +29,37 @@ const Movies = ({ inView, movies }: IProps) => {
   const count = movies.filter((movie) => !!movie.backdrop_path).length
   return (
     <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
-      <AnimatePresence>
-        {movies.map((movie, index) => {
-          const key = `${movie.id}-${index}`
-          if (!movie.backdrop_path) return null
-          return (
-            <motion.div
-              layoutId={`movie-${movie.id}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              key={key}
-              className={styles.wrapper}
-            >
-              <Image
-                alt={movie.title}
-                layout='fill'
-                src={getImage({ path: movie.backdrop_path, format: 'w780' })}
-                className={styles.image}
-                priority
-              />
-              <motion.div className={styles.container}>
-                <motion.div className={styles.subContainer}>
-                  <motion.span className={styles.name}>{movie.title}</motion.span>
-                  <motion.span className={styles.date}>{movie.release_date.split('-')[0]}</motion.span>
-                  <motion.span className={styles.vote}>{movie.vote_average} rating</motion.span>
-                </motion.div>
-                <motion.div>
-                  <ReadMoreBtn mediaType='movie' mediaId={movie.id} media={movie} />
-                </motion.div>
+      {movies.map((movie, index) => {
+        const key = `${movie.id}-${index}`
+        if (!movie.backdrop_path) return null
+        return (
+          <motion.li
+            layoutId={`movie-${movie.id}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            key={key}
+            className={styles.wrapper}
+          >
+            <Image
+              alt={movie.title}
+              layout='fill'
+              src={getImage({ path: movie.backdrop_path, format: 'w780' })}
+              className={styles.image}
+              priority
+            />
+            <motion.div className={styles.container}>
+              <motion.div className={styles.subContainer}>
+                <motion.span className={styles.name}>{movie.title}</motion.span>
+                <motion.span className={styles.date}>{movie.release_date.split('-')[0]}</motion.span>
+                <motion.span className={styles.vote}>{movie.vote_average} rating</motion.span>
+              </motion.div>
+              <motion.div>
+                <ReadMoreBtn mediaType='movie' mediaId={movie.id} media={movie} />
               </motion.div>
             </motion.div>
-          )
-        })}
-      </AnimatePresence>
+          </motion.li>
+        )
+      })}
     </Carousel>
   )
 }

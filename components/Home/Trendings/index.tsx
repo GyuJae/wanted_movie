@@ -1,13 +1,15 @@
 import { IMovie } from 'types/movie'
+import { INIT_LOADING_TIME } from '../constant'
 import { ITV } from 'types/tv'
-import { Suspense } from 'react'
+import Skeleton from '../Skeleton'
 import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { timeTrendingState } from 'atoms/timeTrendingState'
 import { useRecoilValue } from 'recoil'
 import { useTrendings } from '@hooks/trending'
 
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
+import { useEffect, useState } from 'react'
+
 const Movies = dynamic(() => import('./Movies'), { ssr: false })
 const TVShows = dynamic(() => import('./TVShows'), { ssr: false })
 const TimeToggle = dynamic(() => import('./TimeToggle'), { ssr: false })
@@ -19,9 +21,14 @@ const styles = {
 }
 
 const Trendings = () => {
+  const [init, setInit] = useState<boolean>(true)
   const mediaType = useRecoilValue(mediaTypeState)
   const timeTrending = useRecoilValue(timeTrendingState)
-  const { data } = useTrendings(mediaType, timeTrending)
+  const { data, isLoading } = useTrendings(mediaType, timeTrending)
+
+  useEffect(() => {
+    setTimeout(() => setInit(false), INIT_LOADING_TIME)
+  }, [])
 
   return (
     <div className={styles.wrapper}>
@@ -29,10 +36,15 @@ const Trendings = () => {
         <CategoryTitle cateogoryName='Trending' />
         <TimeToggle />
       </div>
-      <Suspense fallback={<Skeleton />}>
-        <Movies inView={Boolean(mediaType === 'movie' && data && data.results)} movies={data?.results as IMovie[]} />
-        <TVShows inView={Boolean(mediaType === 'tv' && data && data.results)} tvs={data?.results as ITV[]} />
-      </Suspense>
+      <Skeleton inView={isLoading || init} size='large' category={`trending-${mediaType}`} />
+      <Movies
+        inView={Boolean(mediaType === 'movie' && data && data.results && !isLoading && !init)}
+        movies={data?.results as IMovie[]}
+      />
+      <TVShows
+        inView={Boolean(mediaType === 'tv' && data && data.results && !isLoading && !init)}
+        tvs={data?.results as ITV[]}
+      />
     </div>
   )
 }

@@ -16,3 +16,10 @@
   background-color: #999999;
   border-radius: 10px;
 }
+
+.homeGrid {
+  display: grid;
+  padding: 0px 1rem;
+  padding-bottom: 2rem;
+  grid-template-rows: 340px 320px 320px 320px 320px;
+}

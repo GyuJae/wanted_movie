@@ -14,7 +14,7 @@ const styles = {
 
 const Carousel = ({ children, totalWidth }: ICarousel) => {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter initial={false}>
       <motion.div
         variants={opacityVariants}
         initial='initial'

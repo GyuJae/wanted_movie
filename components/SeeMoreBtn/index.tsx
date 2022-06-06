@@ -12,6 +12,7 @@ const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'),
 interface IProps {
   mediaType: TMediaType
   category: MovieCategory | TvCategory
+  inView?: boolean
 }
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
   icon: 'w-3 h-3 fill-zinc-500 mt-1',
 }
 
-const SeeMoreBtn = ({ mediaType, category }: IProps) => {
+const SeeMoreBtn = ({ mediaType, category, inView = true }: IProps) => {
   const router = useRouter()
   const setMovieDiscovery = useSetRecoilState(movieDiscoveryState)
   const setTVDiscovery = useSetRecoilState(tvDiscoveryState)
@@ -28,6 +29,7 @@ const SeeMoreBtn = ({ mediaType, category }: IProps) => {
     if (mediaType === 'tv') setTVDiscovery(category as TvCategory)
     router.push('/discovery')
   }
+  if (!inView) return null
   return (
     <button type='button' onClick={handleClick} className={styles.container}>
       <span>See More</span>

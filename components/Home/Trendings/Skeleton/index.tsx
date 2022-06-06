@@ -1,30 +1,22 @@
-import classNames from 'classnames'
 import { motion } from 'framer-motion'
 
 interface IProps {
   inView: boolean
-  category: string
-  size: 'large' | 'medium' | 'small'
 }
 
 const styles = {
   wrapper: 'flex space-x-4',
-  container: (size: 'large' | 'medium' | 'small') =>
-    classNames('bg-zinc-800 rounded-xl', {
-      'min-w-[19rem] h-48': size === 'medium',
-      'min-w-[22rem] h-60': size === 'large',
-      'min-w-[13rem] min-h-[13rem]': size === 'small',
-    }),
+  container: 'min-w-[22rem] h-60 bg-zinc-800 rounded-xl',
 }
 
-const Skeleton = ({ inView, category, size }: IProps) => {
+const Skeleton = ({ inView }: IProps) => {
   if (!inView) return null
   return (
     <div className={styles.wrapper}>
-      {Array(6)
+      {Array(10)
         .fill(1)
         .map((item, index) => {
-          const key = `${category}-loading-${item + index}`
+          const key = `trending-skeleton-${item + index}`
           return (
             <motion.div
               key={key}
@@ -35,7 +27,7 @@ const Skeleton = ({ inView, category, size }: IProps) => {
                 duration: 1.6,
                 repeat: Infinity,
               }}
-              className={styles.container(size)}
+              className={styles.container}
             />
           )
         })}

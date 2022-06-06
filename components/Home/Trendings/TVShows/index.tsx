@@ -3,8 +3,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
-
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
 const ReadMoreBtn = dynamic(() => import('@components/ReadMoreBtn'), { ssr: false })
@@ -30,40 +29,39 @@ const TVShows = ({ inView, tvs }: IProps) => {
   const count = tvs.filter((tv) => !!tv.backdrop_path).length
   return (
     <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
-      <AnimatePresence>
-        {tvs.map((tv, index) => {
-          const key = `${tv.id}-${index}`
-          if (!tv.backdrop_path) return null
-          return (
-            <motion.div
-              layoutId={`tv-${tv.id}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              key={key}
-              className={styles.wrapper}
-            >
-              <Image
-                alt={tv.name}
-                layout='fill'
-                src={getImage({ path: tv.backdrop_path, format: 'w780' })}
-                className={styles.image}
-                priority
-              />
-              <motion.div className={styles.container}>
-                <motion.div className={styles.subContainer}>
-                  <motion.span className={styles.name}>{tv.name}</motion.span>
+      {tvs.map((tv, index) => {
+        const key = `${tv.id}-${index}`
+        if (!tv.backdrop_path) return null
+        return (
+          <motion.li
+            layoutId={`tv-${tv.id}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            key={key}
+            className={styles.wrapper}
+          >
+            <Image
+              alt={tv.name}
+              layout='fill'
+              src={getImage({ path: tv.backdrop_path, format: 'w780' })}
+              className={styles.image}
+              priority
+            />
+            <motion.div className={styles.container}>
+              <motion.div className={styles.subContainer}>
+                <motion.span className={styles.name}>{tv.name}</motion.span>
+                {tv.first_air_date && (
                   <motion.span className={styles.date}>{tv.first_air_date.split('-')[0]}</motion.span>
-                  <motion.span className={styles.vote}>{tv.vote_average} rating</motion.span>
-                </motion.div>
-                <motion.div>
-                  <ReadMoreBtn mediaType='tv' mediaId={tv.id} media={tv} />
-                </motion.div>
+                )}
+                <motion.span className={styles.vote}>{tv.vote_average} rating</motion.span>
+              </motion.div>
+              <motion.div>
+                <ReadMoreBtn mediaType='tv' mediaId={tv.id} media={tv} />
               </motion.div>
             </motion.div>
-          )
-        })}
-      </AnimatePresence>
+          </motion.li>
+        )
+      })}
     </Carousel>
   )
 }
