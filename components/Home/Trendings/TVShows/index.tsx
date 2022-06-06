@@ -1,4 +1,4 @@
-import { INIT_LOADING_TIME } from '@components/Home/constant'
+import { INIT_LOADING_TIME } from 'constant'
 import { ITV } from 'types/tv'
 import dynamic from 'next/dynamic'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'

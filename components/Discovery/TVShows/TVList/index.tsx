@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { tvDiscoveryState } from 'atoms/discoveryState'
@@ -7,7 +6,6 @@ import { useRecoilValue } from 'recoil'
 
 const TVPage = dynamic(() => import('./TVPage'), { ssr: false })
 const NextPageBtn = dynamic(() => import('@components/Discovery//NextPageBtn'), { ssr: false })
-const Loading = dynamic(() => import('@components/Discovery/Skeleton'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col',
@@ -27,14 +25,12 @@ const TVList = () => {
   if (!data) return null
   return (
     <div className={styles.wrapper}>
-      <motion.div layout className={styles.container}>
-        <Suspense fallback={<Loading />}>
-          {data.pages.map((page, index) => {
-            const key = `movie-${cateogry}-${page.page}-${index}`
-            return <TVPage key={key} tvPage={page} />
-          })}
-        </Suspense>
-      </motion.div>
+      <motion.ul layout className={styles.container}>
+        {data.pages.map((page, index) => {
+          const key = `tv-${cateogry}-${page.page}-${index}`
+          return <TVPage key={key} tvPage={page} />
+        })}
+      </motion.ul>
       <NextPageBtn handleFetch={handleFetch} isFetching={isFetching} hasNextPage={hasNextPage} />
     </div>
   )

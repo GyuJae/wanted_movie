@@ -3,6 +3,8 @@ import { MouseEvent } from 'react'
 import { tvSelectedGenres } from 'atoms/selectedGenres'
 import { useSetRecoilState } from 'recoil'
 
+import { AnimatePresence, motion } from 'framer-motion'
+
 interface IProps {
   inView: boolean
   genres: IGenre[]
@@ -24,21 +26,24 @@ const GenreList = ({ inView, genres, handleClickClose }: IProps) => {
     setSelected({ id: +id, name: value })
     handleClickClose()
   }
-  if (!inView) return null
   return (
-    <ul className={styles.wrapper}>
-      <button type='button' onClick={handleClickAll}>
-        <li className={styles.item}>All</li>
-      </button>
-      {genres.map((genre, index) => {
-        const key = `tv-genre-${genre.id}-${index}`
-        return (
-          <button key={key} id={`${genre.id}`} value={genre.name} type='button' onClick={handleClickSelect}>
-            <li className={styles.item}>{genre.name}</li>
+    <AnimatePresence>
+      {inView && (
+        <motion.ul layoutId='tv-genres' className={styles.wrapper}>
+          <button type='button' onClick={handleClickAll}>
+            <li className={styles.item}>All</li>
           </button>
-        )
-      })}
-    </ul>
+          {genres.map((genre, index) => {
+            const key = `tv-genre-${genre.id}-${index}`
+            return (
+              <button key={key} id={`${genre.id}`} value={genre.name} type='button' onClick={handleClickSelect}>
+                <li className={styles.item}>{genre.name}</li>
+              </button>
+            )
+          })}
+        </motion.ul>
+      )}
+    </AnimatePresence>
   )
 }
 

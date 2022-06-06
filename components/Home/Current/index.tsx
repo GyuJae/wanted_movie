@@ -1,4 +1,4 @@
-import { INIT_LOADING_TIME } from '../constant'
+import { INIT_LOADING_TIME } from '../../../constant'
 import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { useMovies } from '@hooks/movie'

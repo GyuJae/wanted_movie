@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { motion } from 'framer-motion'
 import { tvSelectedGenres } from 'atoms/selectedGenres'
 import { useClickAway } from 'react-use'
 import { useRecoilValue } from 'recoil'
@@ -11,9 +12,9 @@ const DownArrow = dynamic(() => import('@components/Icons/DownArrow'), { ssr: fa
 
 const styles = {
   wrapper: 'flex relative items-center space-y-4',
-  listContainer: 'absolute top-16',
-  btnContainer: 'flex justify-between items-center py-2 px-3 w-40 bg-zinc-900 rounded-sm',
-  arrowBtn: 'w-3 h-3 fill-white mt-1',
+  listContainer: 'absolute top-0 right-0',
+  btnContainer: 'flex justify-between items-center py-2 px-3 w-40 bg-zinc-900 rounded-md',
+  arrowIcon: 'w-3 h-3 fill-white mt-1',
 }
 
 const MovieGenres = () => {
@@ -34,12 +35,12 @@ const MovieGenres = () => {
       <div className={styles.listContainer}>
         <GenreList inView={open} genres={data.genres} handleClickClose={handleClickClose} />
       </div>
-      <div className={styles.btnContainer}>
+      <motion.div layoutId='tv-genres' className={styles.btnContainer}>
         <span>{seletedGenre ? seletedGenre.name : 'All'}</span>
         <button type='button' onClick={handleClickToggleOpen}>
-          <DownArrow styleClassname={styles.arrowBtn} />
+          <DownArrow styleClassname={styles.arrowIcon} />
         </button>
-      </div>
+      </motion.div>
     </div>
   )
 }

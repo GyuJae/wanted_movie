@@ -1,5 +1,5 @@
 import { IMovie } from 'types/movie'
-import { INIT_LOADING_TIME } from '@components/Home/constant'
+import { INIT_LOADING_TIME } from 'constant'
 import dynamic from 'next/dynamic'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 import { timeTrendingState } from '@atoms/timeTrendingState'

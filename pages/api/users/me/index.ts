@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 async function handler(req: NextApiRequest, res: NextApiResponse<IMeResponse>) {
   try {
     const { session } = req
-    if (!session.user) {
+    if (!session.user || !session.user.id) {
       return res.json({
         ok: false,
         error: 'user not exist',

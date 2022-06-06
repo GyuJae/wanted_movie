@@ -5,6 +5,7 @@ const Cast = dynamic(() => import('./Cast'), { ssr: false })
 const Main = dynamic(() => import('./Main'), { ssr: false })
 const Recommendations = dynamic(() => import('./Recommendations'), { ssr: false })
 const Similar = dynamic(() => import('./Similar'), { ssr: false })
+const DetailLayout = dynamic(() => import('@components/DetailLayout'))
 
 interface IProps {
   id: string
@@ -17,15 +18,17 @@ const styles = {
 
 const TVDetail = ({ id }: IProps) => {
   return (
-    <div className={styles.wrapper}>
-      <Back />
-      <Main id={id} />
-      <div className={styles.container}>
-        <Cast id={id} />
-        <Recommendations id={id} />
-        <Similar id={id} />
+    <DetailLayout>
+      <div className={styles.wrapper}>
+        <Back />
+        <Main id={id} />
+        <div className={styles.container}>
+          <Cast id={id} />
+          <Recommendations id={id} />
+          <Similar id={id} />
+        </div>
       </div>
-    </div>
+    </DetailLayout>
   )
 }
 
