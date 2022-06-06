@@ -11,7 +11,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: 1,
+        retry: 5,
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: false,
         suspense: true,

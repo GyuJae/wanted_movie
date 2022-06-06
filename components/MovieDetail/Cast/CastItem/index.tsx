@@ -17,7 +17,7 @@ const styles = {
 
 const CastItem = ({ cast }: IProps) => {
   return (
-    <div>
+    <li>
       <div className={styles.imageContainer}>
         {cast.profile_path && (
           <Image
@@ -32,7 +32,7 @@ const CastItem = ({ cast }: IProps) => {
         <span className={styles.name}>{cast.name}</span>
         <span className={styles.character}>{cast.character}</span>
       </div>
-    </div>
+    </li>
   )
 }
 

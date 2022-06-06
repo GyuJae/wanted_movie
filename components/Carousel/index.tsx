@@ -23,14 +23,14 @@ const Carousel = ({ children, totalWidth }: ICarousel) => {
         className={styles.wrapper}
         whileTap={{ cursor: 'grabbing' }}
       >
-        <motion.div
+        <motion.ul
           drag='x'
           dragElastic={0.01}
           dragConstraints={{ right: 0, left: -totalWidth }}
           className={styles.container}
         >
           {children}
-        </motion.div>
+        </motion.ul>
       </motion.div>
     </AnimatePresence>
   )

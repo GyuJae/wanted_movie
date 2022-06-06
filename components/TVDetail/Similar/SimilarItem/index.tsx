@@ -21,7 +21,7 @@ const styles = {
 const SimilarItem = ({ tv }: IProps) => {
   if (!tv.backdrop_path) return null
   return (
-    <div className={styles.wrapper}>
+    <li className={styles.wrapper}>
       <Image
         alt={tv.name}
         layout='fill'
@@ -36,7 +36,7 @@ const SimilarItem = ({ tv }: IProps) => {
         </div>
         <ReadMoreBtn mediaId={tv.id} mediaType='tv' media={tv} />
       </div>
-    </div>
+    </li>
   )
 }
 

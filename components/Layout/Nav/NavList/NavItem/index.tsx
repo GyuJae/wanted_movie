@@ -56,23 +56,25 @@ const NavItem = ({ categoryPathname, categoryName }: IProps) => {
   }
 
   return (
-    <button type='button' onClick={handleClickPathname} className={styles.item(pathname === categoryPathname)}>
-      <div>{symbolIcon}</div>
-      <AnimatePresence>
-        {showItem && (
-          <motion.span
-            variants={opacityVariants}
-            initial='initial'
-            animate='animate'
-            exit='exit'
-            className={styles.categoryName}
-          >
-            {categoryName}
-          </motion.span>
-        )}
-      </AnimatePresence>
-      {pathname === categoryPathname && showItem && <div className={styles.redBar} />}
-    </button>
+    <li>
+      <button type='button' onClick={handleClickPathname} className={styles.item(pathname === categoryPathname)}>
+        <div>{symbolIcon}</div>
+        <AnimatePresence>
+          {showItem && (
+            <motion.span
+              variants={opacityVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+              className={styles.categoryName}
+            >
+              {categoryName}
+            </motion.span>
+          )}
+        </AnimatePresence>
+        {pathname === categoryPathname && showItem && <div className={styles.redBar} />}
+      </button>
+    </li>
   )
 }
 
