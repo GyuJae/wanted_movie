@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from 'react-query'
 
 const Input = dynamic(() => import('../Input'), { ssr: false })
 const FormError = dynamic(() => import('../FormError'), { ssr: false })
-const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
+const SubmitButton = dynamic(() => import('../SubmitButton'), { ssr: false })
 
 interface IProps {
   inView: boolean
@@ -21,8 +21,7 @@ interface IForm {
 }
 
 const styles = {
-  container: 'space-y-3',
-  button: 'py-2 w-full flex justify-center items-center text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+  container: 'space-y-2',
 }
 
 const Login = ({ inView, handleClose }: IProps) => {
@@ -31,6 +30,7 @@ const Login = ({ inView, handleClose }: IProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<IForm>({ mode: 'onChange' })
   const [formError, setFormError] = useState<string | undefined>(undefined)
   const { mutate, isLoading } = useMutation('login', login, {
@@ -59,9 +59,8 @@ const Login = ({ inView, handleClose }: IProps) => {
           required: true,
           pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         })}
+        emailError={errors.email?.type === 'pattern' || errors.email?.type === 'required' || !watch('email')}
       />
-      <FormError inView={errors.email?.type === 'pattern'} message='This is not email pattern' />
-      <FormError inView={errors.email?.type === 'required'} message='Email Required' />
       <Input
         label='Password'
         type='password'
@@ -69,11 +68,9 @@ const Login = ({ inView, handleClose }: IProps) => {
           required: true,
         })}
       />
-      <FormError inView={errors.password?.type === 'required'} message='Password Required' />
-      <button type='submit' className={styles.button}>
-        {isLoading ? <SpinLoading size='s' darkmode /> : 'Login'}
-      </button>
+      <SubmitButton isLoading={isLoading} />
       <FormError inView={Boolean(formError)} message={formError} />
+      <FormError inView={errors.password?.type === 'required'} message='Password Required' />
     </form>
   )
 }

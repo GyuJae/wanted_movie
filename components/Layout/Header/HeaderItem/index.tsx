@@ -19,7 +19,7 @@ const HeaderItem = ({ itemName }: IProps) => {
   }
 
   return (
-    <li className={classNames({ 'text-white font-semibold': showState === itemName })}>
+    <li className={classNames({ 'text-white font-extrabold': showState === itemName })}>
       <button type='button' onClick={handleClick}>
         {itemDict[itemName]}
       </button>
