@@ -2,6 +2,7 @@ import { ITV } from 'types/tv'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
+import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -26,8 +27,9 @@ const styles = {
 const TVShows = ({ inView, tvs }: IProps) => {
   if (!inView) return null
 
+  const count = tvs.filter((tv) => !!tv.backdrop_path).length
   return (
-    <Carousel totalWidth={tvs.filter((tv) => !!tv.backdrop_path).length * 305}>
+    <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
       <AnimatePresence>
         {tvs.map((tv, index) => {
           const key = `${tv.id}-${index}`

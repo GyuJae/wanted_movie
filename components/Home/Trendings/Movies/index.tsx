@@ -2,6 +2,7 @@ import { IMovie } from 'types/movie'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
+import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -25,8 +26,10 @@ const styles = {
 
 const Movies = ({ inView, movies }: IProps) => {
   if (!inView) return null
+
+  const count = movies.filter((movie) => !!movie.backdrop_path).length
   return (
-    <Carousel totalWidth={movies.filter((movie) => !!movie.backdrop_path).length * 305}>
+    <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
       <AnimatePresence>
         {movies.map((movie, index) => {
           const key = `${movie.id}-${index}`
