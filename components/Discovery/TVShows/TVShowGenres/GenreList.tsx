@@ -1,6 +1,6 @@
 import { IGenre } from 'types/movie'
 import { MouseEvent } from 'react'
-import { scaleYVariants } from '@animations/variants'
+import { heightVariants } from '@animations/variants'
 import { tvSelectedGenres } from 'atoms/selectedGenres'
 import { useSetRecoilState } from 'recoil'
 
@@ -31,7 +31,7 @@ const GenreList = ({ inView, genres, handleClickClose }: IProps) => {
     <AnimatePresence>
       {inView && (
         <motion.ul
-          variants={scaleYVariants}
+          variants={heightVariants}
           initial='initial'
           animate='animate'
           exit='exit'

@@ -1,7 +1,7 @@
 import { IGenre } from 'types/movie'
 import { MouseEvent } from 'react'
+import { heightVariants } from '@animations/variants'
 import { movieSelectedGenres } from 'atoms/selectedGenres'
-import { scaleYVariants } from '@animations/variants'
 import { useSetRecoilState } from 'recoil'
 
 import { AnimatePresence, motion } from 'framer-motion'
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'flex overflow-y-scroll flex-col w-48 h-48 text-sm bg-zinc-800 rounded-md shadow-md scrollBar',
+  wrapper: 'flex overflow-y-scroll flex-col w-48 text-sm bg-zinc-800 rounded-md shadow-md scrollBar',
   item: 'py-1 px-3 text-left hover:bg-zinc-900',
 }
 
@@ -31,7 +31,7 @@ const GenreList = ({ inView, genres, handleClickClose }: IProps) => {
     <AnimatePresence>
       {inView && (
         <motion.ul
-          variants={scaleYVariants}
+          variants={heightVariants}
           initial='initial'
           animate='animate'
           exit='exit'

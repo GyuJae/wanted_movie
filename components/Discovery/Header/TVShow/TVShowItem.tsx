@@ -27,9 +27,8 @@ const containerVar: Variants = {
 }
 
 const itemVar: Variants = {
-  initial: { y: 15, opacity: 0 },
+  initial: { opacity: 0 },
   animate: {
-    y: 0,
     opacity: 1,
   },
   exit: {
@@ -45,22 +44,21 @@ const styles = {
 const items: TvCategory[] = ['top_rated', 'popular', 'airing_today', 'on_the_air']
 
 const TVShowItem = ({ inView, handleSelectCategory }: IProps) => {
+  if (!inView) return <AnimatePresence />
   return (
     <AnimatePresence>
-      {inView && (
-        <motion.ul className={styles.wrapper} variants={containerVar} initial='initial' animate='animate' exit='exit'>
-          {items.map((item, index) => {
-            const key = `tv-header-${item}-${index}`
-            return (
-              <motion.li key={key} variants={itemVar}>
-                <button value={item} onClick={handleSelectCategory} type='button' className={styles.button}>
-                  {tvCategoryDict[item]}
-                </button>
-              </motion.li>
-            )
-          })}
-        </motion.ul>
-      )}
+      <motion.ul className={styles.wrapper} variants={containerVar} initial='initial' animate='animate' exit='exit'>
+        {items.map((item, index) => {
+          const key = `tv-header-${item}-${index}`
+          return (
+            <motion.li key={key} variants={itemVar}>
+              <button value={item} onClick={handleSelectCategory} type='button' className={styles.button}>
+                {tvCategoryDict[item]}
+              </button>
+            </motion.li>
+          )
+        })}
+      </motion.ul>
     </AnimatePresence>
   )
 }

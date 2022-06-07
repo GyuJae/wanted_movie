@@ -23,3 +23,14 @@ export const scaleYVariants: Variants = {
     scaleY: 0,
   },
 }
+export const heightVariants: Variants = {
+  initial: {
+    height: 0,
+  },
+  animate: {
+    height: 200,
+  },
+  exit: {
+    height: 0,
+  },
+}
