@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import { motion } from 'framer-motion'
 import { movieSelectedGenres } from 'atoms/selectedGenres'
 import { useClickAway } from 'react-use'
 import { useMovieGenres } from '@hooks/movie'
@@ -12,7 +11,7 @@ const DownArrow = dynamic(() => import('@components/Icons/DownArrow'), { ssr: fa
 
 const styles = {
   wrapper: 'flex relative items-center space-y-4',
-  listContainer: 'absolute top-0 right-0',
+  listContainer: 'absolute top-16 right-0',
   btnContainer: 'flex justify-between items-center py-2 px-3 w-40 bg-zinc-900 rounded-md',
   arrowIcon: 'w-3 h-3 fill-white mt-1',
 }
@@ -35,12 +34,12 @@ const MovieGenres = () => {
       <div className={styles.listContainer}>
         <GenreList inView={open} genres={data.genres} handleClickClose={handleClickClose} />
       </div>
-      <motion.div layoutId='movie-genres' className={styles.btnContainer}>
+      <div className={styles.btnContainer}>
         <span>{seletedGenre ? seletedGenre.name : 'All'}</span>
         <button type='button' onClick={handleClickToggleOpen}>
           <DownArrow styleClassname={styles.arrowIcon} />
         </button>
-      </motion.div>
+      </div>
     </div>
   )
 }

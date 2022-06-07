@@ -11,3 +11,15 @@ export const opacityVariants: Variants = {
     opacity: 0,
   },
 }
+
+export const scaleYVariants: Variants = {
+  initial: {
+    scaleY: 0,
+  },
+  animate: {
+    scaleY: 1,
+  },
+  exit: {
+    scaleY: 0,
+  },
+}
