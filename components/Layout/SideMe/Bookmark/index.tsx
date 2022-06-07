@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useLastBookmark } from '@hooks/bookmark'
 import { useRouter } from 'next/router'
@@ -11,18 +10,17 @@ const styles = {
   wrapper: 'space-y-2',
   container: 'flex justify-between items-center',
   categoryName: 'text-lg font-semibold',
-  linkContainer: 'flex w-full items-center space-x-2',
+  linkContainer: 'flex items-center space-x-2',
   seeAll: 'text-sm text-zinc-500',
-  rightIcon: 'w-2 mt-[2px] fill-zinc-500',
+  seeAllIcon: 'w-2 mt-[2px] fill-zinc-500',
 }
 
 const Bookmark = () => {
-  const { data } = useLastBookmark()
+  const { data, isLoading } = useLastBookmark()
   const router = useRouter()
 
   const handleGoBookmarked = () => router.push('/me/bookmarked')
 
-  if (!data || !data.bookmark) return null
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -30,13 +28,12 @@ const Bookmark = () => {
         <button type='button' onClick={handleGoBookmarked} className={styles.linkContainer}>
           <span className={styles.seeAll}>See all</span>
           <div>
-            <RightArrowIcon styleClassname={styles.rightIcon} />
+            <RightArrowIcon styleClassname={styles.seeAllIcon} />
           </div>
         </button>
       </div>
-      <Suspense fallback={<Skeleton />}>
-        {data && <BookmarkItem inView={data.ok} bookmarked={data.bookmark} />}
-      </Suspense>
+      <Skeleton inView={isLoading} />
+      <BookmarkItem inView={Boolean(data?.ok && !isLoading)} bookmarked={data?.bookmark} />
     </div>
   )
 }

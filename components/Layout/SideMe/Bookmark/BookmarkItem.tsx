@@ -12,8 +12,8 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'relative min-w-[13rem] min-h-[13rem]',
-  image: 'object-cover object-top rounded-xl pointer-events-none',
+  wrapper: 'relative flex justify-center items-center bg-black text-sm rounded-md min-w-[13rem] min-h-[13rem]',
+  image: 'object-cover object-top rounded-md pointer-events-none',
   starIconContainer: 'flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl',
   starIcon: 'w-3 h-3 fill-yellow-500 mt-[1px]',
   vote: 'text-xs font-semibold',
@@ -25,7 +25,13 @@ const styles = {
 }
 
 const BookmarkItem = ({ inView, bookmarked }: IProps) => {
-  if (!inView || !bookmarked) return null
+  if (!inView) return null
+  if (!bookmarked)
+    return (
+      <div className={styles.wrapper}>
+        <span className='text-zinc-500'>No Bookmarked</span>
+      </div>
+    )
   return (
     <div className={styles.wrapper}>
       <Image

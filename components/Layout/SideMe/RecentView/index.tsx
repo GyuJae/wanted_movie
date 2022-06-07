@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import Link from 'next/link'
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useLastRecentView } from '@hooks/recentView'
+import { useRouter } from 'next/router'
 
 const RightArrowIcon = dynamic(() => import('@components/Icons/RightArrowIcon'), { ssr: false })
 const RecentViewItem = dynamic(() => import('./RecentViewItem'), { ssr: false })
@@ -12,30 +10,30 @@ const styles = {
   wrapper: 'space-y-2',
   container: 'flex justify-between items-center',
   categoryName: 'text-lg font-semibold',
-  link: 'flex items-center space-x-2',
+  linkContainer: 'flex items-center space-x-2',
   seeAll: 'text-sm text-zinc-500',
   seeAllIcon: 'w-2 mt-[2px] fill-zinc-500',
 }
 
 const RecentView = () => {
-  const { data } = useLastRecentView()
-  if (!data || !data.recentView) return null
+  const router = useRouter()
+  const { data, isLoading } = useLastRecentView()
+
+  const handleGoRecentView = () => router.push('/me/recent')
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h3 className={styles.categoryName}>Recent View</h3>
-        <Link href='/me/recent'>
-          <a className={styles.link}>
-            <span className={styles.seeAll}>See all</span>
-            <div>
-              <RightArrowIcon styleClassname={styles.seeAllIcon} />
-            </div>
-          </a>
-        </Link>
+        <button type='button' onClick={handleGoRecentView} className={styles.linkContainer}>
+          <span className={styles.seeAll}>See all</span>
+          <div>
+            <RightArrowIcon styleClassname={styles.seeAllIcon} />
+          </div>
+        </button>
       </div>
-      <Suspense fallback={<Skeleton />}>
-        {data && <RecentViewItem inView={data.ok} recentView={data.recentView} />}
-      </Suspense>
+      <Skeleton inView={isLoading} />
+      <RecentViewItem inView={Boolean(data?.ok)} recentView={data?.recentView} />
     </div>
   )
 }
