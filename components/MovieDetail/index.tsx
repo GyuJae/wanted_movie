@@ -6,7 +6,7 @@ const Main = dynamic(() => import('./Main'), { ssr: false })
 const Recommendations = dynamic(() => import('./Recommendations'), { ssr: false })
 const Similar = dynamic(() => import('./Similar'), { ssr: false })
 const DetailLayout = dynamic(() => import('@components/DetailLayout'), { ssr: false })
-const LoginToastMessage = dynamic(() => import('@components/Layout/LoginToastMessage'), { ssr: false })
+const LoginToastMessage = dynamic(() => import('@components/LoginToastMessage'), { ssr: false })
 
 interface IProps {
   id: string

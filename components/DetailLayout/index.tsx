@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 const AccountForm = dynamic(() => import('@components/AccountForm'), { ssr: false })
 const Portal = dynamic(() => import('@components/Portal'), { ssr: false })
-const LoginToastMessage = dynamic(() => import('@components/Layout/LoginToastMessage'), { ssr: false })
+const LoginToastMessage = dynamic(() => import('@components/LoginToastMessage'), { ssr: false })
 
 interface IProps {
   children: React.ReactNode
