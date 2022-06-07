@@ -11,6 +11,7 @@ const Header = dynamic(() => import('./Header'), { ssr: false })
 const SideMe = dynamic(() => import('./SideMe'), { ssr: false })
 const LoginToastMessage = dynamic(() => import('./LoginToastMessage'), { ssr: false })
 const AccountForm = dynamic(() => import('@components/AccountForm'), { ssr: false })
+const Portal = dynamic(() => import('@components/Portal'), { ssr: false })
 
 interface IProps {
   title?: string
@@ -57,8 +58,12 @@ const Layout = ({ children, title, showHeader = true, showNav = true }: IProps) 
         </motion.main>
       </div>
       <SideMe inView={data?.ok as boolean} />
-      <LoginToastMessage />
-      <AccountForm />
+      <Portal>
+        <LoginToastMessage />
+      </Portal>
+      <Portal>
+        <AccountForm />
+      </Portal>
     </div>
   )
 }

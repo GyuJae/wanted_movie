@@ -27,7 +27,7 @@ const variants: Variants = {
 }
 
 const styles = {
-  wrapper: 'flex fixed top-10 right-10 z-30 py-3 px-2 space-x-4 w-[20rem] h-20 bg-rose-700 rounded-md',
+  wrapper: 'flex fixed top-10 right-10 text-white py-3 px-2 space-x-4 w-[20rem] h-20 bg-rose-700 rounded-md',
   xBtn: 'absolute right-3',
   xIcon: 'w-2 fill-zinc-200 hover:fill-zinc-300',
   exclamationIcon: 'w-8 fill-white',
