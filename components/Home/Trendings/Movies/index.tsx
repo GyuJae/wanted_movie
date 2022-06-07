@@ -43,7 +43,7 @@ const Movies = ({ inView }: IProps) => {
       />
       <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
         <DayList movies={dayData.results as IMovie[]} inView={timeTrending === 'day' && !init && !dayIsLoading} />
-        <WeekList movies={dayData.results as IMovie[]} inView={timeTrending === 'week' && !init && !weekIsLoading} />
+        <WeekList movies={weekData.results as IMovie[]} inView={timeTrending === 'week' && !init && !weekIsLoading} />
       </Carousel>
     </>
   )

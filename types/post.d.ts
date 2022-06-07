@@ -1,15 +1,19 @@
 import { IResponse } from '@libs/withHandler'
 import { Media, Post } from '@prisma/client'
 
-export interface PostWithUser extends Post {
+export interface PostWithUserAndCount extends Post {
   user: {
     username: string
     avatar: string | null
   }
+  _count: {
+    Like: number
+    Comment: number
+  }
 }
 
 export interface IPostResponse extends IResponse {
-  posts?: PostWithUser[]
+  posts?: PostWithUserAndCount[]
 }
 
 export interface ICreatePostInput {

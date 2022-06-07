@@ -43,7 +43,7 @@ const TVShows = ({ inView }: IProps) => {
       />
       <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
         <DayList tvs={dayData.results as ITV[]} inView={timeTrending === 'day' && !init && !dayIsLoading} />
-        <WeekList tvs={dayData.results as ITV[]} inView={timeTrending === 'week' && !init && !weekIsLoading} />
+        <WeekList tvs={weekData.results as ITV[]} inView={timeTrending === 'week' && !init && !weekIsLoading} />
       </Carousel>
     </>
   )

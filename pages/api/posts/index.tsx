@@ -33,6 +33,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IPostResponse>)
               username: true,
             },
           },
+          _count: {
+            select: {
+              Like: true,
+              Comment: true,
+            },
+          },
         },
         orderBy: {
           createdAt: 'desc',
