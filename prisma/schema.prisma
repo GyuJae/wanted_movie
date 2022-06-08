@@ -51,6 +51,8 @@ model Like {
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
+
+  @@unique([userId, postId])
 }
 
 model Comment {
@@ -62,6 +64,7 @@ model Comment {
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
+
 }
 
 model Bookmark {
