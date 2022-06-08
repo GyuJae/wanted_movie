@@ -23,6 +23,10 @@ export interface IDetailPost extends Post {
     avatar: string | null
   }
   Comment: Comment[]
+  _count: {
+    Like: number
+    Comment: number
+  }
 }
 
 export interface IDetailPostResponse extends IResponse {

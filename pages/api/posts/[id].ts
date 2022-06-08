@@ -39,6 +39,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IDetailPostResp
             avatar: true,
           },
         },
+        _count: {
+          select: {
+            Like: true,
+            Comment: true,
+          },
+        },
       },
     })
 
