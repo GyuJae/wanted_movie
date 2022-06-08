@@ -1,21 +1,16 @@
-import { IDetailPost } from 'types/post'
 import dynamic from 'next/dynamic'
 
 const Like = dynamic(() => import('./Like'))
 const Comment = dynamic(() => import('./Comment'))
 
-interface IProps {
-  post: IDetailPost
-}
-
 const styles = {
   wrapper: 'flex py-1 px-2 border-y-[1.5px] border-zinc-800',
 }
 
-const FuncBtnContainer = ({ post }: IProps) => {
+const FuncBtnContainer = () => {
   return (
     <ul className={styles.wrapper}>
-      <Like postId={post.id} />
+      <Like />
       <Comment />
     </ul>
   )

@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
 const CommentIcon = dynamic(() => import('@components/Icons/CommentIcon'), { ssr: false })
+const CommentForm = dynamic(() => import('./CommentForm'), { ssr: false })
 
 const styles = {
   item: 'w-full',
@@ -9,12 +11,18 @@ const styles = {
 }
 
 const Comment = () => {
+  const [formOpen, setFormOpen] = useState<boolean>(false)
+
+  const handleFormOpen = () => setFormOpen(true)
+  const handleFormClose = () => setFormOpen(false)
+
   return (
     <li className={styles.item}>
-      <button type='button' className={styles.button}>
+      <button type='button' onClick={handleFormOpen} className={styles.button}>
         <CommentIcon styleClassname='w-4' />
         <span className={styles.buttonName}>Comment</span>
       </button>
+      <CommentForm inView={formOpen} handleFormClose={handleFormClose} />
     </li>
   )
 }

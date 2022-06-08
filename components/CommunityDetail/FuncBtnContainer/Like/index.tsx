@@ -3,15 +3,12 @@ import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { toggleLike } from '@services/like.service'
 import { useIsLike } from '@hooks/like'
+import { useRouter } from 'next/router'
 
 import { motion, useAnimation } from 'framer-motion'
 import { useMutation, useQueryClient } from 'react-query'
 
 const ThumbsUpIcon = dynamic(() => import('@components/Icons/ThumbsUpIcon'), { ssr: false })
-
-interface IProps {
-  postId: number
-}
 
 const styles = {
   item: 'w-full',
@@ -20,17 +17,20 @@ const styles = {
   icon: (isLike: boolean) => classNames('w-4', { 'fill-red-700': isLike }),
 }
 
-const Like = ({ postId }: IProps) => {
+const Like = () => {
+  const {
+    query: { id },
+  } = useRouter()
   const iconAnimation = useAnimation()
   const queryClient = useQueryClient()
-  const { data, isLoading } = useIsLike({ postId })
+  const { data, isLoading } = useIsLike({ postId: +(id as string) })
   const { mutate: toggleLikeMutate, isLoading: toggleIsLikeLoading } = useMutation(
-    ['toggleLike', postId],
-    () => toggleLike({ postId }),
+    ['toggleLike', id],
+    () => toggleLike({ postId: +(id as string) }),
     {
       onSuccess: ({ ok }: ILikeResponse) => {
         if (ok || data?.ok) {
-          queryClient.refetchQueries(['like', postId])
+          queryClient.refetchQueries(['like', id])
         }
       },
     }
