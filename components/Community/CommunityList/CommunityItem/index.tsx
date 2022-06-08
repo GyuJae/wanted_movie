@@ -19,7 +19,7 @@ const styles = {
   itemContainer: 'flex items-center space-x-2',
   username: 'text-sm text-zinc-400',
   mediaType: 'text-xs text-zinc-500',
-  textContainer: 'py-5 px-2 w-full text-left',
+  textContainer: 'py-5 w-full text-left',
   text: 'text-zinc-300',
   imageContainer: 'relative mt-2 w-[5.5rem] h-[8rem]',
   image: 'object-cover object-top rounded-sm',

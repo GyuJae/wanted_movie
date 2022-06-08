@@ -5,24 +5,28 @@ const DetailLayout = dynamic(() => import('@components/DetailLayout'), { ssr: fa
 const UserInfo = dynamic(() => import('./UserInfo'), { ssr: false })
 const MediaInfo = dynamic(() => import('./MediaInfo'), { ssr: false })
 const TextInfo = dynamic(() => import('./TextInfo'), { ssr: false })
+const Poster = dynamic(() => import('./Poster'), { ssr: false })
 
 interface IProps {
   postId: string
 }
 
 const styles = {
-  wrapper: 'px-20 pt-4 pb-16 space-y-2',
+  wrapper: 'relative px-10 pt-4 pb-16 space-y-2',
 }
 
 const CommunityDetail = ({ postId }: IProps) => {
   const { data } = useDetailPost({ postId: +postId })
+
   if (!data || !data.post) return null
+
   return (
     <DetailLayout>
       <div className={styles.wrapper}>
         <UserInfo writer={data?.post?.user} createdAt={data.post.createdAt} />
         <MediaInfo post={data.post} />
         <TextInfo post={data.post} />
+        <Poster post={data.post} />
       </div>
     </DetailLayout>
   )
