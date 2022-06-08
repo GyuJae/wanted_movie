@@ -4,6 +4,7 @@ import { useDetailPost } from '@hooks/post'
 const DetailLayout = dynamic(() => import('@components/DetailLayout'), { ssr: false })
 const UserInfo = dynamic(() => import('./UserInfo'), { ssr: false })
 const MediaInfo = dynamic(() => import('./MediaInfo'), { ssr: false })
+const TextInfo = dynamic(() => import('./TextInfo'), { ssr: false })
 
 interface IProps {
   postId: string
@@ -21,6 +22,7 @@ const CommunityDetail = ({ postId }: IProps) => {
       <div className={styles.wrapper}>
         <UserInfo writer={data?.post?.user} createdAt={data.post.createdAt} />
         <MediaInfo post={data.post} />
+        <TextInfo post={data.post} />
       </div>
     </DetailLayout>
   )
