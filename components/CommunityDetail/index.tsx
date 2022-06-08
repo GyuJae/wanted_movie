@@ -28,7 +28,7 @@ const CommunityDetail = ({ postId }: IProps) => {
         <MediaInfo post={data.post} />
         <TextInfo post={data.post} />
         <Poster post={data.post} />
-        <FuncBtnContainer />
+        <FuncBtnContainer postId={data.post.id} />
       </div>
     </DetailLayout>
   )
