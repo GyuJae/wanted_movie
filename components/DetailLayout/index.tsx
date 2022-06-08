@@ -11,14 +11,14 @@ interface IProps {
 
 const DetailLayout = ({ children }: IProps) => {
   return (
-    <div className='text-white'>
+    <div className='w-screen h-screen text-white bg-black'>
       <Head>
         <title>Wanted Movie App</title>
       </Head>
       <Portal>
         <LoginToastMessage />
+        <AccountForm />
       </Portal>
-      <AccountForm />
       <main>{children}</main>
     </div>
   )
