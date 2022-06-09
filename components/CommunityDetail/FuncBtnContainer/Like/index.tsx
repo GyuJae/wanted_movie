@@ -31,6 +31,7 @@ const Like = ({ postId }: IProps) => {
       onSuccess: ({ ok }: ILikeResponse) => {
         if (ok || data?.ok) {
           queryClient.refetchQueries(['like', postId])
+          queryClient.refetchQueries(['post', postId])
         }
       },
     }

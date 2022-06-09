@@ -6,6 +6,7 @@ const UserInfo = dynamic(() => import('./UserInfo'), { ssr: false })
 const MediaInfo = dynamic(() => import('./MediaInfo'), { ssr: false })
 const TextInfo = dynamic(() => import('./TextInfo'), { ssr: false })
 const Poster = dynamic(() => import('./Poster'), { ssr: false })
+const CommentList = dynamic(() => import('./CommentList'), { ssr: false })
 const FuncBtnContainer = dynamic(() => import('./FuncBtnContainer'), { ssr: false })
 
 interface IProps {
@@ -29,6 +30,7 @@ const CommunityDetail = ({ postId }: IProps) => {
         <TextInfo post={data.post} />
         <Poster post={data.post} />
         <FuncBtnContainer postId={data.post.id} />
+        <CommentList postId={data.post.id} />
       </div>
     </DetailLayout>
   )

@@ -44,7 +44,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<ICommentRespons
     }
     if (req.method === 'GET') {
       const {
-        body: { page },
+        query: { page },
       } = req
       const comments = await prisma.comment.findMany({
         where: {
