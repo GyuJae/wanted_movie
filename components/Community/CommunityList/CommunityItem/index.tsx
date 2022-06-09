@@ -13,7 +13,7 @@ const Vote = dynamic(() => import('./Vote'), { ssr: false })
 const Count = dynamic(() => import('./Count'), { ssr: false })
 
 const styles = {
-  wrapper: 'flex flex-col py-2 space-x-2',
+  wrapper: 'flex flex-col py-2',
   contentContainer: 'flex justify-between',
   container: 'w-full space-y-1',
   itemContainer: 'flex items-center space-x-2',

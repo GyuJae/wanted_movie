@@ -1,4 +1,5 @@
 import { IPostResponse } from 'types/post'
+import { dbNow } from '@utils/dbNow'
 import prisma from '@libs/client'
 import { withApiSession } from '@libs/withSession'
 import withHandler from '@libs/withHandler'
@@ -62,6 +63,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IPostResponse>)
           mediaTitle,
           vote: +vote,
           userId: currentUser.id,
+          createdAt: dbNow(),
+          updatedAt: dbNow(),
         },
       })
       return res.json({

@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'flex space-x-3 items-center border-y-[1px] border-zinc-700 py-2 ',
+  wrapper: 'flex space-x-3 items-center border-y-[1px] border-zinc-700 py-2',
   item: 'text-zinc-600 flex space-x-1',
   icon: 'w-4 fill-zinc-600',
 }

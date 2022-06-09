@@ -4,7 +4,7 @@ import { useInfiniteQuery } from 'react-query'
 
 export const useInfiniteComments = (postId: number) => {
   return useInfiniteQuery<ICommentResponse, Error>(
-    'comments',
+    ['community', 'comments', postId],
     ({ pageParam = 1 }) => readComments({ pageParam, postId }),
     {
       getNextPageParam: (lastPage: ICommentResponse) => {

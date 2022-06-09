@@ -1,10 +1,10 @@
 import { createComment } from '@services/comments.service'
 import dynamic from 'next/dynamic'
 import { useClickAway } from 'react-use'
-import { useMutation } from 'react-query'
 import { useRef } from 'react'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useMutation, useQueryClient } from 'react-query'
 
 const Portal = dynamic(() => import('@components/Portal'), { ssr: false })
 
@@ -29,6 +29,7 @@ const styles = {
 }
 
 const CommentForm = ({ inView, handleFormClose, postId }: IProps) => {
+  const queryClient = useQueryClient()
   const { register, handleSubmit, watch } = useForm<IForm>()
   const { mutate } = useMutation('createComment', createComment)
   const ref = useRef<HTMLDivElement>(null)
@@ -38,6 +39,8 @@ const CommentForm = ({ inView, handleFormClose, postId }: IProps) => {
   const onSubmit: SubmitHandler<IForm> = ({ comment }) => {
     mutate({ comment, postId })
     handleFormClose()
+    queryClient.refetchQueries(['community', 'comments', postId])
+    queryClient.refetchQueries(['post', postId])
   }
 
   useClickAway(ref, handleFormClose)

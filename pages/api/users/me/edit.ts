@@ -1,3 +1,4 @@
+import { dbNow } from '@utils/dbNow'
 import prisma from '@libs/client'
 import { withApiSession } from '@libs/withSession'
 
@@ -49,6 +50,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
         },
         data: {
           username,
+          updatedAt: dbNow(),
         },
       })
     }
