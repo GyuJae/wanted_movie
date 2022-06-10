@@ -1,12 +1,10 @@
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useInfiniteSearchMovies } from '@hooks/movie'
 import { useRouter } from 'next/router'
 
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
 const MoviePage = dynamic(() => import('@components/Discovery/Movies/MovieList/MoviePage'), { ssr: false })
-const Loading = dynamic(() => import('@components/Discovery/Skeleton'), { ssr: false })
 
 interface IProps {
   inView: boolean
@@ -33,12 +31,10 @@ const Movies = ({ inView }: IProps) => {
   return (
     <div className={styles.wrapper}>
       <motion.div layout className={styles.container}>
-        <Suspense fallback={<Loading />}>
-          {data.pages.map((page, index) => {
-            const key = `movie-${query}-${page.page}-${index}`
-            return <MoviePage key={key} moviePage={page} />
-          })}
-        </Suspense>
+        {data.pages.map((page, index) => {
+          const key = `movie-${query}-${page.page}-${index}`
+          return <MoviePage key={key} moviePage={page} />
+        })}
       </motion.div>
       <NextPageBtn handleFetch={handleFetch} isFetching={isFetching} hasNextPage={hasNextPage} />
     </div>

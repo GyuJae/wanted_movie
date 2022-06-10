@@ -1,5 +1,6 @@
 import { IMovie } from 'types/movie'
 import Image from 'next/image'
+import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
@@ -14,7 +15,8 @@ interface IProps {
 }
 
 const styles = {
-  wrapper: 'relative',
+  wrapper: (showNavValue: boolean) =>
+    classNames('relative', { 'w-[11rem] h-[16rem]': showNavValue, 'w-[12rem] h-[18rem]': !showNavValue }),
   image: 'object-cover rounded-md',
   voteContainer: 'flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl',
   starIcon: 'w-3 h-3 fill-yellow-500 mt-[1px]',
@@ -28,19 +30,17 @@ const styles = {
 
 const MovieItem = ({ movie }: IProps) => {
   const showNavValue = useRecoilValue(showNavState)
+
   if (!movie.poster_path) return null
   return (
-    <motion.div
+    <motion.li
       layoutId={`${movie.id}-${movie.title}`}
-      initial={{ opacity: 0, scale: 0 }}
+      initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        scale: 1,
-        width: showNavValue ? '11rem' : '12rem',
-        height: showNavValue ? '16rem' : '18rem',
       }}
       exit={{ opacity: 0 }}
-      className={styles.wrapper}
+      className={styles.wrapper(showNavValue)}
     >
       <Image
         alt={movie.title}
@@ -56,13 +56,13 @@ const MovieItem = ({ movie }: IProps) => {
       <div className={styles.subWrapper}>
         <div className={styles.subContainer}>
           <span className={styles.title}>{movie.title}</span>
-          <span className={styles.date}>{movie.release_date.split('-')[0]}</span>
+          {movie.release_date && <span className={styles.date}>{movie.release_date.split('-')[0]}</span>}
           <div className={styles.readMoreContainer}>
             <ReadMoreBtn mediaId={movie.id} mediaType='movie' media={movie} />
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.li>
   )
 }
 

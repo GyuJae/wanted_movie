@@ -1,5 +1,6 @@
 import { ITV } from 'types/tv'
 import Image from 'next/image'
+import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
 import { motion } from 'framer-motion'
@@ -14,6 +15,8 @@ interface IProps {
 }
 
 const styles = {
+  wrapper: (showNavValue: boolean) =>
+    classNames('relative', { 'w-[11rem] h-[16rem]': showNavValue, 'w-[12rem] h-[18rem]': !showNavValue }),
   image: 'object-cover rounded-md',
   voteContainer: 'flex absolute top-2 left-4 justify-between items-center p-1 space-x-1 bg-black/80 rounded-2xl',
   star: 'w-3 h-3 fill-yellow-500 mt-[1px]',
@@ -27,19 +30,17 @@ const styles = {
 
 const TVItem = ({ tv }: IProps) => {
   const showNavValue = useRecoilValue(showNavState)
+
   if (!tv.poster_path) return null
   return (
-    <motion.div
+    <motion.li
       layoutId={`${tv.id}-${tv.name}`}
-      initial={{ opacity: 0, scale: 0 }}
+      initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        scale: 1,
-        width: showNavValue ? '11rem' : '12rem',
-        height: showNavValue ? '16rem' : '18rem',
       }}
       exit={{ opacity: 0 }}
-      className='relative'
+      className={styles.wrapper(showNavValue)}
     >
       <Image
         alt={tv.name}
@@ -61,7 +62,7 @@ const TVItem = ({ tv }: IProps) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.li>
   )
 }
 

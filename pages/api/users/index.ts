@@ -1,3 +1,4 @@
+import { dbNow } from '@utils/dbNow'
 import prisma from '@libs/client'
 
 import * as bcrypt from 'bcrypt'
@@ -45,6 +46,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
         email,
         username,
         password: hashPassword,
+        createdAt: dbNow(),
+        updatedAt: dbNow(),
       },
     })
     return res.json({

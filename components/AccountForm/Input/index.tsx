@@ -7,8 +7,8 @@ interface IProps {
 }
 
 const styles = {
-  fieldset: 'flex flex-col space-y-1 text-sm',
-  input: 'py-2 px-3 bg-zinc-900/80 rounded-sm outline-none',
+  fieldset: 'relative flex flex-col space-y-1 text-sm font-semibold',
+  input: 'py-2 pl-3 pr-7 bg-zinc-900/80 rounded-md outline-none',
 }
 
 const Input = ({ label, type, register }: IProps) => {

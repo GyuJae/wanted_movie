@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic'
+import { heightVariants } from '@animations/variants'
 import { useClickAway } from 'react-use'
 
+import { AnimatePresence, motion } from 'framer-motion'
 import { MouseEvent, useRef, useState } from 'react'
 
 const StarIcon = dynamic(() => import('@components/Icons/StarIcon'), { ssr: false })
@@ -42,26 +44,37 @@ const Vote = ({ voteValue, handleVoteValue }: IProps) => {
         <StarIcon styleClassName={styles.starIcon} />
         <span className={styles.voteValue}>{voteValue.toFixed(1)}</span>
       </button>
-      {open && (
-        <ul className={styles.btnContainer}>
-          {Array(11)
-            .fill(0)
-            .map((value, index) => (
-              <button
-                key={`${value}-vote`}
-                type='button'
-                value={(value + index * 0.5).toFixed(1)}
-                onClick={handleClickVote}
-                className='w-full'
-              >
-                <li className={styles.btnItem}>
-                  <StarIcon styleClassName={styles.starIcon} />
-                  <span className={styles.voteValue}>{(value + index * 0.5).toFixed(1)}</span>
-                </li>
-              </button>
-            ))}
-        </ul>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            variants={heightVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            transition={{
+              type: 'tween',
+            }}
+            className={styles.btnContainer}
+          >
+            {Array(11)
+              .fill(0)
+              .map((value, index) => (
+                <button
+                  key={`${value}-vote`}
+                  type='button'
+                  value={(value + index * 0.5).toFixed(1)}
+                  onClick={handleClickVote}
+                  className='w-full'
+                >
+                  <li className={styles.btnItem}>
+                    <StarIcon styleClassName={styles.starIcon} />
+                    <span className={styles.voteValue}>{(value + index * 0.5).toFixed(1)}</span>
+                  </li>
+                </button>
+              ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

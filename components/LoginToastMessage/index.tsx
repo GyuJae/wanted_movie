@@ -27,14 +27,13 @@ const variants: Variants = {
 }
 
 const styles = {
-  wrapper: 'flex fixed top-10 right-10 z-30 py-3 px-2 space-x-4 w-[20rem] h-20 bg-rose-700 rounded-md',
+  wrapper: 'z-50 flex fixed top-10 right-10 text-white py-3 px-2 space-x-4 w-[15rem] h-18 bg-rose-700 rounded-md',
   xBtn: 'absolute right-3',
   xIcon: 'w-2 fill-zinc-200 hover:fill-zinc-300',
-  exclamationIcon: 'w-8 fill-white',
+  exclamationIcon: 'w-5 fill-white',
   container: 'flex flex-col',
-  mainMessage: 'text-xl font-semibold',
-  subMessage: 'flex items-center space-x-1 text-sm text-zinc-200',
-  yesBtn: 'px-2 text-base hover:underline rounded-sm',
+  mainMessage: 'text-base font-semibold',
+  yesBtn: 'text-sm hover:underline rounded-sm text-left',
 }
 
 const LoginToastMessage = () => {
@@ -70,13 +69,10 @@ const LoginToastMessage = () => {
         </button>
         <ExclamationIcon styleClassName={styles.exclamationIcon} />
         <div className={styles.container}>
-          <span className={styles.mainMessage}>Required login</span>
-          <div className={styles.subMessage}>
-            <span>go to the login screen?</span>
-            <button type='button' onClick={handleOpenLoginForm} className={styles.yesBtn}>
-              Yes
-            </button>
-          </div>
+          <span className={styles.mainMessage}>Login required</span>
+          <button type='button' onClick={handleOpenLoginForm} className={styles.yesBtn}>
+            Go to login
+          </button>
         </div>
       </motion.div>
     </AnimatePresence>

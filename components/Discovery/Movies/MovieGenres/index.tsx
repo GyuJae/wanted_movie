@@ -11,8 +11,8 @@ const DownArrow = dynamic(() => import('@components/Icons/DownArrow'), { ssr: fa
 
 const styles = {
   wrapper: 'flex relative items-center space-y-4',
-  listContainer: 'absolute top-16',
-  btnContainer: 'flex justify-between items-center py-2 px-3 w-40 bg-zinc-900 rounded-sm',
+  listContainer: 'absolute top-16 right-0',
+  btnContainer: 'flex justify-between items-center py-2 px-3 w-40 bg-zinc-900 rounded-md',
   arrowIcon: 'w-3 h-3 fill-white mt-1',
 }
 

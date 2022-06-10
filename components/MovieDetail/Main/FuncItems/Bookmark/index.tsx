@@ -1,5 +1,6 @@
 import { IBookmarkResponse } from 'types/bookmark'
 import { IMovieDetail } from 'types/movie'
+import { TMediaType } from 'types/trending'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { loginToastMessageState } from '@atoms/loginToastMessageState'
@@ -21,11 +22,21 @@ const styles = {
     classNames('w-4 h-4 fill-zinc-500 pointer-event-none', { 'fill-red-600': currentBookmarked }),
 }
 
-const Bookmark = ({ movie }: IProps) => {
+const BookmarkComponent = ({ movie }: IProps) => {
   const setLoginToastMessage = useSetRecoilState(loginToastMessageState)
   const queryClient = useQueryClient()
 
+  const newMedia = {
+    mediaType: 'movie' as TMediaType,
+    mediaId: movie.id,
+    posterPath: movie.poster_path as string,
+    title: movie.title,
+    releaseDate: movie.release_date,
+    vote: movie.vote_average,
+  }
+
   const { data: meData } = useMe()
+
   const { mutate: createMutate, isLoading: createIsLoading } = useMutation(['bookmarked', 'create'], createBookmark, {
     onSuccess: (createData: IBookmarkResponse) => {
       if (createData.ok) {
@@ -49,21 +60,15 @@ const Bookmark = ({ movie }: IProps) => {
   const handleOpenLoginToastMessage = () => setLoginToastMessage(true)
 
   const handleClickBookmark = () => {
-    if (meData && !meData.ok) handleOpenLoginToastMessage()
+    if (!meData) handleOpenLoginToastMessage()
+
     if (!movie.poster_path || !meData || createIsLoading || deleteIsLoading) return
     if (currentBookmarked) {
       deleteMutate({
         mediaId: movie.id,
       })
     } else {
-      createMutate({
-        mediaType: 'movie',
-        mediaId: movie.id,
-        posterPath: movie.poster_path,
-        title: movie.title,
-        releaseDate: movie.release_date,
-        vote: movie.vote_average,
-      })
+      createMutate(newMedia)
     }
   }
   return (
@@ -73,4 +78,4 @@ const Bookmark = ({ movie }: IProps) => {
   )
 }
 
-export default Bookmark
+export default BookmarkComponent

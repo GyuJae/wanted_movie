@@ -5,8 +5,8 @@ interface IStatus {
 }
 
 const styles = {
-  wrapper: 'flex justify-center pb-10 text-sm text-zinc-400',
-  container: 'flex space-x-2',
+  wrapper: 'flex justify-center pb-5 text-sm text-zinc-400',
+  container: 'flex flex-col',
   button: 'font-semibold text-red-700 hover:underline',
 }
 
@@ -15,15 +15,15 @@ const Status = ({ status, handleSetLogin, handleSetCreateAccount }: IStatus) => 
     <div className={styles.wrapper}>
       {status === 'createAccount' && (
         <div className={styles.container}>
-          <span>Are you already sign up? </span>
+          <span>Already have an account?</span>
           <button type='button' onClick={handleSetLogin} className={styles.button}>
-            log in
+            Log in
           </button>
         </div>
       )}
       {status === 'login' && (
         <div className={styles.container}>
-          <span>Not a member ?</span>
+          <span>{`Don't have an account?`}</span>
           <button type='button' onClick={handleSetCreateAccount} className={styles.button}>
             create account
           </button>

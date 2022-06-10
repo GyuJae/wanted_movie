@@ -33,7 +33,7 @@ const styles = {
   subContainer: 'flex py-2 px-4 space-x-4',
   form: 'flex flex-col py-3 space-y-2 w-11/12',
   input: 'py-1 px-2 w-full bg-transparent border-b-2 border-zinc-700 outline-none',
-  button: 'py-2 px-4 bg-red-700 rounded-full',
+  button: 'flex justify-center items-center py-2 px-4 bg-red-700 rounded-full',
 }
 
 const PostForm = ({ inView, setOpenForm, movie }: IProps) => {

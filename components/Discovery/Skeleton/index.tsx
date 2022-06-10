@@ -1,38 +1,28 @@
-import { motion } from 'framer-motion'
-import { showNavState } from 'atoms/showNavState'
-import { useRecoilValue } from 'recoil'
+import dynamic from 'next/dynamic'
 
-const styles = {
-  wrapper: 'flex space-x-4',
-  container: 'w-[19rem] h-48 bg-zinc-800 rounded-xl',
+const SkeletonItem = dynamic(() => import('./SkeletonItem'))
+
+interface IProps {
+  inView: boolean
 }
 
-const Loading = () => {
-  const showNavValue = useRecoilValue(showNavState)
+const styles = {
+  wrapper:
+    'grid grid-cols-2 gap-4 justify-center py-4 pb-10 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6',
+}
+
+const Skeleton = ({ inView }: IProps) => {
+  if (!inView) return null
   return (
     <div className={styles.wrapper}>
       {Array(10)
         .fill(1)
         .map((item, index) => {
           const key = `discovery-loading-${item + index}`
-          return (
-            <motion.div
-              key={key}
-              animate={{
-                opacity: [0.4, 1, 0.4],
-                width: showNavValue ? '11rem' : '12rem',
-                height: showNavValue ? '16rem' : '18rem',
-              }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-              }}
-              className={styles.container}
-            />
-          )
+          return <SkeletonItem key={key} />
         })}
     </div>
   )
 }
 
-export default Loading
+export default Skeleton

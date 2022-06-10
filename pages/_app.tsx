@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import Error from '@components/Error'
 import { ErrorBoundary } from 'react-error-boundary'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
 
 import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from 'react-query'
@@ -11,7 +12,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: 1,
+        retry: 5,
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: false,
         suspense: true,
@@ -33,6 +34,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </RecoilRoot>
   )

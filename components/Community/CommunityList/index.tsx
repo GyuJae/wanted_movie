@@ -4,7 +4,7 @@ import { usePosts } from '@hooks/post'
 const CommunityItem = dynamic(() => import('./CommunityItem'), { ssr: false })
 
 const styles = {
-  wrapper: 'flex flex-col divide-y-[1px] divide-zinc-800',
+  wrapper: 'flex flex-col',
 }
 
 const CommunityList = () => {

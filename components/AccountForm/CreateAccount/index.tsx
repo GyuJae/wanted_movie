@@ -8,7 +8,9 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const Input = dynamic(() => import('../Input'), { ssr: false })
-const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
+const EmailInput = dynamic(() => import('../Input/EmailInput'), { ssr: false })
+const PasswordInput = dynamic(() => import('../Input/PasswordInput'), { ssr: false })
+const SubmitButton = dynamic(() => import('../SubmitButton'), { ssr: false })
 
 interface IProps {
   inView: boolean
@@ -22,15 +24,16 @@ interface IForm {
 }
 
 const styles = {
-  container: 'space-y-3',
-  button: 'py-2 w-full flex justify-center items-center text-sm bg-zinc-800 hover:bg-zinc-800/90 rounded-full',
+  container: 'space-y-2',
+  inputContainer: 'space-y-1',
 }
 
 const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
+    watch,
   } = useForm<IForm>({ mode: 'onChange' })
 
   const [formError, setFormError] = useState<string | undefined>(undefined)
@@ -46,40 +49,45 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
   if (!inView) return null
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
-      <Input
-        label='Email'
-        type='email'
-        register={register('email', {
-          required: true,
-          pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        })}
-      />
-      <FormError inView={errors.email?.type === 'pattern'} message='This is not email pattern' />
-      <FormError inView={errors.email?.type === 'required'} message='Email Required' />
-      <Input
-        label='Username'
-        type='text'
-        register={register('username', {
-          required: true,
-          maxLength: 10,
-        })}
-      />
-      <FormError inView={errors.username?.type === 'required'} message='Username Required' />
-      <FormError inView={errors.username?.type === 'maxLength'} message='Username Max Length 10' />
-      <Input
-        label='Password'
-        type='password'
-        register={register('password', {
-          required: true,
-          maxLength: 16,
-        })}
-      />
-      <FormError inView={errors.password?.type === 'required'} message='Pssword Required' />
-      <FormError inView={errors.password?.type === 'maxLength'} message='Pssword Max Length 16' />
-      <button type='submit' className={styles.button}>
-        {isLoading ? <SpinLoading size='s' darkmode /> : 'Sign Up'}
-      </button>
-      <FormError inView={!!formError} message={formError} />
+      <div className={styles.inputContainer}>
+        <EmailInput
+          label='Email'
+          register={register('email', {
+            required: true,
+            pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+          })}
+          emailError={errors.email?.type === 'pattern' || errors.email?.type === 'required' || !watch('email')}
+        />
+        <FormError inView={errors.email?.type === 'required'} message='Email Required' />
+        <FormError inView={errors.email?.type === 'pattern'} message='This is not email pattern' />
+      </div>
+      <div className={styles.inputContainer}>
+        <Input
+          label='Username'
+          type='text'
+          register={register('username', {
+            required: true,
+            maxLength: 10,
+          })}
+        />
+        <FormError inView={errors.username?.type === 'required'} message='Username Required' />
+        <FormError inView={errors.username?.type === 'maxLength'} message='Maximum username length is 10' />
+      </div>
+      <div className={styles.inputContainer}>
+        <PasswordInput
+          label='Password'
+          register={register('password', {
+            required: true,
+            maxLength: 16,
+          })}
+        />
+        <FormError inView={errors.password?.type === 'required'} message='Password Required' />
+        <FormError inView={errors.password?.type === 'maxLength'} message='Maximum password length is 16' />
+      </div>
+      <div className={styles.inputContainer}>
+        <SubmitButton isLoading={isLoading} isValid={isValid} />
+        <FormError inView={!!formError} message={formError} />
+      </div>
     </form>
   )
 }

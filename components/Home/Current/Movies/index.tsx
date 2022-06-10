@@ -2,6 +2,7 @@ import { IMovieResult } from 'types/movie'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
+import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 import { motion } from 'framer-motion'
 
 const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
@@ -24,8 +25,9 @@ const styles = {
 const Movies = ({ inView, data }: IProps) => {
   if (!inView || !data) return null
 
+  const count = data.results.filter((movie) => !!movie.backdrop_path).length
   return (
-    <Carousel totalWidth={data.results.filter((movie) => !!movie.backdrop_path).length * 257}>
+    <Carousel totalWidth={getLeftDragConstraints({ count, type: 'medium' })}>
       {data.results.map((movie, index) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null

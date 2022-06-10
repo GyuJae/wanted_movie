@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { motion } from 'framer-motion'
 
 const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr: false })
 
@@ -9,7 +10,7 @@ interface IProps {
 }
 
 const styles = {
-  loadingContainer: 'flex justify-center items-center py-2',
+  loadingContainer: 'flex justify-center items-center py-2 bg-red-700 rounded-md',
   wrapper: 'flex justify-center items-center py-2 text-zinc-200 bg-red-700 hover:bg-red-700/90 rounded-md',
 }
 
@@ -18,17 +19,17 @@ const NextPageBtn = ({ handleFetch, isFetching, hasNextPage }: IProps) => {
 
   if (isFetching)
     return (
-      <div className={styles.loadingContainer}>
-        <SpinLoading />
-      </div>
+      <motion.div className={styles.loadingContainer}>
+        <SpinLoading size='s' darkmode={false} backWhite />
+      </motion.div>
     )
   if (!hasNextPage) return null
   return (
-    <div className={styles.wrapper}>
-      <button type='button' onClick={handleClickFetch} className='w-full'>
+    <motion.div className={styles.wrapper}>
+      <motion.button type='button' onClick={handleClickFetch} className='w-full'>
         Show More
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   )
 }
 
