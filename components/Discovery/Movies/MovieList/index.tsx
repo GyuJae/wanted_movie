@@ -5,7 +5,7 @@ import { useInfiniteMovies } from '@hooks/movie'
 import { useRecoilValue } from 'recoil'
 
 const MoviePage = dynamic(() => import('./MoviePage'), { ssr: false })
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col',

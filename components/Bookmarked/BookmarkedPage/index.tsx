@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useInfiniteBookmarked } from '@hooks/bookmark'
 
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
 const BookmarkedList = dynamic(() => import('./BookmarkedList'), { ssr: false })
 
 const styles = {

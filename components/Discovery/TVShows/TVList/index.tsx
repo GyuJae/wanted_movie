@@ -5,7 +5,7 @@ import { useInfiniteTVs } from '@hooks/tv'
 import { useRecoilValue } from 'recoil'
 
 const TVPage = dynamic(() => import('./TVPage'), { ssr: false })
-const NextPageBtn = dynamic(() => import('@components/Discovery//NextPageBtn'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col',

@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useInfiniteRecentViews } from '@hooks/recentView'
 
-const NextPageBtn = dynamic(() => import('@components/Discovery/NextPageBtn'), { ssr: false })
+const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
 const RecentViewList = dynamic(() => import('./RecentList'), { ssr: false })
 
 const styles = {
