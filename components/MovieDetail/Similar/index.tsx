@@ -1,9 +1,7 @@
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useMovieSimilar } from '@hooks/movie'
 
 const SimilarItem = dynamic(() => import('@components/Home/Current/Movies'), { ssr: false })
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
@@ -16,9 +14,7 @@ const Similar = ({ id }: IProps) => {
   return (
     <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Similar' />
-      <Suspense fallback={<Skeleton />}>
-        <SimilarItem inView={Boolean(data)} data={data} />
-      </Suspense>
+      <SimilarItem inView={Boolean(data)} data={data} />
     </div>
   )
 }

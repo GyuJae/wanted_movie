@@ -1,5 +1,4 @@
 import Carousel from '@components/Carousel'
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { useMovieCredits } from '@hooks/movie'
 
@@ -12,19 +11,17 @@ interface IProps {
 
 const Cast = ({ id }: IProps) => {
   const { data } = useMovieCredits(id)
-  if (!data) return null
+  if (!data || data.cast.length === 0) return null
 
   return (
     <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Cast' />
-      <Suspense fallback={<div>loading..</div>}>
-        <Carousel totalWidth={data.cast.length * 158}>
-          {data?.cast.map((item, index) => {
-            const key = `cast-${item.id}-${index}`
-            return <CastItem key={key} cast={item} />
-          })}
-        </Carousel>
-      </Suspense>
+      <Carousel totalWidth={data.cast.length * 158}>
+        {data?.cast.map((item, index) => {
+          const key = `cast-${item.id}-${index}`
+          return <CastItem key={key} cast={item} />
+        })}
+      </Carousel>
     </div>
   )
 }
