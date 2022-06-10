@@ -1,6 +1,6 @@
 # 🔥 Wanted 개인과제 - 영화 웹 만들기
 
-<img src="https://user-images.githubusercontent.com/58322754/172021721-95609891-87dc-4075-9c02-c79e9087ed67.png">
+<img src="https://user-images.githubusercontent.com/58322754/173046920-ff824be2-023c-4cb8-97d7-9a6e66b470ea.png">
 
 - **Github Repository URL** <br/> https://github.com/GyuJae/wanted_movie
 - **배포 URL** <br/> https://wanted-movie-gyujae.vercel.app/
@@ -375,7 +375,7 @@ useEffect(() => {
 <details>
     <summary>구현 방법</summary>
 
-<img src='https://user-images.githubusercontent.com/58322754/172020508-e5ba8e2f-bdd3-48f6-b2bb-5d1cec436540.png'>
+<img src='https://user-images.githubusercontent.com/58322754/173058168-435220ce-7433-428f-ac22-3acb9dacc829.png'>
 
 로그인이 되지 않은 상태에서 로그인이 필요한 기능을 사용시에 메세지가 나온다. frmaer motion를 애니메이션 효과를 주웠고, recoil를 이용하여 전역에서 사용할 수 있도록 하였다.
 
@@ -810,6 +810,167 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IResponse>) {
 
 export default withApiSession(withHandler({ methods: ['POST'], handler, isPrivate: false }))
 ```
+</details>
+
+<br/>
+
+### Community
+
+<details>
+    <summary>구현 방법</summary>
+
+<img src='https://user-images.githubusercontent.com/58322754/173058860-9619a40b-a5df-4844-ae73-098bc64bbab0.png'>
+
+<img src='https://user-images.githubusercontent.com/58322754/173059376-c6bc4307-a84a-4f63-a92b-fd65d7a14e08.png'>
+
+유저들이 평가를 내린 comment들을 모아놓은 부분으로 댓글 및 좋아요 기능도 있다.
+
+```ts
+import { ICommentResponse } from 'types/comment'
+import { dbNow } from '@utils/dbNow'
+import prisma from '@libs/client'
+import { withApiSession } from '@libs/withSession'
+import withHandler from '@libs/withHandler'
+
+import { NextApiRequest, NextApiResponse } from 'next'
+
+async function handler(req: NextApiRequest, res: NextApiResponse<ICommentResponse>) {
+  try {
+    const {
+      session: { user },
+      query: { postId },
+    } = req
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        id: user?.id,
+      },
+      select: {
+        id: true,
+      },
+    })
+    if (!currentUser) {
+      return res.json({
+        ok: false,
+        error: 'Plz login',
+      })
+    }
+    if (!postId) {
+      return res.json({
+        ok: false,
+        error: 'post id is undefined.',
+      })
+    }
+    const post = await prisma.post.findUnique({
+      where: {
+        id: +postId,
+      },
+      select: {
+        id: true,
+      },
+    })
+    if (!post) {
+      return res.json({ ok: false, error: 'post does not exist.' })
+    }
+    if (req.method === 'GET') {
+      const {
+        query: { page },
+      } = req
+      const comments = await prisma.comment.findMany({
+        where: {
+          postId: +postId,
+        },
+        skip: 25 * (+page - 1),
+        take: 25,
+        include: {
+          user: {
+            select: {
+              id: true,
+              avatar: true,
+              username: true,
+            },
+          },
+        },
+      })
+
+      const totalCount = await prisma.comment.count({
+        where: {
+          postId: +postId,
+        },
+      })
+      return res.json({
+        ok: true,
+        comments,
+        totalCount,
+        totalPage: Math.ceil(totalCount / 25),
+      })
+    }
+    if (req.method === 'POST') {
+      const {
+        body: { comment },
+      } = req
+      await prisma.comment.create({
+        data: {
+          comment,
+          userId: currentUser.id,
+          postId: post.id,
+          createdAt: dbNow(),
+          updatedAt: dbNow(),
+        },
+      })
+      return res.json({
+        ok: true,
+      })
+    }
+    if (req.method === 'DELETE') {
+      const {
+        body: { commentId },
+      } = req
+      const comment = await prisma.comment.findUnique({
+        where: {
+          id: +commentId,
+        },
+        select: {
+          id: true,
+          userId: true,
+        },
+      })
+      if (!comment) {
+        return res.json({
+          ok: false,
+          error: 'this comment is not exist',
+        })
+      }
+      if (comment.userId !== currentUser.id) {
+        return res.json({
+          ok: false,
+          error: 'No Authorization',
+        })
+      }
+      await prisma.comment.delete({
+        where: {
+          id: comment.id,
+        },
+      })
+      return res.json({
+        ok: true,
+      })
+    }
+    return res.json({
+      ok: false,
+      error: 'error',
+    })
+  } catch (error) {
+    return res.json({
+      ok: false,
+      error: error as string,
+    })
+  }
+}
+
+export default withApiSession(withHandler({ methods: ['POST', 'GET', 'DELETE'], handler, isPrivate: true }))
+s
+```
+
 </details>
 
 <br/>
