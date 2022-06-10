@@ -1,11 +1,9 @@
 import Carousel from '@components/Carousel'
-import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 import { useTVSimilar } from '@hooks/tv'
 
 const SimilarItem = dynamic(() => import('./SimilarItem'), { ssr: false })
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
@@ -23,14 +21,12 @@ const Similar = ({ id }: IProps) => {
   return (
     <div className={styles.wrapper}>
       <CategoryTitle cateogoryName='Similar' />
-      <Suspense fallback={<Skeleton />}>
-        <Carousel totalWidth={getLeftDragConstraints({ count, type: 'medium' })}>
-          {data?.results.map((tv, index) => {
-            const key = `similar-${tv.id}-${index}`
-            return <SimilarItem key={key} tv={tv} />
-          })}
-        </Carousel>
-      </Suspense>
+      <Carousel totalWidth={getLeftDragConstraints({ count, type: 'medium' })}>
+        {data?.results.map((tv, index) => {
+          const key = `similar-${tv.id}-${index}`
+          return <SimilarItem key={key} tv={tv} />
+        })}
+      </Carousel>
     </div>
   )
 }
