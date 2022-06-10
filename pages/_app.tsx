@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import Error from '@components/Error'
 import { ErrorBoundary } from 'react-error-boundary'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
 
 import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from 'react-query'
@@ -33,6 +34,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </RecoilRoot>
   )

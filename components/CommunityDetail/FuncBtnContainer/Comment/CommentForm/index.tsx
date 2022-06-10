@@ -1,3 +1,4 @@
+import { ICommentResponse } from 'types/comment'
 import { createComment } from '@services/comments.service'
 import dynamic from 'next/dynamic'
 import { useClickAway } from 'react-use'
@@ -30,17 +31,24 @@ const styles = {
 
 const CommentForm = ({ inView, handleFormClose, postId }: IProps) => {
   const queryClient = useQueryClient()
-  const { register, handleSubmit, watch } = useForm<IForm>()
-  const { mutate } = useMutation('createComment', createComment)
+  const { register, handleSubmit, watch, setValue } = useForm<IForm>()
+  const { mutate } = useMutation('createComment', createComment, {
+    onSuccess: ({ ok }: ICommentResponse) => {
+      if (ok) {
+        queryClient.refetchQueries(['community', 'comments', postId])
+        queryClient.refetchQueries(['post', postId])
+      }
+    },
+  })
   const ref = useRef<HTMLDivElement>(null)
 
   const commentWatch = watch('comment') || ''
 
   const onSubmit: SubmitHandler<IForm> = ({ comment }) => {
     mutate({ comment, postId })
+    setValue('comment', '')
+
     handleFormClose()
-    queryClient.refetchQueries(['community', 'comments', postId])
-    queryClient.refetchQueries(['post', postId])
   }
 
   useClickAway(ref, handleFormClose)

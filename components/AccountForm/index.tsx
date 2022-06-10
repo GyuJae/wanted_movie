@@ -13,7 +13,7 @@ const Status = dynamic(() => import('./Status'), { ssr: false })
 const TagName = dynamic(() => import('./TagName'), { ssr: false })
 
 const styles = {
-  wrapper: 'flex fixed top-0 left-0 justify-center items-center w-screen h-screen bg-zinc-900/90',
+  wrapper: 'flex z-50 fixed top-0 left-0 justify-center items-center w-screen h-screen bg-zinc-900/90',
   container: 'py-4 px-8 space-y-2 w-[20rem] bg-black rounded-xl',
 }
 
