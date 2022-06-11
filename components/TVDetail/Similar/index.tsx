@@ -1,28 +1,26 @@
 import Carousel from '@components/Carousel'
+import { ITVResult } from 'types/tv'
 import dynamic from 'next/dynamic'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
-import { useTVSimilar } from '@hooks/tv'
 
 const SimilarItem = dynamic(() => import('./SimilarItem'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
-  id: string
+  similar: ITVResult
 }
 
 const styles = {
   wrapper: 'overflow-hidden space-y-4',
 }
 
-const Similar = ({ id }: IProps) => {
-  const { data } = useTVSimilar(id)
-  if (!data || data.results.length === 0) return null
-  const count = data.results.filter((tv) => !!tv.backdrop_path).length
+const Similar = ({ similar }: IProps) => {
+  const count = similar.results.filter((tv) => !!tv.backdrop_path).length
   return (
     <div className={styles.wrapper}>
       <CategoryTitle cateogoryName='Similar' />
       <Carousel totalWidth={getLeftDragConstraints({ count, type: 'medium' })}>
-        {data?.results.map((tv, index) => {
+        {similar.results.map((tv, index) => {
           const key = `similar-${tv.id}-${index}`
           return <SimilarItem key={key} tv={tv} />
         })}

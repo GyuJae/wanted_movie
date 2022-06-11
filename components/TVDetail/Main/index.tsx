@@ -1,12 +1,12 @@
+import { ITVDetail } from 'types/tv'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { getImage } from '@utils/getImage'
-import { useTv } from '@hooks/tv'
 
 const FuncItems = dynamic(() => import('./FuncItems'), { ssr: false })
 
 interface IProps {
-  id: string
+  tv: ITVDetail
 }
 
 const styles = {
@@ -24,51 +24,48 @@ const styles = {
   overviewContainer: 'w-[800px]',
 }
 
-const Main = ({ id }: IProps) => {
-  const { data } = useTv(id)
-  if (!data) return null
-
+const Main = ({ tv }: IProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        {data.backdrop_path && (
+        {tv.backdrop_path && (
           <Image
-            alt={`backdrop-${data.name}`}
+            alt={`backdrop-${tv.name}`}
             className={styles.backgroundImage}
             layout='fill'
-            src={getImage({ path: data.backdrop_path as string, format: 'w1280' })}
+            src={getImage({ path: tv.backdrop_path as string, format: 'w1280' })}
             priority
           />
         )}
         <div className={styles.mainContainer}>
           <Image
-            alt={`poster-${data.name}`}
+            alt={`poster-${tv.name}`}
             width={400}
             height={450}
-            src={getImage({ path: data.poster_path as string, format: 'w780' })}
+            src={getImage({ path: tv.poster_path as string, format: 'w780' })}
             className={styles.posterImage}
             priority
           />
           <div className={styles.subContainer}>
             <h3 className={styles.title}>
-              {data.name}
-              {data.first_air_date && <span className={styles.date}>({data.first_air_date.split('-')[0]})</span>}
+              {tv.name}
+              {tv.first_air_date && <span className={styles.date}>({tv.first_air_date.split('-')[0]})</span>}
             </h3>
             <div className={styles.footWrapper}>
-              <div>{data.first_air_date}</div>
+              <div>{tv.first_air_date}</div>
               <div className={styles.footContainer}>
-                {data.genres.map((genre, index) => {
+                {tv.genres.map((genre, index) => {
                   const key = `${genre.id}-${index}-${genre.name}`
                   return <div key={key}>{genre.name}</div>
                 })}
               </div>
-              <div className={styles.footContainer}>{data.episode_run_time}min</div>
+              <div className={styles.footContainer}>{tv.episode_run_time}min</div>
             </div>
-            <div className={styles.tagline}>{data.tagline}</div>
+            <div className={styles.tagline}>{tv.tagline}</div>
             <div className={styles.overviewContainer}>
-              <span>{data.overview}</span>
+              <span>{tv.overview}</span>
             </div>
-            <FuncItems tv={data} />
+            <FuncItems tv={tv} />
           </div>
         </div>
       </div>

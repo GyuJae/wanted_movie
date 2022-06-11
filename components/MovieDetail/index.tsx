@@ -1,3 +1,4 @@
+import { IMovieDetailPage } from 'types/MovieDetail'
 import dynamic from 'next/dynamic'
 
 const Back = dynamic(() => import('./Back'), { ssr: false })
@@ -8,26 +9,22 @@ const Similar = dynamic(() => import('./Similar'), { ssr: false })
 const DetailLayout = dynamic(() => import('@components/DetailLayout'), { ssr: false })
 const LoginToastMessage = dynamic(() => import('@components/LoginToastMessage'), { ssr: false })
 
-interface IProps {
-  id: string
-}
-
 const styles = {
   wrapper: 'w-screen min-h-screen text-white bg-black',
   container: 'w-full py-12 px-4 space-y-10',
 }
 
-const MovieDetail = ({ id }: IProps) => {
+const MovieDetail = ({ movie, credits, recommendations, similar }: IMovieDetailPage) => {
   return (
     <DetailLayout>
       <LoginToastMessage />
       <div className={styles.wrapper}>
         <Back />
-        <Main id={id} />
+        <Main movie={movie} />
         <div className={styles.container}>
-          <Cast id={id} />
-          <Recommendations id={id} />
-          <Similar id={id} />
+          <Cast credits={credits} />
+          <Recommendations recommendations={recommendations} />
+          <Similar similar={similar} />
         </div>
       </div>
     </DetailLayout>
