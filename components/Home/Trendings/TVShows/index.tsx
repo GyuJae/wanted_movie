@@ -1,51 +1,35 @@
-import { INIT_LOADING_TIME } from 'constant'
 import { ITV } from 'types/tv'
+import { ITrendingResponse } from 'types/trending'
 import dynamic from 'next/dynamic'
 import { getLeftDragConstraints } from '@utils/getLeftDragConstraints'
 import { timeTrendingState } from '@atoms/timeTrendingState'
 import { useRecoilValue } from 'recoil'
-import { useTrendings } from '@hooks/trending'
-
-import { useEffect, useState } from 'react'
 
 const Carousel = dynamic(() => import('@components/Carousel'), { ssr: false })
-const Skeleton = dynamic(() => import('@components/Home/Skeleton'), { ssr: false })
 const DayList = dynamic(() => import('./DayList'), { ssr: false })
 const WeekList = dynamic(() => import('./WeekList'), { ssr: false })
 
 interface IProps {
   inView: boolean
+  dayTVs: ITrendingResponse
+  weekTVs: ITrendingResponse
 }
 
-const TVShows = ({ inView }: IProps) => {
+const TVShows = ({ inView, dayTVs, weekTVs }: IProps) => {
   const timeTrending = useRecoilValue(timeTrendingState)
-  const [init, setInit] = useState<boolean>(true)
-  const { data: dayData, isLoading: dayIsLoading } = useTrendings('tv', 'day')
-  const { data: weekData, isLoading: weekIsLoading } = useTrendings('tv', 'week')
 
-  useEffect(() => {
-    setTimeout(() => setInit(false), INIT_LOADING_TIME)
-  }, [])
-
-  if (!inView || !dayData || !weekData) return null
-  const dayTVs = dayData.results as ITV[]
-  const weekTVs = weekData.results as ITV[]
+  if (!inView) return null
+  const dayTVsResults = dayTVs.results as ITV[]
+  const weekTVsResults = weekTVs.results as ITV[]
   const count =
     timeTrending === 'day'
-      ? dayTVs.filter((tv) => !!tv.backdrop_path).length
-      : weekTVs.filter((tv) => !!tv.backdrop_path).length
+      ? dayTVsResults.filter((tv) => !!tv.backdrop_path).length
+      : weekTVsResults.filter((tv) => !!tv.backdrop_path).length
   return (
-    <>
-      <Skeleton
-        inView={init || dayIsLoading || weekIsLoading}
-        size='large'
-        category={`trending-loading-tv-${timeTrending}`}
-      />
-      <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
-        <DayList tvs={dayData.results as ITV[]} inView={timeTrending === 'day' && !init && !dayIsLoading} />
-        <WeekList tvs={weekData.results as ITV[]} inView={timeTrending === 'week' && !init && !weekIsLoading} />
-      </Carousel>
-    </>
+    <Carousel totalWidth={getLeftDragConstraints({ count, type: 'large' })}>
+      <DayList tvs={dayTVs.results as ITV[]} inView={timeTrending === 'day'} />
+      <WeekList tvs={weekTVs.results as ITV[]} inView={timeTrending === 'week'} />
+    </Carousel>
   )
 }
 

@@ -29,13 +29,7 @@ const DayList = ({ tvs, inView }: IProps) => {
         const key = `${tv.id}-${index}`
         if (!tv.backdrop_path) return null
         return (
-          <motion.li
-            layoutId={`tv-${tv.id}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            key={key}
-            className={styles.wrapper}
-          >
+          <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={key} className={styles.wrapper}>
             <Image
               alt={tv.name}
               layout='fill'

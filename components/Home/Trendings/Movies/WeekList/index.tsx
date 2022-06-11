@@ -29,13 +29,7 @@ const WeekList = ({ movies, inView }: IProps) => {
         const key = `${movie.id}-${index}`
         if (!movie.backdrop_path) return null
         return (
-          <motion.li
-            layoutId={`movie-${movie.id}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            key={key}
-            className={styles.wrapper}
-          >
+          <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} key={key} className={styles.wrapper}>
             <Image
               alt={movie.title}
               layout='fill'
