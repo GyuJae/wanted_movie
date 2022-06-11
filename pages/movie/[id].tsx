@@ -1,26 +1,43 @@
+import { IMovieDetailPage } from 'types/MovieDetail'
+import MoviesService from '@services/movies.service'
 import dynamic from 'next/dynamic'
 
-import type { GetServerSideProps, NextPage } from 'next'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
 const MovieDetail = dynamic(() => import('@components/MovieDetail'), { ssr: false })
 
-interface IProps {
-  id: string
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const {
-    query: { id },
-  } = context
+export const getStaticProps: GetStaticProps = async (context) => {
+  if (!context?.params?.id) {
+    return {
+      props: {},
+    }
+  }
+
+  const movieServices = new MoviesService()
+  const movie = await movieServices.getMovie(context.params.id.toString())
+  const credits = await movieServices.getCredits(context.params.id.toString())
+  const recommendations = await movieServices.getRecommendations(context.params.id.toString())
+  const similar = await movieServices.getSimilar(context.params.id.toString())
+
   return {
     props: {
-      id,
+      movie,
+      credits,
+      recommendations,
+      similar,
     },
   }
 }
 
-const Page: NextPage<IProps> = ({ id }) => {
-  return <MovieDetail id={id} />
+const Page: NextPage<IMovieDetailPage> = ({ movie, credits, recommendations, similar }) => {
+  return <MovieDetail movie={movie} credits={credits} recommendations={recommendations} similar={similar} />
 }
 
 export default Page

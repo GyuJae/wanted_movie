@@ -67,6 +67,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<IPostResponse>)
           updatedAt: dbNow(),
         },
       })
+
+      await res.unstable_revalidate('/community')
+
       return res.json({
         ok: true,
       })

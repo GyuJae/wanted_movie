@@ -1,3 +1,4 @@
+import { ITVDetailPage } from 'types/TVDetail'
 import dynamic from 'next/dynamic'
 
 const Back = dynamic(() => import('@components/MovieDetail/Back'), { ssr: false })
@@ -7,25 +8,21 @@ const Recommendations = dynamic(() => import('./Recommendations'), { ssr: false 
 const Similar = dynamic(() => import('./Similar'), { ssr: false })
 const DetailLayout = dynamic(() => import('@components/DetailLayout'))
 
-interface IProps {
-  id: string
-}
-
 const styles = {
   wrapper: 'w-screen min-h-screen text-white bg-black',
   container: 'py-12 px-4 space-y-12',
 }
 
-const TVDetail = ({ id }: IProps) => {
+const TVDetail = ({ tv, credits, recommendations, similar }: ITVDetailPage) => {
   return (
     <DetailLayout>
       <div className={styles.wrapper}>
         <Back />
-        <Main id={id} />
+        <Main tv={tv} />
         <div className={styles.container}>
-          <Cast id={id} />
-          <Recommendations id={id} />
-          <Similar id={id} />
+          <Cast credits={credits} />
+          <Recommendations recommendations={recommendations} />
+          <Similar similar={similar} />
         </div>
       </div>
     </DetailLayout>

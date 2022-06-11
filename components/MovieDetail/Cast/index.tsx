@@ -1,23 +1,20 @@
 import Carousel from '@components/Carousel'
+import { IMovieCredits } from 'types/movie'
 import dynamic from 'next/dynamic'
-import { useMovieCredits } from '@hooks/movie'
 
 const CastItem = dynamic(() => import('./CastItem'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
-  id: string
+  credits: IMovieCredits
 }
 
-const Cast = ({ id }: IProps) => {
-  const { data } = useMovieCredits(id)
-  if (!data || data.cast.length === 0) return null
-
+const Cast = ({ credits }: IProps) => {
   return (
     <div className='overflow-hidden space-y-4'>
       <CategoryTitle cateogoryName='Cast' />
-      <Carousel totalWidth={data.cast.length * 158}>
-        {data?.cast.map((item, index) => {
+      <Carousel totalWidth={credits.cast.length * 158}>
+        {credits.cast.map((item, index) => {
           const key = `cast-${item.id}-${index}`
           return <CastItem key={key} cast={item} />
         })}

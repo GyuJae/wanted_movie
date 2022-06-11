@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-import { ICreatePostInput, IDeletePostInput, IDetailPostInput } from 'types/post'
+import { ICreatePostInput, IDeletePostInput, IDetailPostInput, IPostResponse } from 'types/post'
 
 export const createPost = (createPostInput: ICreatePostInput) => {
   return axios.post('/api/posts', createPostInput).then((res) => res.data)
 }
 
 export const readPosts = () => {
-  return axios.get('/api/posts').then((res) => res.data)
+  return axios.get<IPostResponse>('/api/posts').then((res) => res.data)
 }
 
 export const deletePost = (deletePostInput: IDeletePostInput) => {

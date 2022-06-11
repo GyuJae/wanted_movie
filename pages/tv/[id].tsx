@@ -1,26 +1,43 @@
+import { ITVDetailPage } from 'types/TVDetail'
+import TvsService from '@services/tvs.service'
 import dynamic from 'next/dynamic'
 
-import type { GetServerSideProps, NextPage } from 'next'
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
 const TVDetail = dynamic(() => import('@components/TVDetail'), { ssr: false })
 
-interface IProps {
-  id: string
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const {
-    query: { id },
-  } = context
+export const getStaticProps: GetStaticProps = async (context) => {
+  if (!context?.params?.id) {
+    return {
+      props: {},
+    }
+  }
+
+  const tvServices = new TvsService()
+  const tv = await tvServices.getTV(context.params.id.toString())
+  const credits = await tvServices.getCredits(context.params.id.toString())
+  const recommendations = await tvServices.getRecommendations(context.params.id.toString())
+  const similar = await tvServices.getSimilar(context.params.id.toString())
+
   return {
     props: {
-      id,
+      tv,
+      credits,
+      recommendations,
+      similar,
     },
   }
 }
 
-const Page: NextPage<IProps> = ({ id }) => {
-  return <TVDetail id={id} />
+const Page: NextPage<ITVDetailPage> = ({ tv, credits, recommendations, similar }) => {
+  return <TVDetail tv={tv} credits={credits} recommendations={recommendations} similar={similar} />
 }
 
 export default Page
