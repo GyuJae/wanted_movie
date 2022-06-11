@@ -8,7 +8,7 @@ import { Variants, motion } from 'framer-motion'
 
 const Nav = dynamic(() => import('./Nav'), { ssr: false })
 const Header = dynamic(() => import('./Header'), { ssr: false })
-const SideMe = dynamic(() => import('./SideMe'), { ssr: false })
+const SideMe = dynamic(() => import('./SideMe'))
 const LoginToastMessage = dynamic(() => import('../LoginToastMessage'), { ssr: false })
 const AccountForm = dynamic(() => import('@components/AccountForm'), { ssr: false })
 const Portal = dynamic(() => import('@components/Portal'), { ssr: false })
