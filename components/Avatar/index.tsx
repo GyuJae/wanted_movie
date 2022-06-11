@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import UserIcon from '@components/Icons/UserIcon'
 import classNames from 'classnames'
 import { fileToUrl } from '@utils/fileToUrl'
 
@@ -9,7 +10,7 @@ interface IProps {
 
 const styles = {
   container: (size: 'small' | 'medium' | 'big') =>
-    classNames('relative  bg-zinc-700 rounded-full', {
+    classNames('relative flex justify-center items-center bg-zinc-700 rounded-full', {
       'w-12 h-12': size === 'medium',
       'w-8 h-8': size === 'small',
       'w-16 h-16': size === 'big',
@@ -18,7 +19,12 @@ const styles = {
 }
 
 const Avatar = ({ path, size = 'medium' }: IProps) => {
-  if (!path) return <div className={styles.container(size)} />
+  if (!path)
+    return (
+      <div className={styles.container(size)}>
+        <UserIcon styleClassname='w-4 fill-zinc-500' />
+      </div>
+    )
   return (
     <div className={styles.container(size)}>
       <Image

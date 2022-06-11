@@ -85,7 +85,7 @@ const CreateAccount = ({ inView, handleSetLogin }: IProps) => {
         <FormError inView={errors.password?.type === 'maxLength'} message='Maximum password length is 16' />
       </div>
       <div className={styles.inputContainer}>
-        <SubmitButton isLoading={isLoading} isValid={isValid} />
+        <SubmitButton isLoading={isLoading} isValid={isValid} status='create account' />
         <FormError inView={!!formError} message={formError} />
       </div>
     </form>
