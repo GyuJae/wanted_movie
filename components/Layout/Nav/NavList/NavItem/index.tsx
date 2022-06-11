@@ -29,16 +29,18 @@ const styles = {
     }),
   redBar: 'absolute right-0 w-1 h-5 bg-red-600 rounded-l-md',
   categoryName: 'pr-5',
+  icon: 'w-5',
+  bookmarkedIcon: 'w-4',
 }
 
 const NavItem = ({ categoryPathname, categoryName }: IProps) => {
   const symbolIcon = {
-    Home: <HouseIcon styleClassName='w-5' />,
-    Community: <UsersIcon styleClassName='w-5' />,
-    Discovery: <CompassIcon styleClassName='w-5' />,
-    Recent: <ClockIcon styleClassname='w-5' />,
-    Bookmarked: <BookMarkIcon styleClassname='w-4' />,
-    Search: <SearchIcon styleClassname='w-5' />,
+    Home: <HouseIcon styleClassName={styles.icon} />,
+    Community: <UsersIcon styleClassName={styles.icon} />,
+    Discovery: <CompassIcon styleClassName={styles.icon} />,
+    Recent: <ClockIcon styleClassname={styles.icon} />,
+    Bookmarked: <BookMarkIcon styleClassname={styles.bookmarkedIcon} />,
+    Search: <SearchIcon styleClassname={styles.icon} />,
   }[categoryName]
 
   const router = useRouter()
