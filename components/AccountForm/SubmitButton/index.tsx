@@ -6,6 +6,7 @@ const SpinLoading = dynamic(() => import('@components/Icons/SpinLoading'), { ssr
 interface IProps {
   isLoading: boolean
   isValid: boolean
+  status?: 'login' | 'create account'
 }
 
 const styles = {
@@ -16,10 +17,12 @@ const styles = {
     }),
 }
 
-const SubmitButton = ({ isLoading, isValid }: IProps) => {
+const SubmitButton = ({ isLoading, isValid, status = 'login' }: IProps) => {
+  const value = status === 'login' ? 'Login' : 'Create Account'
+
   return (
     <button type='submit' className={styles.button(isValid)}>
-      {isLoading ? <SpinLoading size='s' darkmode /> : 'Login'}
+      {isLoading ? <SpinLoading size='s' darkmode /> : value}
     </button>
   )
 }
