@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import type { GetServerSideProps, NextPage } from 'next'
 
-const CommunityDetail = dynamic(() => import('routes/CommunityDetail'))
+const CommunityDetail = dynamic(() => import('@components/CommunityDetail'))
 
 interface IProps {
   id: string

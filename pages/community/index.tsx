@@ -3,7 +3,7 @@ import { PostWithUserAndCount } from 'types/post'
 import client from '@libs/client'
 import dynamic from 'next/dynamic'
 
-const Community = dynamic(() => import('routes/Community'), { ssr: false })
+const Community = dynamic(() => import('@components/Community'), { ssr: false })
 
 interface IProps {
   posts?: PostWithUserAndCount[]

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
-const TVDetail = dynamic(() => import('routes/TVDetail'), { ssr: false })
+const TVDetail = dynamic(() => import('@components/TVDetail'), { ssr: false })
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {

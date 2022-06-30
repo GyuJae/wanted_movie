@@ -4,7 +4,7 @@ import { useInfiniteSearchTVs } from '@hooks/tv'
 import { useRouter } from 'next/router'
 
 const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
-const TVPage = dynamic(() => import('routes/Discovery/TVShows/TVList/TVPage'), { ssr: false })
+const TVPage = dynamic(() => import('@components/Discovery/TVShows/TVList/TVPage'), { ssr: false })
 
 interface IProps {
   inView: boolean

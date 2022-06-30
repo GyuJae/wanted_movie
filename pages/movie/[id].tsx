@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
-const MovieDetail = dynamic(() => import('routes/MovieDetail'), { ssr: false })
+const MovieDetail = dynamic(() => import('@components/MovieDetail'), { ssr: false })
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {

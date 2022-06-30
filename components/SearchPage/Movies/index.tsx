@@ -4,7 +4,7 @@ import { useInfiniteSearchMovies } from '@hooks/movie'
 import { useRouter } from 'next/router'
 
 const NextPageBtn = dynamic(() => import('@components/NextPageBtn'), { ssr: false })
-const MoviePage = dynamic(() => import('routes/Discovery/Movies/MovieList/MoviePage'), { ssr: false })
+const MoviePage = dynamic(() => import('@components/Discovery/Movies/MovieList/MoviePage'), { ssr: false })
 
 interface IProps {
   inView: boolean
