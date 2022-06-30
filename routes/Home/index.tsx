@@ -2,12 +2,12 @@ import { IHomePage } from 'types/Home'
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-const Current = dynamic(() => import('@components/Home/Current'))
-const Now = dynamic(() => import('@components/Home/Now'))
+const Current = dynamic(() => import('routes/Home/Current'))
+const Now = dynamic(() => import('routes/Home/Now'))
 const Layout = dynamic(() => import('@components/Layout'))
-const Trendings = dynamic(() => import('@components/Home/Trendings'))
-const TopRated = dynamic(() => import('@components/Home/TopRated'))
-const Popular = dynamic(() => import('@components/Home/Popular'))
+const Trendings = dynamic(() => import('routes/Home/Trendings'))
+const TopRated = dynamic(() => import('routes/Home/TopRated'))
+const Popular = dynamic(() => import('routes/Home/Popular'))
 
 const HomePage = ({ data }: IHomePage) => {
   return (

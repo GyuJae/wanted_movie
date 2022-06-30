@@ -2,7 +2,7 @@ import Carousel from '@components/Carousel'
 import { ITVCredits } from 'types/tv'
 import dynamic from 'next/dynamic'
 
-const CastItem = dynamic(() => import('@components/MovieDetail/Cast/CastItem'), { ssr: false })
+const CastItem = dynamic(() => import('routes/MovieDetail/Cast/CastItem'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {

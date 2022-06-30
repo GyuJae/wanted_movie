@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
-const TVDetail = dynamic(() => import('@components/TVDetail'), { ssr: false })
+const TVDetail = dynamic(() => import('routes/TVDetail'), { ssr: false })
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
@@ -33,6 +33,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       recommendations,
       similar,
     },
+    revalidate: 60 * 60 * 24 * 30,
   }
 }
 

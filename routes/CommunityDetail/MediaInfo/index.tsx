@@ -6,7 +6,7 @@ interface IProps {
   post: IDetailPost
 }
 
-const Vote = dynamic(() => import('@components/Community/CommunityList/CommunityItem/Vote'), { ssr: false })
+const Vote = dynamic(() => import('routes/Community/CommunityList/CommunityItem/Vote'), { ssr: false })
 
 const styles = {
   wrapper: 'flex flex-col space-y-1',

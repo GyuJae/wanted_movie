@@ -1,7 +1,7 @@
 import { ITVDetailPage } from 'types/TVDetail'
 import dynamic from 'next/dynamic'
 
-const Back = dynamic(() => import('@components/MovieDetail/Back'), { ssr: false })
+const Back = dynamic(() => import('routes/MovieDetail/Back'), { ssr: false })
 const Cast = dynamic(() => import('./Cast'), { ssr: false })
 const Main = dynamic(() => import('./Main'), { ssr: false })
 const Recommendations = dynamic(() => import('./Recommendations'), { ssr: false })

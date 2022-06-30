@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic'
 import { mediaTypeState } from 'atoms/mediaTypeState'
 import { useRecoilValue } from 'recoil'
 
-const Movies = dynamic(() => import('@components/Home/TopRated/Movies'), { ssr: false })
-const TVShows = dynamic(() => import('@components/Home/TopRated/TVShows'), { ssr: false })
+const Movies = dynamic(() => import('routes/Home/TopRated/Movies'), { ssr: false })
+const TVShows = dynamic(() => import('routes/Home/TopRated/TVShows'), { ssr: false })
 const SeeMoreBtn = dynamic(() => import('@components/SeeMoreBtn'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 

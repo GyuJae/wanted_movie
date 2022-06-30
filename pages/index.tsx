@@ -5,7 +5,7 @@ import TrendingsService from '@services/trendings.service'
 import TvsService from '@services/tvs.service'
 import dynamic from 'next/dynamic'
 
-const HomePage = dynamic(() => import('@components/Home'), { ssr: false })
+const HomePage = dynamic(() => import('routes/Home'), { ssr: false })
 
 export async function getStaticProps() {
   const trendingsService = new TrendingsService()

@@ -1,7 +1,7 @@
 import { IMovieResult } from 'types/movie'
 import dynamic from 'next/dynamic'
 
-const RecommendationsItem = dynamic(() => import('@components/Home/Current/Movies'), { ssr: false })
+const RecommendationsItem = dynamic(() => import('routes/Home/Current/Movies'), { ssr: false })
 const CategoryTitle = dynamic(() => import('@components/CategoryTitle'), { ssr: false })
 
 interface IProps {
